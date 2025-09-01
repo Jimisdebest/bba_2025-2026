@@ -1,3 +1,11 @@
+// Check of het vandaag donderdag is
+const vandaag = new Date();
+const dagNummer = vandaag.getDay(); // 0 = zondag, 4 = donderdag
+
+if (dagNummer === 4) {
+  // Doorsturen naar onderhoudspagina
+  window.location.href = "onderhoud.html";
+}
 // ===== Laatste update op Homepagina =====
 const lastUpdateElement = document.getElementById("lastUpdate");
 if (lastUpdateElement) {
