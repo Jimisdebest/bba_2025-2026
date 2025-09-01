@@ -1,3 +1,2 @@
-# bba_2025-2026
-De klassenwebsite van BBA
+# Welkom op de BBA klassenwebsite
 Hier vind je belangerijke data en gezellige fotos
