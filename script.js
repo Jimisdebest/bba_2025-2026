@@ -12,8 +12,22 @@ if (lastUpdateElement) {
 const birthdayTodayElement = document.getElementById("birthdayToday");
 if (birthdayTodayElement) {
   const birthdays = [
-    { name: "Tycho", day: 3, month: 9 },
-    { name: "Jim", day: 14, month: 10 },
-    { name: "Emma", day: 1, month: 9 },
-    { name: "Ravi", day: 22, month: 11 },
-    { name: "Lotte", day: 5, month: 5 }
+    { name: "Jim", day: 19, month: 06 },
+    
+// Check of het vandaag donderdag is
+const vandaag = new Date();
+const dagNummer = vandaag.getDay(); // 0 = zondag, 4 = donderdag
+
+if (dagNummer === 4) {
+  const melding = "Er wordt momenteel hard gewerkt aan de wekelijkse update.\n" +
+                  "Als de webpagina raar doet, komt het omdat we met een nieuwe versie bezig zijn.\n" +
+                  "Vanaf morgen kunt u sowieso weer op de website.";
+  
+  alert(melding);
+
+  // Proberen het tabblad te sluiten (werkt alleen als het door script is geopend)
+  window.close();
+
+  // Als sluiten niet lukt, doorsturen naar een onderhoudspagina
+  // window.location.href = "onderhoud.html";
+}
