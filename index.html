@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
 </head>
+  <script>
+// Vraag om wachtwoord zodra de pagina opent
+const wachtwoord = prompt("Voer het wachtwoord in om verder te gaan:");
+
+if (wachtwoord !== "bba_2025") {
+  alert("Onjuist wachtwoord. Toegang geweigerd.");
+  window.location.href = "https://www.google.com"; // Stuur ze weg
+}
+</script>
+
 <body>
 
   <!-- Navigatie -->
