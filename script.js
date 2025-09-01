@@ -1,6 +1,10 @@
 // Check of het vandaag donderdag is
 const vandaag = new Date();
 const dagNummer = vandaag.getDay(); // 0 = zondag, 4 = donderdag
+const vandaag = new Date();
+if (vandaag.getDay() === 4) { // 4 = donderdag
+  window.location.href = "onderhoud.html";
+}
 
 if (dagNummer === 4) {
   // Doorsturen naar onderhoudspagina
