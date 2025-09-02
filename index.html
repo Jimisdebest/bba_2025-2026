@@ -9,35 +9,40 @@
 </head>
   <script>
 <script>
-// Wachtwoorden instellen
-const normaalWachtwoord = "bba_2025";
-const priveWachtwoord = "Jimschool10";
+<script>
+(function () {
+  const NORMAAL = "bba_2025";
+  const PRIVE = "Jimschool10";
+  const dag = new Date().getDay(); // 4 = donderdag
 
-// Huidige dag ophalen (0 = zondag, 4 = donderdag)
-const vandaag = new Date();
-const dagNummer = vandaag.getDay();
+  // Skip op de onderhoudspagina zelf (daar geen prompt)
+  const isOnderhoud = /onderhoud\.html(\?|#|$)/i.test(location.pathname) || document.title.toLowerCase().includes("onderhoud");
+  if (isOnderhoud) return;
 
-// Vraag altijd om wachtwoord
-const invoer = prompt("Voer het wachtwoord in om verder te gaan:");
+  // Altijd vragen om wachtwoord
+  const invoer = (prompt("Voer het wachtwoord in om verder te gaan:") || "").trim();
 
-// Controleer wachtwoord
-if (invoer === priveWachtwoord) {
-  // Privé wachtwoord → altijd toegang
-  console.log("Privé toegang verleend");
-} 
-else if (invoer === normaalWachtwoord) {
-  if (dagNummer === 4) {
-    // Donderdag → onderhoudspagina
-    window.location.href = "onderhoud.html";
-  } else {
-    console.log("Normale toegang verleend");
+  if (invoer === PRIVE) {
+    // Altijd toegang, ook op donderdag
+    window.__bbaAccessGranted = true;
+    return;
   }
-} 
-else {
-  // Fout wachtwoord → wegsturen
+
+  if (invoer === NORMAAL) {
+    if (dag === 4) {
+      // Normaal wachtwoord op donderdag → onderhoudspagina
+      window.location.replace("onderhoud.html");
+      return;
+    }
+    // Normaal wachtwoord op andere dagen → toegang
+    window.__bbaAccessGranted = true;
+    return;
+  }
+
+  // Onjuist wachtwoord → wegsturen
   alert("Onjuist wachtwoord. Toegang geweigerd.");
-  window.location.href = "https://www.google.com";
-}
+  window.location.replace("https://www.google.com");
+})();
 </script>
 
 <body>
