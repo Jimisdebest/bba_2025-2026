@@ -8,12 +8,35 @@
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
 </head>
   <script>
-// Vraag om wachtwoord zodra de pagina opent
-const wachtwoord = prompt("Voer het wachtwoord in om verder te gaan:");
+<script>
+// Wachtwoorden instellen
+const normaalWachtwoord = "bba_2025";
+const priveWachtwoord = "Jimschool10";
 
-if (wachtwoord !== "bba_2025") {
+// Huidige dag ophalen (0 = zondag, 4 = donderdag)
+const vandaag = new Date();
+const dagNummer = vandaag.getDay();
+
+// Vraag altijd om wachtwoord
+const invoer = prompt("Voer het wachtwoord in om verder te gaan:");
+
+// Controleer wachtwoord
+if (invoer === priveWachtwoord) {
+  // Privé wachtwoord → altijd toegang
+  console.log("Privé toegang verleend");
+} 
+else if (invoer === normaalWachtwoord) {
+  if (dagNummer === 4) {
+    // Donderdag → onderhoudspagina
+    window.location.href = "onderhoud.html";
+  } else {
+    console.log("Normale toegang verleend");
+  }
+} 
+else {
+  // Fout wachtwoord → wegsturen
   alert("Onjuist wachtwoord. Toegang geweigerd.");
-  window.location.href = "https://www.google.com"; // Stuur ze weg
+  window.location.href = "https://www.google.com";
 }
 </script>
 
