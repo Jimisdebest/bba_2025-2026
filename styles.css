@@ -15,19 +15,20 @@ body {
   line-height: 1.6;
 }
 
-/* ===== Navigatiebalk - Speels ===== */
+/* ===== Navigatiebalk - Speels & Breder ===== */
 nav {
   background: #ff6f91;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 24px;
+  padding: 14px 40px; /* meer horizontale ruimte */
   position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  width: 100%;
 }
 
 nav .logo {
@@ -49,14 +50,15 @@ nav .logo:hover {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 18px;
+  gap: 30px; /* meer ruimte tussen knoppen */
+  flex-wrap: wrap;
 }
 
 .nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  padding: 8px 14px;
+  padding: 10px 20px; /* grotere knoppen */
   border-radius: 20px;
   background: #ff9671;
   transition: all 0.3s ease;
