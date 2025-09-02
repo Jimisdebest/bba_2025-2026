@@ -1,4 +1,4 @@
-/* ===== Reset & Basisstijl ===== */
+/* ===== Reset & Basis ===== */
 *,
 *::before,
 *::after {
@@ -8,18 +8,16 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
   color: #333;
   min-height: 100vh;
   line-height: 1.6;
 }
 
-/* ===== Navigatiebalk ===== */
+/* ===== Navigatiebalk - Speels ===== */
 nav {
-  background: rgba(44, 62, 80, 0.9); /* semi-transparant voor diepte */
-  backdrop-filter: blur(6px); /* glas-effect */
-  color: #fff;
+  background: #ff6f91;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,72 +25,59 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border-bottom: 2px solid rgba(255,255,255,0.1);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 nav .logo {
   font-size: 1.6rem;
   font-weight: bold;
-  letter-spacing: 1px;
-  color: #ffdd57; /* opvallende accentkleur */
-  text-shadow: 0 0 6px rgba(255, 221, 87, 0.8);
+  color: #fff;
+  background: #ff9671;
+  padding: 6px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: rotate(-2deg);
   transition: transform 0.3s ease;
 }
 
 nav .logo:hover {
-  transform: scale(1.05);
+  transform: rotate(2deg) scale(1.05);
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 24px;
+  gap: 18px;
 }
 
 .nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.05rem;
   padding: 8px 14px;
-  border-radius: 6px;
-  position: relative;
+  border-radius: 20px;
+  background: #ff9671;
   transition: all 0.3s ease;
 }
 
-/* Hover-animatie met onderstreep-effect */
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 3px;
-  background: #ffdd57;
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
 .nav-links a:hover {
-  color: #ffdd57;
-  text-shadow: 0 0 6px rgba(255, 221, 87, 0.8);
+  background: #ffc75f;
+  color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.nav-links a.active {
-  color: #ffdd57;
-}
-
-/* ===== Intro tekst ===== */
+/* ===== Intro ===== */
 .intro {
   text-align: center;
   max-width: 600px;
   margin: 40px auto;
   padding: 0 1rem;
+  background: rgba(255,255,255,0.8);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* ===== Verjaardagslijst ===== */
@@ -100,15 +85,15 @@ ul {
   list-style: none;
   max-width: 500px;
   margin: 20px auto;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
+  background: #fff5e1;
+  border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
 }
 
 li {
   padding: 14px 18px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 2px dashed #ffd6a5;
   font-size: 1.05em;
   display: flex;
   justify-content: space-between;
@@ -116,7 +101,7 @@ li {
 }
 
 li:nth-child(even) {
-  background: #f9fbfd;
+  background: #fff0f5;
 }
 
 li:last-child {
@@ -128,14 +113,13 @@ li:last-child {
   margin-top: 30px;
   font-size: 1.3em;
   font-weight: bold;
-  color: #27ae60;
-  animation: pop 1s ease-in-out;
+  color: #ff6f91;
+  animation: bounce 1s ease-in-out infinite alternate;
 }
 
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); }
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
 }
 
 /* ===== Fotogalerij ===== */
@@ -150,23 +134,17 @@ li:last-child {
 
 .gallery img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 16px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .gallery img:hover {
-  transform: scale(1.05);
+  transform: rotate(2deg) scale(1.05);
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 /* ===== Responsiveness ===== */
-@media (max-width: 768px) {
-  .nav-links {
-    gap: 14px;
-  }
-}
-
 @media (max-width: 600px) {
   nav {
     flex-direction: column;
@@ -180,6 +158,6 @@ li:last-child {
   }
   .nav-links a {
     width: 100%;
-    padding: 10px;
+    text-align: center;
   }
 }
