@@ -43,3 +43,25 @@ if (dagNummer === 4) {
   // Als sluiten niet lukt, doorsturen naar een onderhoudspagina
   // window.location.href = "onderhoud.html";
 }
+// 🎉 Confetti-effect bij verjaardag deze week
+const isVerjaardagDezeWeek = true; // Later vervangen met echte check
+
+function vuurConfetti() {
+  const colors = ["#ff6f91", "#ffc75f", "#27ae60", "#2980b9", "#ff9671"];
+  for (let i = 0; i < 100; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+// 🔁 Vuur confetti 3x als er een jarige is
+if (isVerjaardagDezeWeek) {
+  vuurConfetti();
+  setTimeout(vuurConfetti, 1500);
+  setTimeout(vuurConfetti, 3000);
+}
