@@ -10,38 +10,75 @@
   <script>
 <script>
 <script>
+<script>
 (function () {
-  const NORMAAL = "bba_2025";
-  const PRIVE = "Jimschool10";
+  const bezoekersWachtwoord = "bbc_2025";
   const dag = new Date().getDay(); // 4 = donderdag
 
-  // Skip op de onderhoudspagina zelf (daar geen prompt)
-  const isOnderhoud = /onderhoud\.html(\?|#|$)/i.test(location.pathname) || document.title.toLowerCase().includes("onderhoud");
-  if (isOnderhoud) return;
-
-  // Altijd vragen om wachtwoord
-  const invoer = (prompt("Voer het wachtwoord in om verder te gaan:") || "").trim();
-
-  if (invoer === PRIVE) {
-    // Altijd toegang, ook op donderdag
-    window.__bbaAccessGranted = true;
+  // Vraag altijd om wachtwoord
+  const invoer = prompt("Voer het wachtwoord in om verder te gaan:");
+  if (invoer !== bezoekersWachtwoord) {
+    alert("Onjuist wachtwoord. Toegang geweigerd.");
+    window.location.href = "https://www.bing.com";
     return;
   }
 
-  if (invoer === NORMAAL) {
-    if (dag === 4) {
-      // Normaal wachtwoord op donderdag → onderhoudspagina
-      window.location.replace("onderhoud.html");
-      return;
-    }
-    // Normaal wachtwoord op andere dagen → toegang
-    window.__bbaAccessGranted = true;
-    return;
-  }
+  // Als het donderdag is → waarschuwing tonen
+  if (dag === 4) {
+    // Maak overlay
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.backgroundColor = "rgba(0,0,0,0.85)";
+    overlay.style.color = "white";
+    overlay.style.display = "flex";
+    overlay.style.flexDirection = "column";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.zIndex = 9999;
+    overlay.style.textAlign = "center";
+    overlay.style.padding = "20px";
 
-  // Onjuist wachtwoord → wegsturen
-  alert("Onjuist wachtwoord. Toegang geweigerd.");
-  window.location.replace("https://www.google.com");
+    const bericht = document.createElement("p");
+    bericht.textContent = "Er wordt momenteel gewerkt aan de website. De website kan errors en andere fouten bevatten.";
+    bericht.style.fontSize = "1.2em";
+    bericht.style.maxWidth = "600px";
+    bericht.style.marginBottom = "20px";
+
+    const afsluitBtn = document.createElement("button");
+    afsluitBtn.textContent = "Website afsluiten";
+    afsluitBtn.style.padding = "10px 20px";
+    afsluitBtn.style.margin = "10px";
+    afsluitBtn.style.fontSize = "1em";
+    afsluitBtn.style.backgroundColor = "#c0392b";
+    afsluitBtn.style.color = "white";
+    afsluitBtn.style.border = "none";
+    afsluitBtn.style.borderRadius = "5px";
+    afsluitBtn.onclick = () => {
+      window.location.href = "https://www.bing.com";
+    };
+
+    const doorgaanBtn = document.createElement("button");
+    doorgaanBtn.textContent = "Toch doorgaan (niet aanbevolen)";
+    doorgaanBtn.style.padding = "8px 16px";
+    doorgaanBtn.style.margin = "10px";
+    doorgaanBtn.style.fontSize = "0.9em";
+    doorgaanBtn.style.backgroundColor = "#27ae60";
+    doorgaanBtn.style.color = "white";
+    doorgaanBtn.style.border = "none";
+    doorgaanBtn.style.borderRadius = "5px";
+    doorgaanBtn.onclick = () => {
+      document.body.removeChild(overlay);
+    };
+
+    overlay.appendChild(bericht);
+    overlay.appendChild(afsluitBtn);
+    overlay.appendChild(doorgaanBtn);
+    document.body.appendChild(overlay);
+  }
 })();
 </script>
 
