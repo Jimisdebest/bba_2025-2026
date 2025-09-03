@@ -6,178 +6,118 @@
   <title>BBA Klassenwebsite - Home</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
+
+  <script>
+    (function () {
+      const wachtwoord = "bba_2025";
+      const dag = new Date().getDay(); // 4 = donderdag
+
+      // Check of wachtwoord al eerder is ingevoerd
+      if (localStorage.getItem("toegangBBA") !== "ok") {
+        const invoer = prompt("Voer het wachtwoord in voor de beveiliging van u / uw kind zijn gegevens en foto's");
+        if (invoer !== wachtwoord) {
+          alert("Het wachtwoord is onjuist");
+          window.location.href = "https://www.bing.com";
+          return;
+        } else {
+          localStorage.setItem("toegangBBA", "ok");
+        }
+      }
+
+      // Donderdag waarschuwing
+      if (dag === 4) {
+        const overlay = document.createElement("div");
+        overlay.style.position = "fixed";
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.backgroundColor = "rgba(0,0,0,0.85)";
+        overlay.style.color = "white";
+        overlay.style.display = "flex";
+        overlay.style.flexDirection = "column";
+        overlay.style.justifyContent = "center";
+        overlay.style.alignItems = "center";
+        overlay.style.zIndex = 9999;
+        overlay.style.textAlign = "center";
+        overlay.style.padding = "20px";
+        overlay.style.fontFamily = "Arial, sans-serif";
+
+        const bericht = document.createElement("p");
+        bericht.textContent = "Er wordt momenteel gewerkt aan de website. De website kan errors en andere fouten bevatten.";
+        bericht.style.fontSize = "1.2em";
+        bericht.style.maxWidth = "600px";
+        bericht.style.marginBottom = "20px";
+
+        const afsluitBtn = document.createElement("button");
+        afsluitBtn.textContent = "Website afsluiten";
+        afsluitBtn.style.padding = "10px 20px";
+        afsluitBtn.style.margin = "10px";
+        afsluitBtn.style.fontSize = "1em";
+        afsluitBtn.style.backgroundColor = "#c0392b";
+        afsluitBtn.style.color = "white";
+        afsluitBtn.style.border = "none";
+        afsluitBtn.style.borderRadius = "5px";
+        afsluitBtn.onclick = () => {
+          window.location.href = "https://www.bing.com";
+        };
+
+        const doorgaanBtn = document.createElement("button");
+        doorgaanBtn.textContent = "Toch doorgaan (niet doen idioot)";
+        doorgaanBtn.style.padding = "8px 16px";
+        doorgaanBtn.style.margin = "10px";
+        doorgaanBtn.style.fontSize = "0.9em";
+        doorgaanBtn.style.backgroundColor = "#27ae60";
+        doorgaanBtn.style.color = "white";
+        doorgaanBtn.style.border = "none";
+        doorgaanBtn.style.borderRadius = "5px";
+        doorgaanBtn.onclick = () => {
+          document.body.removeChild(overlay);
+        };
+
+        overlay.appendChild(bericht);
+        overlay.appendChild(afsluitBtn);
+        overlay.appendChild(doorgaanBtn);
+        document.body.appendChild(overlay);
+      }
+    })();
+  </script>
 </head>
-  <script>
-  <script>
-(function () {
-  const wachtwoord = "bba_2025";
-  const dag = new Date().getDay(); // 4 = donderdag
-
-  // Check of wachtwoord al eerder is ingevoerd
-  if (localStorage.getItem("toegangBBA") !== "ok") {
-    const invoer = prompt("Voer het wachtwoord in voor de beveiliging van u / uw kind zijn gegevens en foto's");
-    if (invoer !== wachtwoord) {
-      alert("Het wachtwoord is onjuist");
-      window.location.href = "https://www.bing.com";
-      return;
-    } else {
-      localStorage.setItem("toegangBBA", "ok");
-    }
-  }
-
-  // Donderdag waarschuwing
-  if (dag === 4) {
-    const overlay = document.createElement("div");
-    overlay.style.position = "fixed";
-    overlay.style.top = 0;
-    overlay.style.left = 0;
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0,0,0,0.85)";
-    overlay.style.color = "white";
-    overlay.style.display = "flex";
-    overlay.style.flexDirection = "column";
-    overlay.style.justifyContent = "center";
-    overlay.style.alignItems = "center";
-    overlay.style.zIndex = 9999;
-    overlay.style.textAlign = "center";
-    overlay.style.padding = "20px";
-    overlay.style.fontFamily = "Arial, sans-serif";
-
-    const bericht = document.createElement("p");
-    bericht.textContent = "Er wordt momenteel gewerkt aan de website. De website kan errors en andere fouten bevatten.";
-    bericht.style.fontSize = "1.2em";
-    bericht.style.maxWidth = "600px";
-    bericht.style.marginBottom = "20px";
-
-    const afsluitBtn = document.createElement("button");
-    afsluitBtn.textContent = "Website afsluiten";
-    afsluitBtn.style.padding = "10px 20px";
-    afsluitBtn.style.margin = "10px";
-    afsluitBtn.style.fontSize = "1em";
-    afsluitBtn.style.backgroundColor = "#c0392b";
-    afsluitBtn.style.color = "white";
-    afsluitBtn.style.border = "none";
-    afsluitBtn.style.borderRadius = "5px";
-    afsluitBtn.onclick = () => {
-      window.location.href = "https://www.bing.com";
-    };
-
-    const doorgaanBtn = document.createElement("button");
-    doorgaanBtn.textContent = "Toch doorgaan (niet doen idioot)";
-    doorgaanBtn.style.padding = "8px 16px";
-    doorgaanBtn.style.margin = "10px";
-    doorgaanBtn.style.fontSize = "0.9em";
-    doorgaanBtn.style.backgroundColor = "#27ae60";
-    doorgaanBtn.style.color = "white";
-    doorgaanBtn.style.border = "none";
-    doorgaanBtn.style.borderRadius = "5px";
-    doorgaanBtn.onclick = () => {
-      document.body.removeChild(overlay);
-    };
-
-    overlay.appendChild(bericht);
-    overlay.appendChild(afsluitBtn);
-    overlay.appendChild(doorgaanBtn);
-    document.body.appendChild(overlay);
-  }
-})();
-</script>
-
-  // Als het donderdag is → waarschuwing tonen
-  if (dag === 4) {
-    const overlay = document.createElement("div");
-    overlay.style.position = "fixed";
-    overlay.style.top = 0;
-    overlay.style.left = 0;
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0,0,0,0.85)";
-    overlay.style.color = "white";
-    overlay.style.display = "flex";
-    overlay.style.flexDirection = "column";
-    overlay.style.justifyContent = "center";
-    overlay.style.alignItems = "center";
-    overlay.style.zIndex = 9999;
-    overlay.style.textAlign = "center";
-    overlay.style.padding = "20px";
-    overlay.style.fontFamily = "Arial, sans-serif";
-
-    const bericht = document.createElement("p");
-    bericht.textContent = "Er wordt momenteel gewerkt aan de website. De website kan errors en andere fouten bevatten.";
-    bericht.style.fontSize = "1.2em";
-    bericht.style.maxWidth = "600px";
-    bericht.style.marginBottom = "20px";
-
-    const afsluitBtn = document.createElement("button");
-    afsluitBtn.textContent = "Website afsluiten";
-    afsluitBtn.style.padding = "10px 20px";
-    afsluitBtn.style.margin = "10px";
-    afsluitBtn.style.fontSize = "1em";
-    afsluitBtn.style.backgroundColor = "#c0392b";
-    afsluitBtn.style.color = "white";
-    afsluitBtn.style.border = "none";
-    afsluitBtn.style.borderRadius = "5px";
-    afsluitBtn.onclick = () => {
-      window.location.href = "https://www.bing.com";
-    };
-
-    const doorgaanBtn = document.createElement("button");
-    doorgaanBtn.textContent = "Toch doorgaan (niet doen idioot)";
-    doorgaanBtn.style.padding = "8px 16px";
-    doorgaanBtn.style.margin = "10px";
-    doorgaanBtn.style.fontSize = "0.9em";
-    doorgaanBtn.style.backgroundColor = "#27ae60";
-    doorgaanBtn.style.color = "white";
-    doorgaanBtn.style.border = "none";
-    doorgaanBtn.style.borderRadius = "5px";
-    doorgaanBtn.onclick = () => {
-      document.body.removeChild(overlay);
-    };
-
-    overlay.appendChild(bericht);
-    overlay.appendChild(afsluitBtn);
-    overlay.appendChild(doorgaanBtn);
-    document.body.appendChild(overlay);
-  }
-})();
-</script>
 
 <body>
 
   <!-- Navigatie -->
- <!-- Navigatie -->
-<nav>
-  <a href="index.html">
-    <img src="BBA-Logo.png" alt="BBA Logo" width="80">
-  </a>
+  <nav>
+    <a href="index.html">
+      <img src="BBA-Logo.png" alt="BBA Logo" width="80">
+    </a>
 
-  <!-- Menu-knop -->
-  <div class="menu-toggle" id="menu-toggle">☰ Menu</div>
+    <!-- Menu-knop -->
+    <div class="menu-toggle" id="menu-toggle">☰ Menu</div>
 
-  <!-- Verborgen menu -->
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="verjaardagen.html">Verjaardagen</a></li>
-    <li><a href="fotos.html">Foto's</a></li>
-    <li><a href="andere.html">Andere info</a></li>
-  </ul>
-</nav>
-
+    <!-- Verborgen menu -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="verjaardagen.html">Verjaardagen</a></li>
+      <li><a href="fotos.html">Foto's</a></li>
+      <li><a href="andere.html">Andere info</a></li>
+    </ul>
+  </nav>
 
   <!-- Hoofdinhoud -->
   <header>
     <p class="intro">
-     Welkom op de BBA Klassenwebsite.
-      Elke donderdag wordt de website geupdatet zodat u de nieuwste fotos en verhalen uit de klas ook kunt meebeleven.
+      Welkom op de BBA Klassenwebsite.<br>
+      Elke donderdag wordt de website geüpdatet zodat u de nieuwste foto's en verhalen uit de klas ook kunt meebeleven.
     </p>
   </header>
 
   <main>
     <h2>Laatste update</h2>
-    <p id="lastUpdate"></p>
+    <p id="lastUpdate">3 september 2025</p>
   </main>
 
   <script src="script.js"></script>
 </body>
 </html>
+
