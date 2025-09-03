@@ -59,7 +59,7 @@
     };
 
     const doorgaanBtn = document.createElement("button");
-    doorgaanBtn.textContent = "Toch doorgaan (niet aanbevolen)";
+    doorgaanBtn.textContent = "Toch doorgaan (niet doen idioot)";
     doorgaanBtn.style.padding = "8px 16px";
     doorgaanBtn.style.margin = "10px";
     doorgaanBtn.style.fontSize = "0.9em";
@@ -82,17 +82,24 @@
 <body>
 
   <!-- Navigatie -->
-  <nav>
-    <a href="index.html">
-      <img src="BBA-Logo.png" alt="BBA Logo" width="80">
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="verjaardagen.html">Verjaardagen</a></li>
-      <li><a href="fotos.html">Foto's</a></li>
-      <li><a href="andere.html">Andere info</a></li>
-    </ul>
-  </nav>
+ <!-- Navigatie -->
+<nav>
+  <a href="index.html">
+    <img src="BBA-Logo.png" alt="BBA Logo" width="80">
+  </a>
+
+  <!-- Menu-knop -->
+  <div class="menu-toggle" id="menu-toggle">☰ Menu</div>
+
+  <!-- Verborgen menu -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="verjaardagen.html">Verjaardagen</a></li>
+    <li><a href="fotos.html">Foto's</a></li>
+    <li><a href="andere.html">Andere info</a></li>
+  </ul>
+</nav>
+
 
   <!-- Hoofdinhoud -->
   <header>
