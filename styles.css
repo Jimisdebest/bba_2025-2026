@@ -239,3 +239,35 @@ li:last-child {
     opacity: 0;
   }
 }
+/* Menu-knop standaard verbergen op grote schermen */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  background: #ff9671;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+/* Mobiel: menu-knop tonen, links verbergen */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background: #ff6f91;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .nav-links.show {
+    display: flex;
+  }
+}
