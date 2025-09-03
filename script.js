@@ -65,3 +65,7 @@ if (isVerjaardagDezeWeek) {
   setTimeout(vuurConfetti, 1500);
   setTimeout(vuurConfetti, 3000);
 }
+// Menu open/dicht klappen
+document.getElementById("menu-toggle").addEventListener("click", function() {
+  document.getElementById("nav-links").classList.toggle("show");
+});
