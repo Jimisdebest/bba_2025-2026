@@ -1,3 +1,60 @@
+(function () {
+  const wachtwoord = "bba_2025";
+  const maxPogingen = 6;
+  let pogingen = 0;
+  const dag = new Date().getDay(); // 4 = donderdag
+
+  while (pogingen < maxPogingen) {
+    const invoer = prompt("Voer het wachtwoord in voor toegang tot de website:");
+    if (invoer === wachtwoord) {
+      // ✅ Goed wachtwoord
+      if (dag === 4) {
+        // Donderdag → waarschuwing tonen
+        const overlay = document.createElement("div");
+        overlay.style.position = "fixed";
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.backgroundColor = "rgba(0,0,0,0.85)";
+        overlay.style.color = "white";
+        overlay.style.display = "flex";
+        overlay.style.flexDirection = "column";
+        overlay.style.justifyContent = "center";
+        overlay.style.alignItems = "center";
+        overlay.style.zIndex = 9999;
+        overlay.style.textAlign = "center";
+        overlay.style.padding = "20px";
+        overlay.style.fontFamily = "Arial, sans-serif";
+
+        const bericht = document.createElement("p");
+        bericht.textContent = "Er wordt momenteel gewerkt aan de website. De website kan errors en andere fouten bevatten.";
+        bericht.style.fontSize = "1.2em";
+        bericht.style.maxWidth = "600px";
+        bericht.style.marginBottom = "20px";
+
+        const afsluitBtn = document.createElement("button");
+        afsluitBtn.textContent = "Website afsluiten";
+        afsluitBtn.style.padding = "10px 20px";
+        afsluitBtn.style.margin = "10px";
+        afsluitBtn.style.fontSize = "1em";
+        afsluitBtn.style.backgroundColor = "#c0392b";
+        afsluitBtn.style.color = "white";
+        afsluitBtn.style.border = "none";
+        afsluitBtn.style.borderRadius = "5px";
+        afsluitBtn.onclick = () => {
+          window.location.href = "https://www.bing.com";
+        };
+
+        const doorgaanBtn = document.createElement("button");
+        doorgaanBtn.textContent = "Toch doorgaan (niet aanbevolen)";
+        doorgaanBtn.style.padding = "8px 16px";
+        doorgaanBtn.style.margin = "10px";
+        doorgaanBtn.style.fontSize = "0.9em";
+        doorgaanBtn.style.backgroundColor = "#27ae60";
+        doorgaanBtn.style.color = "white";
+        doorgaanBtn.style.border = "none";
+        doorgaanBtn.style.borderRadius = "
 // Check of het vandaag donderdag is
 const vandaag = new Date();
 const dagNummer = vandaag.getDay(); // 0 = zondag, 4 = donderdag
