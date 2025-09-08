@@ -21,7 +21,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 10px; /* meer horizontale ruimte */
+  padding: 14px 40px; /* meer horizontale ruimte */
   position: sticky;
   top: 0;
   z-index: 1000;
