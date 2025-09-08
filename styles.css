@@ -250,23 +250,15 @@ li:last-child {
   border-radius: 8px;
 }
 
-/* Mobiel: menu-knop tonen, links verbergen */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-    background: #ff6f91;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 20px;
+}
+h3 {
+  font-size: 18px;
+}
   .nav-links.show {
     display: flex;
   }
