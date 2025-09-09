@@ -26,20 +26,12 @@
 
   <!-- Hoofdinhoud -->
   <header>
-    <span class="intro">Hier komen binnenkort onze leukste foto's! Klik op een foto om deze te vergroten.</span>
+    <span class="intro">Hier zijn onze leukste foto's! </span>
     <button id="viewPhotosBtn" class="btn btn-primary view-btn" aria-label="Bekijk de fotos">Bekijk de fotos</button>
   </header>
 
-  <main class="container" id="main">
-    <!-- Upload / toevoeggebied (client-side preview, geen server) -->
-    <section class="upload-area" aria-labelledby="upload-heading">
-      <h2 id="upload-heading" style="width:100%; margin:0 0 .5rem 0; font-size:1rem;">Foto toevoegen (preview, lokaal)</h2>
-      <div class="file-input">
-        <label class="btn btn-primary" for="file">Selecteer foto</label>
-        <input id="file" type="file" accept="image/*" style="display:none" multiple>
-        <button id="clearBtn" class="btn" type="button">Verwijder preview</button>
-      </div>
-      <small style="color:#666; width:100%;">Opmerking: deze pagina slaat uploads alleen lokaal op in je browser (geen server). Gebruik de knop hieronder om de geselecteerde bestanden toe te voegen aan de galerij.</small>
+  
+      
     </section>
 
     <!-- Galerij -->
@@ -143,8 +135,7 @@
       });
 
       // File input / preview (client-side only)
-      const fileInput = document.getElementById('file');
-      const clearBtn = document.getElementById('clearBtn');
+      
 
       fileInput.addEventListener('change', (event) => {
         const files = Array.from(event.target.files).filter(f => f.type.startsWith('image/'));
