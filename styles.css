@@ -134,11 +134,28 @@ li:last-child {
   padding: 0 1rem;
 }
 
-.gallery img {
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.photo-item {
+  text-align: center;
+}
+
+.photo-item img {
   width: 100%;
-  border-radius: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  height: auto;
+  border-radius: 8px;
+}
+
+.caption {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #333;
+}
 }
 
 .gallery img:hover {
