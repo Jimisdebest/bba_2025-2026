@@ -6,55 +6,14 @@
   <title>BBA Klassenwebsite - Foto's</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon" />
-  <style>
-    /* Kleine ingebedde stijlen voor voorbeeld; zet ze liever in styles.css */
-    :root {
-      --bg: #fff;
-      --muted: #666;
-      --accent: #222;
-    }
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 0; color: #222; background: #fafafa; }
-    nav { display:flex; align-items:center; gap:1rem; padding:1rem; background:#fff; border-bottom:1px solid #eaeaea; position:sticky; top:0; z-index:5; }
-    .nav-links { list-style:none; display:flex; gap:.5rem; margin:0; padding:0; }
-    .nav-links a { text-decoration:none; color:inherit; padding:.4rem .6rem; border-radius:.25rem; }
-    .nav-links a.active { background:var(--accent); color:#fff; }
-    header { padding:1.5rem 1rem; text-align:center; background:linear-gradient(180deg, #fff, #fbfbfb); }
-    .intro { margin:0; font-size:1.05rem; color:#444; display:inline-block; vertical-align:middle; }
-    .view-btn { margin-left:0.8rem; vertical-align:middle; }
-    .container { max-width:1100px; margin:1rem auto; padding:0 1rem; }
-    .gallery { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:1rem; }
-    .photo-item { background:var(--bg); border:1px solid #eaeaea; padding:.5rem; border-radius:.5rem; box-shadow:0 1px 2px rgba(0,0,0,0.03); }
-    .photo-item img { width:100%; height:160px; object-fit:cover; border-radius:.4rem; display:block; cursor:zoom-in; transition:transform .18s ease; }
-    .photo-item img:focus { outline:3px solid rgba(34,34,34,.12); transform:scale(1.01); }
-    .caption { font-size:.9rem; color:var(--muted); margin:.5rem 0 0; }
-    .upload-area { margin:1rem 0; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
-    .file-input { display:flex; gap:.5rem; align-items:center; }
-    .btn { display:inline-block; padding:.45rem .8rem; border-radius:.35rem; border:1px solid #ccc; background:#fff; cursor:pointer; font-size:.95rem; }
-    .btn-primary { background:var(--accent); color:#fff; border-color:var(--accent); }
-    /* Lightbox */
-    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.8); z-index:9999; padding:24px; }
-    .modal.open { display:flex; }
-    .lightbox-inner { position:relative; max-width:1100px; width:100%; display:flex; flex-direction:column; align-items:center; }
-    .lightbox-img { max-width:100%; max-height:80vh; border-radius:.5rem; box-shadow:0 18px 50px rgba(0,0,0,0.6); transform-origin:center center; transition:transform .25s ease; }
-    .lightbox-meta { color:#fff; margin-top:.5rem; text-align:center; max-width:100%; font-size:0.95rem; }
-    .btn-icon { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.45); color:#fff; border:0; padding:.5rem .6rem; border-radius:.35rem; cursor:pointer; }
-    .btn-prev { left:8px; }
-    .btn-next { right:8px; }
-    .btn-close { position:absolute; right:8px; top:8px; background:rgba(0,0,0,0.45); color:#fff; border:0; padding:.4rem .6rem; border-radius:.35rem; cursor:pointer; }
-    .sr-only { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
-    @media (max-width:480px) {
-      .photo-item img { height:120px; }
-      .btn-icon { padding:.4rem .5rem; }
-      .lightbox-meta { font-size:.85rem; }
-    }
-  </style>
 </head>
 <body>
 
   <!-- Navigatie -->
   <nav aria-label="Hoofdnavigatie">
-    <a href="index.html" aria-label="Ga naar home">
-      <img src="BBA-Logo.png" alt="BBA Logo" width="150" />
+    <a href="index.html" aria-label="Ga naar home" class="logo">
+      BBA
+      <!-- of: <img src="BBA-Logo.png" alt="BBA Logo" width="150" /> -->
     </a>
     <ul class="nav-links" role="menubar">
       <li role="none"><a role="menuitem" href="index.html">Home</a></li>
@@ -63,6 +22,7 @@
       <li role="none"><a role="menuitem" href="andere.html">Overige</a></li>
       <li role="none"><a role="menuitem" href="belangrijkeinfo.html">Belangrijke info</a></li>
     </ul>
+    <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
   </nav>
 
   <!-- Hoofdinhoud -->
@@ -72,16 +32,7 @@
   </header>
 
   <main class="container" id="main">
-    <!-- Upload / toevoeggebied (client-side preview, geen server) -->
-    <section class="upload-area" aria-labelledby="upload-heading">
-      <h2 id="upload-heading" style="width:100%; margin:0 0 .5rem 0; font-size:1rem;">Foto toevoegen (preview, lokaal)</h2>
-      <div class="file-input">
-        <label class="btn btn-primary" for="file">Selecteer foto</label>
-        <input id="file" type="file" accept="image/*" style="display:none" multiple />
-        <button id="clearBtn" class="btn" type="button">Verwijder preview</button>
-      </div>
-      <small style="color:var(--muted); width:100%;">Opmerking: deze pagina slaat uploads alleen lokaal op in je browser (geen server). Gebruik de knop hieronder om de geselecteerde bestanden toe te voegen aan de galerij.</small>
-    </section>
+    <!-- UPLOAD-SECTIE VERWIJDERD zoals gevraagd -->
 
     <!-- Galerij -->
     <section aria-labelledby="galery-heading">
@@ -101,14 +52,15 @@
         <div class="photo-item"><img src="gym11.jpg" alt="Gymles foto 11" data-caption="Gymles foto 11" data-index="10" tabindex="0"><p class="caption">Gymles foto 11</p></div>
         <div class="photo-item"><img src="gym12.jpg" alt="Gymles foto 12" data-caption="Gymles foto 12" data-index="11" tabindex="0"><p class="caption">Gymles foto 12</p></div>
 
-        <!-- Bestaande voorbeeldfoto's blijven ook aanwezig -->
+        <!-- Bestaande voorbeeldfoto's -->
         <div class="photo-item">
-          <img src="voorbeeld.jpg" alt="Gymles samenwerken: mensenknoop en oefeningen" data-caption="Dinsdag hebben we een leuke gymles gehad die in het teken stond van samenwerken. De spellen die we deden zijn 'de mensenknoop', een klasgenoot van plek A naar B krijgen door over stokken te lopen, een leerling over een blok laten klimmen zonder dat hij/zij de mat mocht raken en over een mat de grote mat klimmen die rechtop gehouden moest worden door klasgenoten. Erg spannend allemaal, maar we hebben elkaar goed geholpen zodat niemand gewond is geraakt." data-index="12" tabindex="0">
+          <img src="gym1.jpg" alt="Gymles samenwerken: mensenknoop en oefeningen" data-caption="Dinsdag hebben we een leuke gymles gehad die in het teken stond van samenwerken. De spellen die we deden zijn ´de mensenknoop´, een klasgenoot van plek A naar B krijgen door over stokken te lopen, een leerling over een blok laten klimmen zonder dat hij/zij de mat mocht raken en over een mat de groten mat klimmen die rechtop gehouden moest worden door klasgenoten. Erg spannend allemaal, maar we hebben elkaar goed geholpen zodat niemand gewond is geraakt ;) !!!
+" data-index="12" tabindex="0">
           <p class="caption">Gymles samenwerken — spannend maar veilig!</p>
         </div>
 
         <div class="photo-item">
-          <img src="voorbeeld2.jpg" alt="Groepsfoto bij activiteit" data-caption="Nog een leuk tekstje bij deze foto." data-index="13" tabindex="0">
+          <img src="afbeelding1.jpg" alt="Groepsfoto bij activiteit" data-caption="Nog een leuk tekstje bij deze foto." data-index="13" tabindex="0">
           <p class="caption">Nog een leuk tekstje bij deze foto.</p>
         </div>
 
@@ -129,10 +81,9 @@
   </div>
 
   <script>
-    // Lightbox + navigation + upload preview
+    // Lightbox + navigation, upload/preview removed as requested
     (function () {
       const gallery = document.getElementById('gallery');
-      const images = Array.from(gallery.querySelectorAll('img'));
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightbox-img');
       const lbCaption = document.getElementById('lightbox-caption');
@@ -144,7 +95,7 @@
 
       let currentIndex = -1;
 
-      // Ensure every image has a data-index (rebuild indices each time to be safe)
+      // assign (or reassign) data-index to be safe
       function rebuildIndices() {
         const imgs = Array.from(gallery.querySelectorAll('img'));
         imgs.forEach((img, i) => img.setAttribute('data-index', i));
@@ -163,10 +114,8 @@
         lbStatus.textContent = `Foto ${index + 1} van ${imgs.length}`;
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
-        // small scale-in animation
         lbImg.style.transform = 'scale(0.98)';
         requestAnimationFrame(() => { lbImg.style.transform = 'scale(1)'; });
-        // focus management
         btnClose.focus();
       }
 
@@ -219,7 +168,6 @@
       // "Bekijk de fotos" knop scrollt en opent eerste foto (gym1 if present)
       viewBtn.addEventListener('click', () => {
         const imgs = Array.from(gallery.querySelectorAll('img'));
-        // try find gym1 first
         const gym1 = imgs.find(img => /(^|\/)gym1\.jpg$/i.test(img.getAttribute('src')));
         const target = gym1 || imgs[0];
         if (target) {
@@ -230,50 +178,7 @@
         }
       });
 
-      // Upload preview (client-side only) - preserves behaviour from before
-      const fileInput = document.getElementById('file');
-      const clearBtn = document.getElementById('clearBtn');
-      fileInput.addEventListener('change', (event) => {
-        const files = Array.from(event.target.files).filter(f => f.type.startsWith('image/'));
-        files.forEach(file => {
-          const reader = new FileReader();
-          reader.onload = function (ev) {
-            const src = ev.target.result;
-            const item = document.createElement('div');
-            item.className = 'photo-item';
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = file.name;
-            img.setAttribute('data-caption', file.name);
-            img.tabIndex = 0;
-            const p = document.createElement('p');
-            p.className = 'caption';
-            p.textContent = file.name;
-            item.appendChild(img);
-            item.appendChild(p);
-            gallery.prepend(item); // voeg bovenaan toe
-            rebuildIndices();
-          };
-          reader.readAsDataURL(file);
-        });
-        fileInput.value = '';
-      });
-
-      clearBtn.addEventListener('click', () => {
-        const items = gallery.querySelectorAll('img');
-        items.forEach(img => {
-          if (img.src.startsWith('data:')) {
-            const container = img.closest('.photo-item');
-            container?.remove();
-          }
-        });
-        rebuildIndices();
-      });
-
-      // Rebuild indices if images are added elsewhere dynamically
-      const observer = new MutationObserver(() => rebuildIndices());
-      observer.observe(gallery, { childList: true, subtree: true });
-
+      // If you later add images dynamically via other scripts, call rebuildIndices() again.
     })();
   </script>
 
