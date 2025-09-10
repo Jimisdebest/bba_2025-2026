@@ -6,6 +6,24 @@
   <title>BBA Klassenwebsite - Verjaardagen</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
+  <style>
+    /* Maak de hoofdinhoud gecentreerd op het scherm */
+    main.center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 180px); /* Houd rekening met de ruimte van de navigatie */
+      text-align: center;
+    }
+    /* Optioneel: als de navigatie niet gecentreerd moet worden, laten we het ongewijzigd */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+  </style>
 </head>
 <body>
 
@@ -23,29 +41,30 @@
     </ul>
   </nav>
 
-  <!-- Hoofdinhoud -->
-  <header>
-    
-    <p class="intro">Bekijk wie er binnenkort jarig is in onze klas!</p>
-  </header>
+  <!-- Gecentreerde hoofdinhoud -->
+  <main class="center-content">
+    <header>      
+      <p class="intro">Bekijk wie er binnenkort jarig is in onze klas!</p>
+    </header>
 
-  <ul id="birthdayList">
-    <li>De enige echte Meester Jan - </li>
-    <li>Aiden - 8 januari</li>
-    <li>Tycho – 22 november</li>
-    <li>Jim – 19 juni</li>
-    <li>Timo – 12 februari</li>
-    <li>Feliciano - </li>
-    <li>Parsa - 27 maart</li>
-    <li>Joe - 8 februari</li>
-    <li>Wester - 8 oktober</li>
-    <li>Rian - 4 januari</li>
-    <li>Thijs - 20 januari</li>
-    <li>Oscar - 19 november</li>
-    <li>Cherelle - 17 juli</li>
-  </ul>
+    <ul id="birthdayList">
+      <li>De enige echte Meester Jan - </li>
+      <li>Aiden - 8 januari</li>
+      <li>Tycho – 22 november</li>
+      <li>Jim – 19 juni</li>
+      <li>Timo – 12 februari</li>
+      <li>Feliciano - </li>
+      <li>Parsa - 27 maart</li>
+      <li>Joe - 8 februari</li>
+      <li>Wester - 8 oktober</li>
+      <li>Rian - 4 januari</li>
+      <li>Thijs - 20 januari</li>
+      <li>Oscar - 19 november</li>
+      <li>Cherelle - 17 juli</li>
+    </ul>
 
-  <div id="birthdayToday"></div>
+    <div id="birthdayToday"></div>
+  </main>
 
   <script src="script.js"></script>
 </body>
