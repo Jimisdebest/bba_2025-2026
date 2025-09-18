@@ -11,11 +11,8 @@
 
   <!-- Navigatie -->
   <nav aria-label="Hoofdnavigatie">
-    
-      <a href="index.html">
-  <img src="BBA-Logo.png" alt="BBA Logo" width="150">
-</a>
-      <!-- of: <img src="BBA-Logo.png" alt="BBA Logo" width="150" /> -->
+    <a href="index.html">
+      <img src="BBA-Logo.png" alt="BBA Logo" width="150">
     </a>
     <ul class="nav-links" role="menubar">
       <li role="none"><a role="menuitem" href="index.html">Home</a></li>
@@ -29,150 +26,20 @@
 
   <!-- Hoofdinhoud -->
   <header>
-    <span class="intro">Hier staan onze leukste foto's! Klik op een foto om deze te vergroten.</span>
-    <button id="viewPhotosBtn" class="btn btn-primary view-btn" aria-label="Bekijk de fotos">Bekijk de fotos</button>
+    <span class="intro">Klik op de onderstaande foto om alle gymfoto’s te bekijken!</span>
   </header>
 
   <main class="container" id="main">
-
-    <!-- Galerij -->
     <section aria-labelledby="galery-heading">
-      <h2 id="galery-heading" style="margin:0 0 1rem 0;">Galerij</h2>
+      <h2 id="galery-heading" style="margin:0 0 1rem 0;">Gymfoto's</h2>
       <div class="gallery" id="gallery">
-        <div class="photo-item"><img src="gym1.jpg" alt="Gymles foto 1" data-caption="Dinsdag hebben we een leuke gymles gehad die in het teken stond van samenwerken. De spellen die we deden zijn ´de mensenknoop´, een klasgenoot van plek A naar B krijgen door over stokken te lopen, een leerling over een blok laten klimmen zonder dat hij/zij de mat mocht raken en over een mat de groten mat klimmen die rechtop gehouden moest worden door klasgenoten. Veel kijkplezier!" data-index="0" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym2.jpg" alt="Gymles foto 2" data-caption="Dit is de mat" data-index="1" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym3.jpg" alt="Gymles foto 3" data-caption="Hannah klimt over het blok" data-index="2" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym4.jpg" alt="Gymles foto 4" data-caption="En ook Roos is het gelukt!" data-index="3" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym5.jpg" alt="Gymles foto 5" data-caption="Aloys klom er ook met gemak overheen..." data-index="4" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym6.jpg" alt="Gymles foto 6" data-caption="En de stokken..." data-index="5" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym7.jpg" alt="Gymles foto 7" data-caption="De mensenknoop is bijna iedereen gelukt! Goed werk allemaal!" data-index="6" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym8.jpg" alt="Gymles foto 8" data-caption="Hadewijch is het ook gelukt" data-index="7" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym9.jpg" alt="Gymles foto 9" data-caption="Thijs had er ook plezier in!" data-index="8" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym10.jpg" alt="Gymles foto 10" data-caption="Cherelle had eerst nog wat moeite, maar toen Oscar en Aiden even hielpen, was het haar ook gelukt" data-index="9" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym11.jpg" alt="Gymles foto 11" data-caption="Huh? Met 5 kinderen? Ja, Wester die hield makkelijk een stokkie extra!" data-index="10" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-        <div class="photo-item"><img src="gym12.jpg" alt="Gymles foto 12" data-caption="Zoals u ziet; het was allemaal erg spannend, maar we hebben elkaar goed geholpen zodat niemand gewond is geraakt en iedereen weer op zijn pootjes terecht is gekomen." data-index="11" tabindex="0"><p class="caption">Gymles samenwerken — spannend maar veilig!</p></div>
-
-        
-
-        
-
+        <a href="gymfotos.html">
+          <img src="gym1.jpg" alt="Klik om alle gymfoto's te bekijken" class="single-preview" style="max-width:100%; cursor:pointer;">
+        </a>
+        <p class="caption">Gymles samenwerken — spannend maar veilig!</p>
       </div>
     </section>
   </main>
-
-  <!-- Lightbox modal -->
-  <div id="lightbox" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="lightbox-inner" role="document">
-      <button class="btn-close" id="lbClose" aria-label="Sluit (Esc)">✕</button>
-      <button class="btn-icon btn-prev" id="lbPrev" aria-label="Vorige foto">‹</button>
-      <img id="lightbox-img" class="lightbox-img" alt="" />
-      <button class="btn-icon btn-next" id="lbNext" aria-label="Volgende foto">›</button>
-      <div class="lightbox-meta" id="lightbox-caption"></div>
-      <div class="sr-only" id="lbStatus" aria-live="polite"></div>
-    </div>
-  </div>
-
-  <script>
-    // Lightbox + navigation, upload/preview removed as requested
-    (function () {
-      const gallery = document.getElementById('gallery');
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightbox-img');
-      const lbCaption = document.getElementById('lightbox-caption');
-      const lbStatus = document.getElementById('lbStatus');
-      const btnPrev = document.getElementById('lbPrev');
-      const btnNext = document.getElementById('lbNext');
-      const btnClose = document.getElementById('lbClose');
-      const viewBtn = document.getElementById('viewPhotosBtn');
-
-      let currentIndex = -1;
-
-      // assign (or reassign) data-index to be safe
-      function rebuildIndices() {
-        const imgs = Array.from(gallery.querySelectorAll('img'));
-        imgs.forEach((img, i) => img.setAttribute('data-index', i));
-      }
-      rebuildIndices();
-
-      function openLightboxByIndex(index) {
-        const imgs = Array.from(gallery.querySelectorAll('img'));
-        if (!imgs.length) return;
-        index = (index + imgs.length) % imgs.length;
-        currentIndex = index;
-        const img = imgs[index];
-        lbImg.src = img.src;
-        lbImg.alt = img.alt || '';
-        lbCaption.textContent = img.dataset.caption || img.alt || '';
-        lbStatus.textContent = `Foto ${index + 1} van ${imgs.length}`;
-        lightbox.classList.add('open');
-        lightbox.setAttribute('aria-hidden', 'false');
-        lbImg.style.transform = 'scale(0.98)';
-        requestAnimationFrame(() => { lbImg.style.transform = 'scale(1)'; });
-        btnClose.focus();
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('open');
-        lightbox.setAttribute('aria-hidden', 'true');
-        lbImg.src = '';
-        currentIndex = -1;
-      }
-
-      function showNext() { openLightboxByIndex(currentIndex + 1); }
-      function showPrev() { openLightboxByIndex(currentIndex - 1); }
-
-      // Click on a gallery image opens the lightbox
-      gallery.addEventListener('click', (e) => {
-        const img = e.target.closest('img');
-        if (!img) return;
-        const i = parseInt(img.getAttribute('data-index'), 10);
-        openLightboxByIndex(i);
-      });
-
-      // Keyboard support on gallery images: Enter or Space opens
-      gallery.addEventListener('keydown', (e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && e.target.tagName === 'IMG') {
-          e.preventDefault();
-          const i = parseInt(e.target.getAttribute('data-index'), 10);
-          openLightboxByIndex(i);
-        }
-      });
-
-      // Lightbox controls
-      btnNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-      btnPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
-      btnClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
-
-      // Click outside image closes; click on image does NOT close
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (lightbox.classList.contains('open')) {
-          if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowRight') showNext();
-          if (e.key === 'ArrowLeft') showPrev();
-        }
-      });
-
-      // "Bekijk de fotos" knop scrollt en opent eerste foto (gym1 if present)
-      viewBtn.addEventListener('click', () => {
-        const imgs = Array.from(gallery.querySelectorAll('img'));
-        const gym1 = imgs.find(img => /(^|\/)gym1\.jpg$/i.test(img.getAttribute('src')));
-        const target = gym1 || imgs[0];
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          setTimeout(() => { openLightboxByIndex(parseInt(target.getAttribute('data-index'), 10)); }, 350);
-        } else {
-          gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-
-      // If you later add images dynamically via other scripts, call rebuildIndices() again.
-    })();
-  </script>
 
 </body>
 </html>
