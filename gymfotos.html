@@ -9,45 +9,30 @@
 </head>
 <body>
 
-  <!-- Navigatie -->
-  <nav aria-label="Hoofdnavigatie">
-    <a href="index.html">
-      <img src="BBA-Logo.png" alt="BBA Logo" width="150">
-    </a>
-    <ul class="nav-links" role="menubar">
-      <li role="none"><a role="menuitem" href="index.html">Home</a></li>
-      <li role="none"><a role="menuitem" href="verjaardagen.html">Verjaardagen</a></li>
-      <li role="none"><a role="menuitem" href="fotos.html">Foto's</a></li>
-      <li role="none"><a role="menuitem" href="andere.html">Overige</a></li>
-      <li role="none"><a role="menuitem" href="belangrijkeinfo.html">Belangrijke info</a></li>
-    </ul>
-  </nav>
+  <!-- Muziek -->
+  <audio id="bgMusic" src="achtergrondmuziekje.mp3" autoplay loop></audio>
 
   <!-- Verborgen galerij -->
   <div class="gallery" id="gallery" style="display:none;">
-    <img src="gym1.jpg" alt="Gymles foto 1" data-caption="Samenwerken in de gymles" data-index="0">
-    <img src="gym2.jpg" alt="Gymles foto 2" data-caption="De mat" data-index="1">
-    <img src="gym3.jpg" alt="Gymles foto 3" data-caption="Hannah klimt over het blok" data-index="2">
-    <img src="gym4.jpg" alt="Gymles foto 4" data-caption="Roos is het gelukt!" data-index="3">
-    <img src="gym5.jpg" alt="Gymles foto 5" data-caption="Aloys klom er ook overheen" data-index="4">
-    <img src="gym6.jpg" alt="Gymles foto 6" data-caption="De stokken..." data-index="5">
-    <img src="gym7.jpg" alt="Gymles foto 7" data-caption="De mensenknoop is gelukt!" data-index="6">
-    <img src="gym8.jpg" alt="Gymles foto 8" data-caption="Hadewijch is het ook gelukt" data-index="7">
-    <img src="gym9.jpg" alt="Gymles foto 9" data-caption="Thijs had er plezier in!" data-index="8">
-    <img src="gym10.jpg" alt="Gymles foto 10" data-caption="Cherelle kreeg hulp van Oscar en Aiden" data-index="9">
-    <img src="gym11.jpg" alt="Gymles foto 11" data-caption="Wester hield een extra stok vast!" data-index="10">
-    <img src="gym12.jpg" alt="Gymles foto 12" data-caption="Spannend maar veilig!" data-index="11">
+    <img src="gym1.jpg" alt="Gymles foto 1" data-caption="Samenwerken in de gymles">
+    <img src="gym2.jpg" alt="Gymles foto 2" data-caption="De mat">
+    <img src="gym3.jpg" alt="Gymles foto 3" data-caption="Hannah klimt over het blok">
+    <img src="gym4.jpg" alt="Gymles foto 4" data-caption="Roos is het gelukt!">
+    <img src="gym5.jpg" alt="Gymles foto 5" data-caption="Aloys klom er ook overheen">
+    <img src="gym6.jpg" alt="Gymles foto 6" data-caption="De stokken...">
+    <img src="gym7.jpg" alt="Gymles foto 7" data-caption="De mensenknoop is gelukt!">
+    <img src="gym8.jpg" alt="Gymles foto 8" data-caption="Hadewijch is het ook gelukt">
+    <img src="gym9.jpg" alt="Gymles foto 9" data-caption="Thijs had er plezier in!">
+    <img src="gym10.jpg" alt="Gymles foto 10" data-caption="Cherelle kreeg hulp van Oscar en Aiden">
+    <img src="gym11.jpg" alt="Gymles foto 11" data-caption="Wester hield een extra stok vast!">
+    <img src="gym12.jpg" alt="Gymles foto 12" data-caption="Spannend maar veilig!">
   </div>
 
-  <!-- Lightbox modal -->
-  <div id="lightbox" class="modal open" role="dialog" aria-modal="true" aria-hidden="false">
-    <div class="lightbox-inner" role="document">
-      <button class="btn-close" id="lbClose" aria-label="Sluit (Esc)">✕</button>
-      <button class="btn-icon btn-prev" id="lbPrev" aria-label="Vorige foto">‹</button>
+  <!-- Lightbox -->
+  <div id="lightbox" class="modal open">
+    <div class="lightbox-inner">
       <img id="lightbox-img" class="lightbox-img" alt="" />
-      <button class="btn-icon btn-next" id="lbNext" aria-label="Volgende foto">›</button>
       <div class="lightbox-meta" id="lightbox-caption"></div>
-      <div class="sr-only" id="lbStatus" aria-live="polite"></div>
     </div>
   </div>
 
@@ -55,65 +40,38 @@
   <script>
     (function () {
       const gallery = document.getElementById('gallery');
-      const lightbox = document.getElementById('lightbox');
+      const imgs = Array.from(gallery.querySelectorAll('img'));
       const lbImg = document.getElementById('lightbox-img');
       const lbCaption = document.getElementById('lightbox-caption');
-      const lbStatus = document.getElementById('lbStatus');
-      const btnPrev = document.getElementById('lbPrev');
-      const btnNext = document.getElementById('lbNext');
-      const btnClose = document.getElementById('lbClose');
+      let currentIndex = 0;
 
-      let currentIndex = -1;
-
-      function rebuildIndices() {
-        const imgs = Array.from(gallery.querySelectorAll('img'));
-        imgs.forEach((img, i) => img.setAttribute('data-index', i));
-      }
-      rebuildIndices();
-
-      function openLightboxByIndex(index) {
-        const imgs = Array.from(gallery.querySelectorAll('img'));
-        if (!imgs.length) return;
-        index = (index + imgs.length) % imgs.length;
-        currentIndex = index;
+      function showImage(index) {
         const img = imgs[index];
         lbImg.src = img.src;
         lbImg.alt = img.alt || '';
-        lbCaption.textContent = img.dataset.caption || img.alt || '';
-        lbStatus.textContent = `Foto ${index + 1} van ${imgs.length}`;
-        lbImg.style.transform = 'scale(0.98)';
-        requestAnimationFrame(() => { lbImg.style.transform = 'scale(1)'; });
+        lbCaption.textContent = img.dataset.caption || '';
       }
 
-      function closeLightbox() {
-        lightbox.classList.remove('open');
-        lightbox.setAttribute('aria-hidden', 'true');
-        lbImg.src = '';
-        currentIndex = -1;
+      function startSlideshow() {
+        showImage(currentIndex);
+        const interval = setInterval(() => {
+          currentIndex++;
+          if (currentIndex >= imgs.length) {
+            clearInterval(interval);
+            window.location.href = "fotos.html";
+          } else {
+            showImage(currentIndex);
+          }
+        }, 5000);
       }
 
-      function showNext() { openLightboxByIndex(currentIndex + 1); }
-      function showPrev() { openLightboxByIndex(currentIndex - 1); }
-
-      btnNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-      btnPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
-      btnClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
-
-      document.addEventListener('keydown', (e) => {
-        if (lightbox.classList.contains('open')) {
-          if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowRight') showNext();
-          if (e.key === 'ArrowLeft') showPrev();
-        }
-      });
-
-      // Open automatisch bij laden
       window.addEventListener('load', () => {
-        openLightboxByIndex(0);
+        const music = document.getElementById('bgMusic');
+        music.volume = 0.2;
+        startSlideshow();
       });
     })();
   </script>
 
 </body>
 </html>
-
