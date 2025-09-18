@@ -1,5 +1,3 @@
-/* styles.css — frisse, speelse en toegankelijke stijl voor de BBA site
-   Gebaseerd op jouw huidige CSS, opgeschoond en uitgebreid.
 */
 
 /* ===== Variabelen & Reset ===== */
@@ -424,5 +422,47 @@ header {
   background-color: #f2f2f2;
   border-radius: 6px;
   font-family: sans-serif;
+}
+/* Lightbox stijl */
+.modal {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.lightbox-inner {
+  text-align: center;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.lightbox-meta {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+/* Fade-in animatie */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Body achtergrond */
+body {
+  background-color: #111;
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
 }
 
