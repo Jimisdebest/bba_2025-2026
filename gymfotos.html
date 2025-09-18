@@ -4,8 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gymfoto's Diavoorstelling</title>
-  <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
+      --bg: #fefaf6;
+      --overlay: rgba(0, 0, 0, 0.7);
+      --text: #ffffff;
+      --accent: #e27d90;
+      --caption-bg: rgba(0, 0, 0, 0.5);
+      --radius: 12px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      --ease: cubic-bezier(.25,.8,.25,1);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      overflow: hidden;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .gallery {
+      display: none;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-inner {
+      max-width: 90%;
+      max-height: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.4s var(--ease);
+    }
+
+    .lightbox-img:hover {
+      transform: scale(1.02);
+    }
+
+    .lightbox-meta {
+      margin-top: 16px;
+      background: var(--caption-bg);
+      color: var(--text);
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-size: 1.05rem;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 </head>
 <body>
 
@@ -13,13 +90,13 @@
   <audio id="bgMusic" src="achtergrondmuziekje.mp3" autoplay loop></audio>
 
   <!-- Verborgen galerij -->
-  <div class="gallery" id="gallery" style="display:none;">
+  <div class="gallery" id="gallery">
     <img src="gym1.jpg" alt="Gymles foto 1" data-caption="Samenwerken in de gymles">
-    <img src="gym2.jpg" alt="Gymles foto 2" data-caption="We gingen klimmen over de mat die werdt vastgehouden door de andere kinderen">
+    <img src="gym2.jpg" alt="Gymles foto 2" data-caption="We gingen klimmen over de mat die werd vastgehouden door de andere kinderen">
     <img src="gym3.jpg" alt="Gymles foto 3" data-caption="Over het blok klimmen">
     <img src="gym4.jpg" alt="Gymles foto 4" data-caption="Roos is het ook gelukt om over het blok te klimmen!">
     <img src="gym5.jpg" alt="Gymles foto 5" data-caption="Aloys klom ook over de mat!">
-    <img src="gym6.jpg" alt="Gymles foto 6" data-caption="Ook gingen we over stokken lopen die door de andere werden vastgehouden">
+    <img src="gym6.jpg" alt="Gymles foto 6" data-caption="Ook gingen we over stokken lopen die door de anderen werden vastgehouden">
     <img src="gym7.jpg" alt="Gymles foto 7" data-caption="We deden ook de mensenknoop wat ook heel leuk was!">
     <img src="gym8.jpg" alt="Gymles foto 8" data-caption="Hadewijch is het ook gelukt om over de stokken te lopen">
     <img src="gym9.jpg" alt="Gymles foto 9" data-caption="Thijs ging makkelijk over de mat">
