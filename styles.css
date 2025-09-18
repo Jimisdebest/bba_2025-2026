@@ -3,14 +3,12 @@
 =========================== */
 :root {
   --font-main: 'Segoe UI', Roboto, sans-serif;
-  --color-bg: #f9f9f9;
-  --color-text: #222;
+  --color-bg: #f4f6f8;
+  --color-text: #1a1a1a;
   --color-accent: #0057b8;
-  --color-muted: #666;
+  --color-muted: #555;
   --color-border: #ddd;
-  --color-nav-bg: #ffffff;
-  --color-nav-text: #333;
-  --color-nav-hover: #0057b8;
+  --color-white: #fff;
 }
 
 * {
@@ -31,12 +29,15 @@ body {
    Navigatie
 =========================== */
 nav {
-  background-color: var(--color-nav-bg);
+  background-color: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 nav img {
@@ -51,14 +52,14 @@ nav img {
 
 .nav-links a {
   text-decoration: none;
-  color: var(--color-nav-text);
+  color: var(--color-text);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-nav-hover);
+  color: var(--color-accent);
 }
 
 /* ===========================
@@ -66,7 +67,7 @@ nav img {
 =========================== */
 header {
   padding: 2rem;
-  background-color: #fff;
+  background-color: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   text-align: center;
 }
@@ -95,29 +96,23 @@ main.container {
   margin-top: 2rem;
 }
 
-.photo-item {
-  background-color: #fff;
-  border: 1px solid var(--color-border);
+.gallery img {
+  width: 100%;
+  height: auto;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
 }
 
-.photo-item:hover {
-  transform: scale(1.02);
-}
-
-.photo-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+.gallery img:hover {
+  transform: scale(1.03);
 }
 
 .caption {
-  padding: 0.75rem 1rem;
+  text-align: center;
   font-size: 0.95rem;
   color: var(--color-muted);
+  margin-top: 0.5rem;
 }
 
 /* ===========================
@@ -146,6 +141,7 @@ main.container {
   max-height: 80vh;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 .lightbox-meta {
@@ -154,30 +150,12 @@ main.container {
   font-size: 1rem;
 }
 
-.btn-icon,
-.btn-close {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #fff;
-  cursor: pointer;
-}
-
-.btn-prev {
-  left: -60px;
-}
-
-.btn-next {
-  right: -60px;
-}
-
-.btn-close {
-  top: 20px;
-  right: 20px;
-  font-size: 1.5rem;
+/* ===========================
+   Animaties
+=========================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* ===========================
@@ -189,6 +167,6 @@ footer {
   font-size: 0.9rem;
   color: var(--color-muted);
   border-top: 1px solid var(--color-border);
-  background-color: #fff;
+  background-color: var(--color-white);
   margin-top: 4rem;
 }
