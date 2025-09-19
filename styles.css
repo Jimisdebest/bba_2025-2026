@@ -1,184 +1,185 @@
-/* ===== Basisvariabelen ===== */
+/* ===========================
+   Google Fonts
+   (Zorg dat je deze link in <head> zet van je HTML)
+   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Maven+Pro:wght@400;700&display=swap" rel="stylesheet">
+=========================== */
+
+/* ===========================
+   Basisinstellingen
+=========================== */
 :root {
-  --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
-  --bg-light: #fefaf6;
-  --bg-accent: #f7ede2;
-  --primary: #e27d90;
-  --accent: #f4a261;
-  --accent-2: #e9c46a;
-  --text: #2c3e50;
-  --muted: #5f6b7a;
-  --card: #ffffff;
-  --border: rgba(0,0,0,0.05);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.1);
-  --radius: 10px;
-  --ease: cubic-bezier(.25,.8,.25,1);
-  --max-width: 1100px;
+  --font-heading: 'Comfortaa', sans-serif;
+  --font-body: 'Maven Pro', sans-serif;
+  --color-bg: #f5f7fa;
+  --color-text: #1a1a1a;
+  --color-accent: #0057b8;
+  --color-muted: #555;
+  --color-border: #ddd;
+  --color-white: #fff;
 }
 
-/* ===== Reset & Body ===== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-main);
-  background: linear-gradient(135deg, var(--bg-accent), var(--bg-light));
-  color: var(--text);
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   line-height: 1.6;
-  min-height: 100vh;
-  padding-bottom: 3rem;
-  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
 }
 
-/* ===== Navigatie ===== */
+/* ===========================
+   Navigatie
+=========================== */
 nav {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
-  border-bottom-left-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
+  justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-nav .logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: white;
-  background: rgba(255,255,255,0.08);
-  padding: 8px 14px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s var(--ease);
-}
-nav .logo:hover {
-  transform: scale(1.05);
+nav img {
+  height: 50px;
 }
 
 .nav-links {
-  display: flex;
-  gap: 20px;
   list-style: none;
+  display: flex;
+  gap: 1.5rem;
 }
 
 .nav-links a {
-  font-weight: 600;
-  color: white;
   text-decoration: none;
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.06);
-  transition: all 0.2s var(--ease);
-}
-.nav-links a:hover {
-  background: rgba(255,255,255,0.12);
-  transform: translateY(-2px);
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-/* ===== Introductie ===== */
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-accent);
+}
+
+/* ===========================
+   Header & Intro
+=========================== */
 header {
+  padding: 2rem;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
   text-align: center;
-  padding: 32px 16px;
 }
+
+header h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
 .intro {
-  max-width: 720px;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.85);
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  font-size: 1.05rem;
+  font-size: 1.2rem;
+  color: var(--color-muted);
 }
 
-/* ===== Knoppen ===== */
-.btn {
-  display: inline-block;
-  padding: 10px 16px;
-  font-weight: 600;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s var(--ease);
-}
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-.btn-primary {
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  color: white;
-  border: none;
+/* ===========================
+   Main Container
+=========================== */
+main.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 2rem;
 }
 
-/* ===== Gallery ===== */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
+/* ===========================
+   Galerij
+=========================== */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  margin-top: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-.photo-item {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 10px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s var(--ease);
-}
-.photo-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-.photo-item img {
+.gallery img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
-}
-.photo-item img:hover {
-  transform: scale(1.02);
-  filter: brightness(1.05);
-}
-.caption {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: var(--muted);
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-  }
-  .nav-links a {
-    width: 100%;
-    text-align: center;
-  }
-  .gallery {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  }
+.gallery img:hover {
+  transform: scale(1.03);
+}
+
+.caption {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+}
+
+/* ===========================
+   Lightbox
+=========================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.lightbox-inner {
+  position: relative;
+  text-align: center;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.lightbox-meta {
+  margin-top: 1rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* ===========================
+   Animaties
+=========================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===========================
+   Footer
+=========================== */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  margin-top: 4rem;
 }
