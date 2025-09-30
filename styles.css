@@ -142,6 +142,7 @@ header {
   padding: 10px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s var(--ease);
+  position: relative; /* nodig voor watermerk */
 }
 .photo-item:hover {
   transform: translateY(-4px);
@@ -164,21 +165,23 @@ header {
   color: var(--muted);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-  }
-  .nav-links a {
-    width: 100%;
-    text-align: center;
-  }
-  #wachtwoord-overlay {
+/* ===== Watermerk op foto's ===== */
+.photo-item::after {
+  content: "BBA 2025";
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 12px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 3px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ===== Wachtwoord-overlay ===== */
+#wachtwoord-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -211,6 +214,23 @@ header {
   padding: 10px 20px;
   cursor: pointer;
 }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+  }
 
   .gallery {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
