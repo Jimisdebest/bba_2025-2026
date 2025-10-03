@@ -6,36 +6,12 @@
   <title>BBA Klassenwebsite - Verjaardagen</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="jarig.png" type="image/x-icon">
-  <style>
-    /* Zorg dat de hoofdinhoud gecentreerd wordt */
-    main.center-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 180px); /* Houd rekening met de navigatie */
-      text-align: center;
-    }
-    /* Zorg dat het logo niet wordt uitgerekt */
-    nav img {
-      max-width: 150px;
-      height: auto;
-    }
-    /* Navigatie styling */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Navigatie -->
   <nav>
     <a href="index.html" class="logo-link">
-      <img src="jarig.png" alt="Jarig Logo">
+      <img src="jarig.png" alt="Jarig Logo" style="max-width:150px; height:auto;">
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -47,14 +23,12 @@
     </ul>
   </nav>
 
-  <!-- Gecentreerde hoofdinhoud -->
   <main class="center-content">
     <header>
       <p class="intro">Bekijk wie er binnenkort jarig is in onze klas!</p>
     </header>
 
     <ul id="birthdayList">
-      <!--verjaardagen -->
       <li>Ryan - 4 Januari</li>
       <li>Aiden - 8 Januari</li>
       <li>Thijs - 20 Januari</li>
@@ -67,7 +41,7 @@
       <li>Levien - 6 Maart</li>
       <li>Parsa - 27 Maart</li>
       <li>Lila - 31 Maart</li>
-      <li>Ona - 27 april</li>
+      <li>Ona - 27 April</li>
       <li>Lily - 23 Mei</li>
       <li>Jim - 19 Juni</li>
       <li>Nova - 21 Juni</li>
@@ -80,7 +54,6 @@
       <li>Oscar - 19 November</li>
       <li>Tycho - 22 November</li>
       <li>Feline - 30 November</li>
-    
     </ul>
 
     <div id="birthdayToday"></div>
