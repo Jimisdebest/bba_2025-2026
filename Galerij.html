@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Fotogalerij</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lightbox:target {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .lightbox .controls {
+      margin-top: 15px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .lightbox button, .lightbox a.download {
+      background: #fff;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">
+      <img src="BBA-Logo.png" alt="BBA Logo" width="150">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="verjaardagen.html">Verjaardagen</a></li>
+      <li><a href="fotos.html">Foto´s</a></li>
+      <li><a href="overig.html">Overig</a></li>
+      <li><a href="belangrijkeinfo.html">Belangrijke Data</a></li>
+      <li><a href="Huiswerk.html">Huiswerk</a></li>
+    </ul>
+  </nav>
+
+  <h1>Fotogalerij</h1>
+  <div class="gallery">
+    <img src="Judo 6.jpg" alt="Judofoto 1">
+    <img src="Judo 4.jpg" alt="Judofoto 2">
+    <img src="Judo 1.jpg" alt="Judofoto 3">
+    <img src="Judo 2.jpg" alt="Judofoto 4">
+    <img src="Judo 3.jpg" alt="Judofoto 5">
+    <img src="Judo 5.jpg" alt="Judofoto 6">
+    <img src="werk 1.jpg" alt="Mooi werk!">
+    <img src="werk 2.jpg" alt="Mooi werk!">
+    <img src="werk 3.jpg" alt="Mooi werk!">
+    <img src="mummificeren 1.jpg" alt="Mummificeren">
+    <img src="mummificeren 3.jpg" alt="Mummificeren">
+    <img src="mummificeren 3.jpg" alt="Mummificeren">
+    <img src="Weekwerkje 1.jpg" alt="Weekwerkje">
+    <img src="Weekwerkje 2.jpg" alt="Weekwerkje">
+    <img src="Weekwerkje 3.jpg" alt="Weekwerkje">
+    <img src="Herfsthuiswerk 1.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="Herfsthuiswerk 2.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="Herfsthuiswerk 3.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="Herfsthuiswerk 4.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="Herfsthuiswerk 5.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="Herfsthuiswerk 6.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="gym1.jpg" alt="Gymfoto 1">
+    <img src="gym2.jpg" alt="Gymfoto 2">
+    <img src="gym3.jpg" alt="Gymfoto 3">
+    <img src="gym4.jpg" alt="Gymfoto 4">
+    <img src="gym5.jpg" alt="Gymfoto 5">
+    <img src="gym6.jpg" alt="Gymfoto 6">
+    <img src="gym7.jpg" alt="Gymfoto 7">
+    <img src="gym8.jpg" alt="Gymfoto 8">
+    <img src="gym9.jpg" alt="Gymfoto 9">
+    <img src="gym10.jpg" alt="Gymfoto 10">
+    <img src="gym11.jpg" alt="Gymfoto 11">
+    <img src="gym12.jpg" alt="Gymfoto 12">
+    <img src="opening KBW 1.jpg" alt="Opening kinderboekenweek spelletje">
+    <img src="opening KWB 2.jpg" alt="Opening kinderboekenweek voorstelling">
+    <img src="Minirekenen1.jpg" alt="Minirekenen AH">
+    <img src="Minirekenen2.jpg" alt="Minirekenen AH">
+    <img src="Minirekenen3.jpg" alt="Minirekenen AH">
+  </div>
+
+  <!-- Eén lightbox voor alle foto's -->
+  <div id="lightbox" class="lightbox">
+    <a href="#" class="close">&times;</a>
+    <img src="" alt="Vergrote foto">
+    <div class="controls">
+      <button id="prevBtn">&larr; Vorige</button>
+      <a id="downloadBtn" class="download" href="#" download>Download</a>
+      <button id="nextBtn">Volgende &rarr;</button>
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const images = Array.from(document.querySelectorAll('.gallery img'));
+    let currentIndex = 0;
+
+    function showImage(index) {
+      const img = images[index];
+      lightboxImg.src = img.src;
+      downloadBtn.href = img.src;
+      window.location.hash = 'lightbox';
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index;
+        showImage(currentIndex);
+      });
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        window.location.hash = "";
+      } else if (e.key === "ArrowLeft") {
+        prevBtn.click();
+      } else if (e.key === "ArrowRight") {
+        nextBtn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>

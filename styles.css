@@ -1,0 +1,264 @@
+/* ===== Basisvariabelen ===== */
+:root {
+  --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --bg-light: #fefaf6;
+  --bg-accent: #f7ede2;
+  --primary: #e27d90;
+  --accent: #f4a261;
+  --accent-2: #e9c46a;
+  --text: #2c3e50;
+  --muted: #5f6b7a;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.05);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.1);
+  --radius: 10px;
+  --ease: cubic-bezier(.25,.8,.25,1);
+  --max-width: 1100px;
+}
+
+/* ===== Reset & Body ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(135deg, var(--bg-accent), var(--bg-light));
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Navigatie ===== */
+nav {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav img {
+  max-width: 150px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.06);
+  transition: all 0.2s var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* ===== Introductie ===== */
+header {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.intro {
+  max-width: 720px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.85);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  font-size: 1.05rem;
+}
+
+/* ===== Knoppen ===== */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: white;
+  border: none;
+}
+
+/* ===== Gallery ===== */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== Lightbox ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease;
+}
+
+.lightbox:target {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: var(--radius);
+  box-shadow: 0 0 20px rgba(255,255,255,0.5);
+  animation: fadeIn 0.5s ease;
+}
+
+.lightbox .controls {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.lightbox button,
+.lightbox a.download {
+  background: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.lightbox button:hover,
+.lightbox a.download:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===== Fade-in animatie ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Confetti-effect ===== */
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: fall 3s linear;
+  z-index: 9999;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
