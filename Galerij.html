@@ -3,128 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <title>Fotogalerij</title>
-  <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
+    :root{
+      --bg: #f0f0f0;
+      --nav-bg: #fff;
+      --lightbox-bg: rgba(0,0,0,0.85);
+      --btn-bg: #fff;
+      --btn-color: #222;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body {
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background: var(--bg);
       margin: 0;
       padding: 20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #fff;
-      padding: 10px 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:var(--nav-bg);
+      padding:10px 20px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.08);
+      position:relative;
+      z-index:2;
     }
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 15px;
+    .nav-links{list-style:none;display:flex;gap:15px;margin:0;padding:0}
+    .nav-links a{text-decoration:none;color:#333;font-weight:700}
+
+    h1{text-align:center;margin:26px 0 30px}
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+      gap:15px;
+      align-items:start;
     }
 
-    .nav-links li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
+    .gallery img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      border-radius:10px;
+      cursor:pointer;
+      transition:transform .28s ease, box-shadow .28s ease;
+      display:block;
+      background:#ddd;
+    }
+    .gallery img:hover{transform:scale(1.03);box-shadow:0 10px 20px rgba(0,0,0,0.16)}
+
+    /* Lightbox (JS toggles .open) */
+    .lightbox{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:var(--lightbox-bg);
+      justify-content:center;
+      align-items:center;
+      padding:28px 18px;
+    }
+    .lightbox.open{display:flex}
+
+    .stage{
+      max-width:1100px;
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+      position:relative;
+      outline: none;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
+    .stage img{
+      max-width:100%;
+      max-height:75vh;
+      border-radius:8px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.6);
+      background:#000;
+      object-fit:contain;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
+    .controls{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    .controls button, .controls a.download{
+      background:var(--btn-bg);
+      color:var(--btn-color);
+      border:none;
+      padding:8px 12px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05) rotate(-1deg);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    .close-btn{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      background:rgba(0,0,0,0.6);
+      color:#fff;
+      border:none;
+      width:42px;
+      height:42px;
+      border-radius:8px;
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+    /* small-screen tweaks */
+    @media (max-width:540px){
+      body{padding:14px}
+      .gallery img{height:140px}
+      .close-btn{top:8px;right:8px}
+      .stage{padding-top:26px}
     }
 
-    .lightbox:target {
-      display: flex;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
-      animation: fadeIn 0.5s ease;
-    }
-
-    .lightbox .controls {
-      margin-top: 15px;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .lightbox button, .lightbox a.download {
-      background: #fff;
-      border: none;
-      padding: 10px 15px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 40px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
+    /* utility used by JS to disable scroll without layout jump */
+    .no-scroll{overflow:hidden}
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html">
-      <img src="BBA-Logo.png" alt="BBA Logo" width="150">
-    </a>
-    <ul class="nav-links">
+    <a href="index.html" aria-label="Ga naar home"><img src="BBA-Logo.png" alt="BBA Logo" width="150"></a>
+    <ul class="nav-links" role="navigation">
       <li><a href="index.html">Home</a></li>
       <li><a href="verjaardagen.html">Verjaardagen</a></li>
       <li><a href="fotos.html">Foto´s</a></li>
@@ -135,7 +155,9 @@
   </nav>
 
   <h1>Fotogalerij</h1>
-  <div class="gallery">
+
+  <div class="gallery" id="gallery">
+    <!-- Behoud je bestaande afbeeldingen en alt-teksten -->
     <img src="Judo 6.jpg" alt="Judofoto 1">
     <img src="Judo 4.jpg" alt="Judofoto 2">
     <img src="Judo 1.jpg" alt="Judofoto 3">
@@ -151,12 +173,12 @@
     <img src="Weekwerkje 1.jpg" alt="Weekwerkje">
     <img src="Weekwerkje 2.jpg" alt="Weekwerkje">
     <img src="Weekwerkje 3.jpg" alt="Weekwerkje">
-    <img src="Herfsthuiswerk 1.jpg" alt="De resultaten van het herfshuiswerk!">
-    <img src="Herfsthuiswerk 2.jpg" alt="De resultaten van het herfshuiswerk!">
-    <img src="Herfsthuiswerk 3.jpg" alt="De resultaten van het herfshuiswerk!">
-    <img src="Herfsthuiswerk 4.jpg" alt="De resultaten van het herfshuiswerk!">
-    <img src="Herfsthuiswerk 5.jpg" alt="De resultaten van het herfshuiswerk!">
-    <img src="Herfsthuiswerk 6.jpg" alt="De resultaten van het herfshuiswerk!">
+    <img src="Herfsthuiswerk 1.jpg" alt="De resultaten van het herfsthuiswerk!">
+    <img src="Herfsthuiswerk 2.jpg" alt="De resultaten van het herfsthuiswerk!">
+    <img src="Herfsthuiswerk 3.jpg" alt="De resultaten van het herfsthuiswerk!">
+    <img src="Herfsthuiswerk 4.jpg" alt="De resultaten van het herfsthuiswerk!">
+    <img src="Herfsthuiswerk 5.jpg" alt="De resultaten van het herfsthuiswerk!">
+    <img src="Herfsthuiswerk 6.jpg" alt="De resultaten van het herfsthuiswerk!">
     <img src="gym1.jpg" alt="Gymfoto 1">
     <img src="gym2.jpg" alt="Gymfoto 2">
     <img src="gym3.jpg" alt="Gymfoto 3">
@@ -176,60 +198,199 @@
     <img src="Minirekenen3.jpg" alt="Minirekenen AH">
   </div>
 
-  <!-- Eén lightbox voor alle foto's -->
-  <div id="lightbox" class="lightbox">
-    <a href="#" class="close">&times;</a>
-    <img src="" alt="Vergrote foto">
-    <div class="controls">
-      <button id="prevBtn">&larr; Vorige</button>
-      <a id="downloadBtn" class="download" href="#" download>Download</a>
-      <button id="nextBtn">Volgende &rarr;</button>
+  <!-- Lightbox modal (JS toggles .open). No URL hash used. -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Fotogrootweergave">
+    <div class="stage" tabindex="-1">
+      <button class="close-btn" aria-label="Sluit (Escape)">×</button>
+      <img src="" alt="Vergrote foto" id="lightboxImage">
+      <div class="controls" role="group" aria-label="Afbeelding besturing">
+        <button id="prevBtn" aria-label="Vorige afbeelding">← Vorige</button>
+        <a id="downloadBtn" class="download" href="#" download>Download</a>
+        <button id="nextBtn" aria-label="Volgende afbeelding">Volgende →</button>
+      </div>
     </div>
   </div>
 
   <script>
+    // Elementreferenties
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
+    const stage = lightbox.querySelector('.stage');
+    const lightboxImg = document.getElementById('lightboxImage');
     const downloadBtn = document.getElementById('downloadBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const images = Array.from(document.querySelectorAll('.gallery img'));
+    const closeBtn = lightbox.querySelector('.close-btn');
+    const galleryImages = Array.from(document.querySelectorAll('.gallery img'));
     let currentIndex = 0;
 
-    function showImage(index) {
-      const img = images[index];
-      lightboxImg.src = img.src;
-      downloadBtn.href = img.src;
-      window.location.hash = 'lightbox';
+    // Bereken scrollbarbreedte (voor compensatie)
+    function getScrollbarWidth() {
+      return window.innerWidth - document.documentElement.clientWidth;
     }
 
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        currentIndex = index;
-        showImage(currentIndex);
+    // Open lightbox met index
+    function openLightbox(index) {
+      currentIndex = index;
+      const src = galleryImages[currentIndex].src;
+      const alt = galleryImages[currentIndex].alt || 'Vergrote foto';
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      downloadBtn.href = src;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+
+      // voorkom page scroll en compenseer scrollbar om nav/lay-out shift te voorkomen
+      const sw = getScrollbarWidth();
+      if (sw > 0) {
+        document.body.style.paddingRight = sw + 'px';
+      }
+      document.body.classList.add('no-scroll');
+
+      // focus en maak stage focusable
+      closeBtn.focus();
+      stage.focus();
+      // add key listeners
+      document.addEventListener('keydown', onKeyDown);
+      // trap focus
+      document.addEventListener('focus', maintainFocus, true);
+    }
+
+    // Close lightbox
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+      downloadBtn.href = '#';
+      document.body.classList.remove('no-scroll');
+      document.body.style.paddingRight = '';
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('focus', maintainFocus, true);
+      // return focus to originating image (if still in DOM)
+      const img = galleryImages[currentIndex];
+      if (img) img.focus?.();
+    }
+
+    // Toggle image
+    function showImage(index) {
+      currentIndex = (index + galleryImages.length) % galleryImages.length;
+      const img = galleryImages[currentIndex];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || 'Vergrote foto';
+      downloadBtn.href = img.src;
+    }
+
+    // Events: click op thumbnails
+    galleryImages.forEach((img, idx) => {
+      // make thumbnails keyboard accessible
+      img.setAttribute('tabindex', '0');
+      img.addEventListener('click', () => openLightbox(idx));
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(idx);
+        }
       });
     });
 
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
+    // Prev/Next handlers
+    prevBtn.addEventListener('click', () => { showImage(currentIndex - 1); });
+    nextBtn.addEventListener('click', () => { showImage(currentIndex + 1); });
+
+    // Close handlers
+    closeBtn.addEventListener('click', closeLightbox);
+
+    // Click overlay to close (only when clicking the backdrop, not the stage)
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
     });
 
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    });
-
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape") {
-        window.location.hash = "";
-      } else if (e.key === "ArrowLeft") {
-        prevBtn.click();
-      } else if (e.key === "ArrowRight") {
-        nextBtn.click();
+    // Keyboard navigation
+    function onKeyDown(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showImage(currentIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        showImage(currentIndex + 1);
+      } else if (e.key === 'Tab') {
+        // let focus trap handler manage it
       }
-    });
-  </script>
+    }
 
+    // Simple focus trap inside lightbox
+    const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    function maintainFocus(e) {
+      if (!lightbox.classList.contains('open')) return;
+      if (lightbox.contains(e.target)) return; // allowed
+      // otherwise move focus back to close button
+      e.stopPropagation();
+      closeBtn.focus();
+    }
+
+    // Prevent accidental image drag
+    galleryImages.forEach(img => {
+      img.addEventListener('dragstart', (e) => e.preventDefault());
+    });
+
+    // Ensure download has a filename suggestion where possible
+    function filenameFromSrc(src) {
+      try {
+        const u = new URL(src, location.href);
+        return decodeURIComponent(u.pathname.split('/').pop() || 'image');
+      } catch (err) {
+        return 'image';
+      }
+    }
+    // Update download attribute when showing image
+    function updateDownloadName() {
+      const name = filenameFromSrc(lightboxImg.src);
+      downloadBtn.setAttribute('download', name);
+    }
+    // observe changes to image src
+    const imgObserver = new MutationObserver(() => updateDownloadName());
+    imgObserver.observe(lightboxImg, { attributes: true, attributeFilter: ['src'] });
+
+    // also update when changing image via showImage
+    const originalShowImage = showImage;
+    showImage = function(index) {
+      originalShowImage(index);
+      updateDownloadName();
+    };
+
+    // Accessibility: close on focus lost? not necessary; Escape covers it.
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      document.body.classList.remove('no-scroll');
+      document.body.style.paddingRight = '';
+    });
+
+    // Optional: swipe support for mobile (basic)
+    (function addSwipe() {
+      let startX = 0;
+      let moved = false;
+      stage.addEventListener('touchstart', e => {
+        if (!e.touches || e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        moved = false;
+      }, {passive:true});
+      stage.addEventListener('touchmove', e => {
+        moved = true;
+      }, {passive:true});
+      stage.addEventListener('touchend', e => {
+        if (!moved) return;
+        const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : startX;
+        const diff = endX - startX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) showImage(currentIndex - 1);
+          else showImage(currentIndex + 1);
+        }
+      });
+    })();
+
+    // expose open/close on window for quick testing (optional)
+    window.openGalleryImage = openLightbox;
+    window.closeGallery = closeLightbox;
+  </script>
 </body>
 </html>
