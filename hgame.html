@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zombie Game</title>
+  <style>
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    canvas { display: block; }
+
+    #overlay, #gameover {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    #healthbar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 200px;
+      height: 20px;
+      background: red;
+      border: 2px solid #000;
+      z-index: 5;
+    }
+
+    #health {
+      height: 100%;
+      background: limegreen;
+      width: 100%;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="overlay">
+  <h1>Zombie Game</h1>
+  <button onclick="startGame()">Start Game</button>
+</div>
+
+<div id="gameover" style="display:none;">
+  <h1>Game Over</h1>
+  <button onclick="restartGame()">Respawn</button>
+</div>
+
+<div id="healthbar"><div id="health"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<script>
+let scene, camera, renderer, player, zombies = [], health = 100;
+let keys = {}, raycaster, mouse = new THREE.Vector2();
+let gameRunning = false;
+
+function startGame() {
+  document.getElementById('overlay').style.display = 'none';
+  gameRunning = true;
+  init();
+  animate();
+  setInterval(spawnZombie, 3000);
+}
+
+function restartGame() {
+  location.reload();
+}
+
+function init() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(10, 20, 10);
+  scene.add(light);
+
+  // Vloertegels
+  for (let x = -20; x <= 20; x += 2) {
+    for (let z = -20; z <= 20; z += 2) {
+      const tile = new THREE.Mesh(
+        new THREE.BoxGeometry(2, 0.1, 2),
+        new THREE.MeshStandardMaterial({ color: (x + z) % 4 === 0 ? 0x888888 : 0x555555 })
+      );
+      tile.position.set(x, 0, z);
+      scene.add(tile);
+    }
+  }
+
+  // Muren
+  const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x3333aa });
+  for (let i = -20; i <= 20; i += 2) {
+    const wall1 = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 0.5), wallMaterial);
+    wall1.position.set(i, 1, -21);
+    scene.add(wall1);
+    const wall2 = wall1.clone(); wall2.position.z = 21; scene.add(wall2);
+    const wall3 = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 2), wallMaterial);
+    wall3.position.set(-21, 1, i); scene.add(wall3);
+    const wall4 = wall3.clone(); wall4.position.x = 21; scene.add(wall4);
+  }
+
+  // Pompoenen (platte oranje cilinders)
+  for (let i = 0; i < 10; i++) {
+    const pumpkin = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.6, 0.6, 0.3, 16),
+      new THREE.MeshStandardMaterial({ color: 0xffa500 })
+    );
+    pumpkin.position.set(Math.random() * 30 - 15, 0.15, Math.random() * 30 - 15);
+    scene.add(pumpkin);
+  }
+
+  // Speler
+  player = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+  );
+  player.position.y = 0.5;
+  scene.add(player);
+
+  camera.position.set(0, 5, 10);
+  camera.lookAt(player.position);
+
+  raycaster = new THREE.Raycaster();
+
+  document.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+  document.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+  document.addEventListener('click', onClick);
+}
+
+function spawnZombie() {
+  if (!gameRunning) return;
+  const zombie = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshStandardMaterial({ color: 0xff0000 })
+  );
+  zombie.position.set(Math.random() * 30 - 15, 0.5, Math.random() * 30 - 15);
+  scene.add(zombie);
+  zombies.push(zombie);
+}
+
+function onClick(event) {
+  if (!gameRunning) return;
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(zombies);
+  if (intersects.length > 0) {
+    const zombie = intersects[0].object;
+    scene.remove(zombie);
+    zombies = zombies.filter(z => z !== zombie);
+  }
+}
+
+function movePlayer() {
+  const speed = 0.2;
+  if (keys['w'] || keys['arrowup']) player.position.z -= speed;
+  if (keys['s'] || keys['arrowdown']) player.position.z += speed;
+  if (keys['a'] || keys['arrowleft']) player.position.x -= speed;
+  if (keys['d'] || keys['arrowright']) player.position.x += speed;
+}
+
+function checkCollision(zombie) {
+  const dx = player.position.x - zombie.position.x;
+  const dz = player.position.z - zombie.position.z;
+  return Math.sqrt(dx * dx + dz * dz) < 1;
+}
+
+function updateHealthBar() {
+  document.getElementById('health').style.width = health + '%';
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  if (!gameRunning) return;
+
+  movePlayer();
+
+  // Buiten de map = Game Over
+  if (Math.abs(player.position.x) > 20 || Math.abs(player.position.z) > 20) {
+    gameRunning = false;
+    document.getElementById('gameover').style.display = 'flex';
+    return;
+  }
+
+  zombies.forEach((zombie, index) => {
+    const dir = new THREE.Vector3().subVectors(player.position, zombie.position).normalize();
+    zombie.position.addScaledVector(dir, 0.02);
+
+    if (checkCollision(zombie)) {
+      health -= 0.2;
+      updateHealthBar();
+      if (health <= 0) {
+        gameRunning = false;
+        document.getElementById('gameover').style.display = 'flex';
+      }
+    }
+  });
+
+  camera.position.x = player.position.x;
+  camera.position.z = player.position.z + 10;
+  camera.lookAt(player.position);
+
+  renderer.render(scene, camera);
+}
+</script>
+</body>
+</html>
