@@ -28,7 +28,8 @@
 
 body {
   font-family: var(--font-main);
-  background: linear-gradient(135deg, var(--bg-accent), var(--bg-light));
+  background: url('https://img.freepik.com/vrije-photo/halloween-achtergrond-met-enge-pompoenkaarsen-op-het-kerkhof-s-nachts-met-een-kasteelachtergrond_123827-25820.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
@@ -119,13 +120,23 @@ header {
   border: none;
 }
 
-/* ===== Gallery ===== */
+/* ===== Container & Main ===== */
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 16px;
 }
 
+main {
+  background: rgba(255,255,255,0.85);
+  margin: 32px auto;
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  max-width: var(--max-width);
+}
+
+/* ===== Gallery ===== */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
