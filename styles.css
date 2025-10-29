@@ -47,9 +47,19 @@ nav {
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+
+nav.visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 nav img {
@@ -57,6 +67,16 @@ nav img {
   height: auto;
 }
 
+.hamburger {
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+/* ===== Navigatie links ===== */
 .nav-links {
   display: flex;
   gap: 20px;
@@ -83,7 +103,7 @@ nav img {
 /* ===== Introductie ===== */
 header {
   text-align: center;
-  padding: 32px 16px;
+  padding: 80px 16px 32px;
 }
 
 .intro {
@@ -252,21 +272,31 @@ main {
   z-index: 9999;
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive + Hamburgermenu ===== */
 @media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
+  .hamburger {
+    display: block;
   }
 
   .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
     flex-direction: column;
-    width: 100%;
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
   }
 
   .nav-links a {
     width: 100%;
     text-align: center;
+    padding: 12px;
+    border-top: 1px solid rgba(255,255,255,0.2);
   }
 
   .gallery {
