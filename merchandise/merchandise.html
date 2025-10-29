@@ -9,11 +9,12 @@
 </head>
 <body>
   <!-- Navigatie -->
-  <nav>
+  <nav id="mobileNav" aria-label="Hoofdnavigatie">
     <a href="index.html">
       <img src="BBA-Logo.png" alt="BBA Logo" />
     </a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu openen/sluiten">☰</button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="verjaardagen.html">Verjaardagen</a></li>
       <li><a href="fotos.html">Foto's</a></li>
@@ -67,8 +68,40 @@
     </section>
   </main>
 
-  <!-- JavaScript -->
+  <!-- Scripts -->
   <script>
+    const nav = document.getElementById("mobileNav");
+    const hamburger = document.getElementById("hamburgerBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    let lastScroll = window.pageYOffset;
+
+    window.addEventListener("load", () => {
+      nav.classList.add("visible");
+    });
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll < lastScroll) {
+        nav.classList.add("visible");
+      } else {
+        nav.classList.remove("visible");
+        navLinks.classList.remove("show");
+      }
+      lastScroll = currentScroll;
+    });
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+
+    // Winkelmandje functionaliteit
     const producten = [
       { naam: "BBA T-shirt", prijs: 15, afbeelding: "merchandise/tshirt.jpg" },
       { naam: "BBA Mok", prijs: 8, afbeelding: "merchandise/mok.jpg" },
