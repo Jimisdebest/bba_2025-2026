@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" href="BBA-Logo.png" />
 </head>
 <body>
+
   <!-- Navigatie -->
   <nav id="mobileNav" aria-label="Hoofdnavigatie">
     <a href="index.html">
@@ -34,9 +35,7 @@
   <!-- Productgalerij -->
   <main class="container">
     <h2>Producten</h2>
-    <div class="gallery" id="productGallery">
-      <!-- Producten worden hier geladen -->
-    </div>
+    <div class="gallery" id="productGallery"></div>
 
     <!-- Winkelmandje -->
     <section style="margin-top: 48px;">
@@ -103,10 +102,10 @@
 
     // Winkelmandje functionaliteit
     const producten = [
-      { naam: "BBA T-shirt", prijs: 15, afbeelding: "merchandise/tshirt.jpg" },
-      { naam: "BBA Mok", prijs: 8, afbeelding: "merchandise/mok.jpg" },
-      { naam: "BBA Sticker", prijs: 2, afbeelding: "merchandise/sticker.jpg" },
-      { naam: "BBA Petje", prijs: 12, afbeelding: "merchandise/pet.jpg" }
+      { naam: "BBA T-shirt", prijs: 15, afbeelding: "merchandise/tshirt.png" },
+      { naam: "BBA Mok", prijs: 8, afbeelding: "merchandise/mok.png" },
+      { naam: "BBA Sticker", prijs: 2, afbeelding: "merchandise/sticker.png" },
+      { naam: "BBA Petje", prijs: 12, afbeelding: "merchandise/pet.png" }
     ];
 
     const gallery = document.getElementById("productGallery");
@@ -120,6 +119,7 @@
 
     producten.forEach((product, index) => {
       const item = document.createElement("div");
+      item.classList.add("product-item");
       item.innerHTML = `
         <img src="${product.afbeelding}" alt="${product.naam}" />
         <p><strong>${product.naam}</strong><br>€${product.prijs}</p>
