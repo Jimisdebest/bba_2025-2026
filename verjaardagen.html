@@ -9,13 +9,15 @@
 </head>
 <body>
 
-  <nav>
+  <!-- Navigatie -->
+  <nav id="mobileNav" aria-label="Hoofdnavigatie">
     <a href="index.html" class="logo-link">
       <img src="jarig.png" alt="Jarig Logo" style="max-width:150px; height:auto;">
     </a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu openen/sluiten">☰</button>
+    <ul class="nav-links" id="navLinks" role="menubar">
       <li><a href="index.html">Home</a></li>
-      <li><a href="verjaardagen.html" class="active">Verjaardagen</a></li>
+      <li><a href="verjaardagen.html" class="active" aria-current="page">Verjaardagen</a></li>
       <li><a href="fotos.html">Foto's</a></li>
       <li><a href="overig.html">Overig</a></li>
       <li><a href="belangrijkeinfo.html">Belangrijke Data</a></li>
@@ -23,11 +25,12 @@
     </ul>
   </nav>
 
-  <main class="center-content">
-    <header>
-      <p class="intro">Bekijk wie er binnenkort jarig is in onze klas!</p>
-    </header>
+  <!-- Hoofdinhoud -->
+  <header>
+    <p class="intro">Bekijk wie er binnenkort jarig is in onze klas!</p>
+  </header>
 
+  <main class="container">
     <ul id="birthdayList">
       <li>Ryan - 4 Januari</li>
       <li>Aiden - 8 Januari</li>
@@ -59,6 +62,38 @@
     <div id="birthdayToday"></div>
   </main>
 
-  <script src="script.js"></script>
+  <!-- Scripts -->
+  <script>
+    const nav = document.getElementById("mobileNav");
+    const hamburger = document.getElementById("hamburgerBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    let lastScroll = window.pageYOffset;
+
+    window.addEventListener("load", () => {
+      nav.classList.add("visible");
+    });
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll < lastScroll) {
+        nav.classList.add("visible");
+      } else {
+        nav.classList.remove("visible");
+        navLinks.classList.remove("show");
+      }
+      lastScroll = currentScroll;
+    });
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+  </script>
 </body>
 </html>
