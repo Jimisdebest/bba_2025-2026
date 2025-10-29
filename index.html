@@ -6,16 +6,18 @@
   <title>BBA Klassenwebsite - Home</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="BBA-Logo.png" />
-  <script src="auth.js" defer></script>
 </head>
 
 <body>
   <!-- Navigatie -->
-  <nav>
+  <nav id="mobileNav">
     <a href="index.html">
       <img src="BBA-Logo.png" alt="BBA Logo" />
     </a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu openen/sluiten">
+      ☰
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="verjaardagen.html">Verjaardagen</a></li>
       <li><a href="fotos.html">Foto's</a></li>
@@ -45,6 +47,43 @@
   </main>
 
   <!-- Scripts -->
-  <script src="script.js" defer></script>
+  <script>
+    const nav = document.getElementById("mobileNav");
+    const hamburger = document.getElementById("hamburgerBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    let lastScroll = window.pageYOffset;
+
+    // Toon menu bij laden
+    window.addEventListener("load", () => {
+      nav.classList.add("visible");
+    });
+
+    // Scrollgedrag
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll < lastScroll) {
+        nav.classList.add("visible");
+      } else {
+        nav.classList.remove("visible");
+        navLinks.classList.remove("show");
+      }
+
+      lastScroll = currentScroll;
+    });
+
+    // Hamburgerknop toggle
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Sluit menu bij klik op link (optioneel)
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+  </script>
 </body>
 </html>
