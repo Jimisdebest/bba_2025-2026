@@ -1,310 +1,15 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overig - BBA Klassenwebsite</title>
-  <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
-  <style>
-    /* ===== Basisvariabelen ===== */
-    :root {
-      --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
-      --bg-light: #fefaf6;
-      --bg-accent: #f7ede2;
-      --primary: #e27d90;
-      --accent: #f4a261;
-      --accent-2: #e9c46a;
-      --text: #2c3e50;
-      --muted: #5f6b7a;
-      --card: #ffffff;
-      --border: rgba(0,0,0,0.05);
-      --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
-      --shadow-lg: 0 12px 32px rgba(0,0,0,0.1);
-      --radius: 10px;
-      --ease: cubic-bezier(.25,.8,.25,1);
-      --max-width: 1100px;
-      --nav-height: 80px;
-    }
-
-    /* ===== Reset & Body ===== */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-main);
-      background: url('https://copilot.microsoft.com/th/id/BCO.df55e37b-ece2-45eb-8bbd-ff0042843aac.png') no-repeat center center fixed;
-      background-size: cover;
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-      padding-bottom: 3rem;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ===== Navigatie ===== */
-    #mobileNav {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 32px;
-      height: var(--nav-height);
-      box-shadow: var(--shadow-lg);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      transform: translateY(-100%);
-      opacity: 0;
-      transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
-    }
-
-    #mobileNav.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    #mobileNav img {
-      max-width: 150px;
-      height: auto;
-    }
-
-    .hamburger {
-      font-size: 28px;
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      display: none;
-      padding: 5px 10px;
-    }
-
-    /* ===== Navigatie links ===== */
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-weight: 600;
-      color: white;
-      text-decoration: none;
-      padding: 10px 16px;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.06);
-      transition: all 0.2s var(--ease);
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-2px);
-      outline: none;
-    }
-
-    .nav-links a.active {
-      background: rgba(255,255,255,0.15);
-    }
-
-    /* ===== Hoofdinhoud ===== */
-    main {
-      margin-top: 100px;
-      padding: 20px;
-      max-width: var(--max-width);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    section {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 25px;
-      margin-bottom: 30px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s ease;
-    }
-
-    section:hover {
-      transform: translateY(-5px);
-    }
-
-    h1, h2, h3 {
-      color: var(--text);
-      margin-top: 0;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      border-bottom: 3px solid var(--accent);
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 15px;
-    }
-
-    h3 {
-      font-size: 1.4rem;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    /* Halloween thema sectie */
-    .halloween-section {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .halloween-section::before {
-      content: "🎃";
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 2rem;
-      opacity: 0.3;
-    }
-
-    .halloween-section h2 {
-      color: white;
-    }
-
-    .halloween-section ul {
-      padding-left: 20px;
-    }
-
-    .halloween-section li {
-      margin-bottom: 10px;
-      padding-left: 5px;
-    }
-
-    /* Game link styling */
-    .game-link {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: var(--accent-2);
-      color: white;
-      text-decoration: none;
-      padding: 12px 25px;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .cta-button:hover {
-      background-color: #e55a2b;
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Mededelingen sectie */
-    .announcements {
-      border-left: 5px solid var(--primary);
-    }
-
-    /* ===== Responsive + Hamburgermenu ===== */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: linear-gradient(90deg, var(--primary), var(--accent));
-        flex-direction: column;
-        display: none;
-        padding: 10px 0;
-        box-shadow: var(--shadow-lg);
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
-
-      .nav-links a {
-        width: 100%;
-        text-align: center;
-        padding: 12px;
-        border-top: 1px solid rgba(255,255,255,0.2);
-      }
-
-      main {
-        margin-top: 120px;
-        padding: 15px;
-      }
-
-      section {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
-
-    /* Halloween animatie */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .halloween-icon {
-      animation: float 3s ease-in-out infinite;
-      display: inline-block;
-    }
-
-    /* Links in content */
-    a:not(.cta-button) {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    a:not(.cta-button):hover {
-      text-decoration: underline;
-    }
-
-    /* Lijst opmaak */
-    ul {
-      margin-bottom: 1rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Strong element */
-    strong {
-      color: var(--primary);
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overig - BBA</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="BBA-Logo.png" />
 </head>
+
 <body>
-  <!-- Navigatie - met hamburger menu -->
+  <!-- Navigatie -->
   <nav id="mobileNav">
     <a href="index.html">
       <img src="BBA-Logo.png" alt="BBA Logo" />
@@ -322,15 +27,15 @@
     </ul>
   </nav>
 
-  <!-- Hoofdinhoud -->
-  <main>
-    <section class="welcome">
-      <h1>Overig</h1>
-      <p>Welkom op de overig pagina! Hier komen overige berichten, tips en mededelingen uit onze klas.</p>
+  <!-- Inhoud -->
+  <main class="container">
+    <section class="intro">
+      <h2>Overig</h2>
+      <p>Welkom op de overig-pagina! Hier komen overige berichten uit onze klas.</p>
     </section>
 
-    <section class="halloween-section">
-      <h2><span class="halloween-icon">🎃</span> Halloween Tips</h2>
+    <section class="intro">
+      <h3>🎃 Halloween Tips</h3>
       <p>Het is bijna Halloween! Tijd om te griezelen, huilen (want dat werkt) en creatief te zijn. Hier zijn wat leuke ideeën:</p>
       <ul>
         <li>👻 Maak je eigen spookhuis in de woonkamer met lakens, lichtjes en enge geluiden.</li>
@@ -339,19 +44,18 @@
         <li>🕷️ Versier je kamer met spinnenwebben van watten en papieren vleermuizen. Niet aan je ouders vragen!</li>
         <li>🎥 Kijk samen een spannende (maar kindvriendelijke) Halloweenfilm zoals "Hotel Transylvania" of "Casper".</li>
         <li>🧙‍♀️ Verkleed je als heks, zombie, pompoen of iets totaal geks – hoe origineler, hoe beter!</li>
+        <li>⬇🎮 Probeer onze Halloween game!⬇</li>
+        <li><a href="https://jimisdebest.github.io/welkom/game.html">Speel de zombie game!</a></li>
       </ul>
-      
-      <div class="game-link">
-        <a href="https://jimisdebest.github.io/welkom/game.html" class="cta-button">
-          🎮 Speel de zombie game! 🧟
-        </a>
-      </div>
     </section>
 
-    <section class="announcements">
-      <h2>Mededelingen</h2>
-      <p>Heb jij iets leuks, geks of belangrijks om te delen? E-mail naar <strong>Jimschel1@outlook.com</strong> of zet het in de map <strong>Wi-Wa-Website</strong> en wie weet verschijnt het hier!</p>
-      <p>Enge Halloweenfoto's? LAAT IEDEREEN SCHRIKKEN! Stuur ze in en dan zetten we ze er zo snel mogelijk op.</p>
+    <section class="intro">
+      <h3>📣 Mededelingen</h3>
+      <p>
+        Heb jij iets leuks, geks of belangrijks om te delen? <br>
+        ✉️ Mail naar <a href="mailto:Jimschel1@outlook.com">Jimschel1@outlook.com</a> of zet het in de map <strong>Wi-Wa-Website</strong> en wie weet verschijnt het hier!<br><br>
+        📸 Enge Halloweenfoto’s? LAAT IEDEREEN SCHRIKKEN! Stuur ze in en dan zetten we ze er zo snel mogelijk op.
+      </p>
     </section>
   </main>
 
@@ -363,12 +67,10 @@
 
     let lastScroll = window.pageYOffset;
 
-    // Toon menu bij laden
     window.addEventListener("load", () => {
       nav.classList.add("visible");
     });
 
-    // Scrollgedrag
     window.addEventListener("scroll", () => {
       const currentScroll = window.pageYOffset;
 
@@ -382,12 +84,10 @@
       lastScroll = currentScroll;
     });
 
-    // Hamburgerknop toggle
     hamburger.addEventListener("click", () => {
       navLinks.classList.toggle("show");
     });
 
-    // Sluit menu bij klik op link
     document.querySelectorAll(".nav-links a").forEach(link => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("show");
