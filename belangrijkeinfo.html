@@ -3,32 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Belangrijke Data- BBA</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Correcte bestandsnaam -->
+  <title>Belangrijke Data - BBA</title>
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
 </head>
 <body>
 
-  
-  <nav id="mobileNav" aria-label="Hoofdnavigatie">
+  <nav>
     <a href="index.html">
       <img src="BBA-Logo.png" alt="BBA Logo" width="150">
     </a>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu openen/sluiten">☰</button>
-    <ul class="nav-links" id="navLinks" role="menubar">
-      <li role="none"><a role="menuitem" href="index.html">Home</a></li>
-      <li role="none"><a role="menuitem" href="verjaardagen.html">Verjaardagen</a></li>
-      <li role="none"><a role="menuitem" href="fotos.html" class="active" aria-current="page">Foto's</a></li>
-      <li role="none"><a role="menuitem" href="overig.html">Overig</a></li>
-      <li role="none"><a role="menuitem" href="belangrijkeinfo.html">Belangrijke Data</a></li>
-      <li role="none"><a role="menuitem" href="Huiswerk.html">Huiswerk</a></li>
-    </ul>
-  </nav>  
-    <a href="index.html">
-  <img src="BBA-Logo.png" alt="BBA Logo" width="150">
-</a>
 
-    <ul class="nav-links">
+    <!-- Hamburger knop -->
+    <div class="hamburger" onclick="toggleMenu()">
+      ☰
+    </div>
+
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="verjaardagen.html">Verjaardagen</a></li>
       <li><a href="fotos.html">Foto´s</a></li>
@@ -43,20 +34,23 @@
     <p>Hier vind je alle belangrijke data in onze klas. Van studiedag tot dagje uit.</p>
   </section>
 
- 
-
- 
-
   <section class="intro">
-    <h3> Studiedagen </h3>
-    <p>Dit zijn alle studiedagen: Maandag 29 September, Maandag 3 November, Maandag 5 Januari, Vrijdag 13 Februari, Dinsdag 7 April, Woensdag 10 Juni, Vrijdag 17 Juli </p>
+    <h3>Studiedagen</h3>
+    <p>Maandag 29 September, Maandag 3 November, Maandag 5 Januari, Vrijdag 13 Februari, Dinsdag 7 April, Woensdag 10 Juni, Vrijdag 17 Juli</p>
   </section>
 
   <section class="intro">
-    <h3> Vakanties </h3>
-    <p>Herfstvakantie: 20 tot 26 Oktober Kerstvakantie: 22 December tot 4 Januari Voorjaarsvakantie: 16 tot 22 Februari Meivakantie: 27 April tot 5 Mei Zomervakantie: 18 juli 2026 tot 30 augustus 2026 </p>
+    <h3>Vakanties</h3>
+    <p>Herfstvakantie: 20–26 Oktober<br>Kerstvakantie: 22 December–4 Januari<br>Voorjaarsvakantie: 16–22 Februari<br>Meivakantie: 27 April–5 Mei<br>Zomervakantie: 18 juli–30 augustus 2026</p>
   </section>
 
+  <!-- Script voor hamburgermenu -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      nav.classList.toggle("active");
+    }
+  </script>
 
 </body>
 </html>
