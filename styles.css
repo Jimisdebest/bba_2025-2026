@@ -29,7 +29,7 @@
 
 body {
   font-family: var(--font-main);
-  background: url('https://copilot.microsoft.com/th/id/BCO.df55e37b-ece2-45eb-8bbd-ff0042843aac.png') no-repeat center center fixed;
+  background: url('Achtergrond.png') no-repeat center center fixed;
   background-size: cover;
   color: var(--text);
   line-height: 1.6;
