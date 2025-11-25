@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verwijderd - Chromebook Reset</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b, #ff0000);
+            background-size: 400% 400%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            animation: gradientShift 8s ease infinite;
+            padding: 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 95%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-text {
+            font-size: 15vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s infinite, shake 0.5s infinite alternate;
+            line-height: 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
+        }
+
+        .subtitle {
+            font-size: 5vw;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeInOut 3s infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .message {
+            font-size: 4vw;
+            max-width: 90%;
+            margin: 0 auto 1rem;
+            line-height: 1.4;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            animation: slideUp 2s ease-out;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .help-message {
+            font-size: 4.5vw;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            border: 2px dashed white;
+            animation: highlight 4s infinite;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        @keyframes highlight {
+            0% { background: rgba(255, 255, 255, 0.2); }
+            50% { background: rgba(255, 255, 255, 0.4); }
+            100% { background: rgba(255, 255, 255, 0.2); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 5vw;
+            opacity: 0.2;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .warning-icon {
+            font-size: 10vw;
+            margin-bottom: 1rem;
+            animation: spin 4s linear infinite, glow 2s infinite alternate;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #fff, 0 0 20px #fff; }
+            100% { text-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000; }
+        }
+
+        /* Responsive aanpassingen voor grotere schermen */
+        @media (min-width: 768px) {
+            .main-text {
+                font-size: 120px;
+            }
+            
+            .subtitle {
+                font-size: 40px;
+            }
+            
+            .message {
+                font-size: 24px;
+                max-width: 70%;
+            }
+            
+            .help-message {
+                font-size: 28px;
+                max-width: 70%;
+            }
+            
+            .warning-icon {
+                font-size: 80px;
+            }
+        }
+
+        /* Extra kleine schermen */
+        @media (max-width: 480px) {
+            .main-text {
+                font-size: 18vw;
+            }
+            
+            .subtitle {
+                font-size: 6vw;
+            }
+            
+            .message {
+                font-size: 5vw;
+            }
+            
+            .help-message {
+                font-size: 5.5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <div class="container">
+        <div class="warning-icon">⚠️</div>
+        <h1 class="main-text">Verwijderd</h1>
+        <h2 class="subtitle">De Chromebooks zijn gereset</h2>
+        <p class="message">Hierdoor zijn er geen foto's meer beschikbaar. Alle gegevens zijn permanent verwijderd en kunnen niet worden hersteld.</p>
+        
+        <div class="help-message">
+            <p>Stuur Jan een bericht, help ons en om te zorgen dat we een nieuwe mogen maken</p>
+        </div>
+    </div>
+
+    <!-- Audio element voor het geluid -->
+    <audio id="errorSound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-tone-996.mp3" type="audio/mpeg">
+        Je browser ondersteunt geen audio element.
+    </audio>
+
+    <script>
+        // Voeg zwevende elementen toe
+        const floatingElements = document.getElementById('floatingElements');
+        const symbols = ['❌', '🗑️', '📵', '🚫', '💥', '🔥', '📷', '💻'];
+        
+        for (let i = 0; i < 20; i++) {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.animationDelay = Math.random() * 15 + 's';
+            element.style.fontSize = (Math.random() * 4 + 2) + 'vw';
+            floatingElements.appendChild(element);
+        }
+
+        // Voeg klik-effect toe
+        document.body.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.animation = 'ripple 0.6s linear';
+            
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+
+        // Voeg CSS voor ripple-effect toe
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    width: 200px;
+                    height: 200px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Speel het foutgeluid af
+        window.addEventListener('load', function() {
+            const errorSound = document.getElementById('errorSound');
+            // Probeer het geluid af te spelen
+            errorSound.play().catch(function(error) {
+                console.log('Automatisch afspelen geblokkeerd: ', error);
+                // Toon een bericht dat de gebruiker moet klikken om geluid te activeren
+                document.body.addEventListener('click', function() {
+                    errorSound.play();
+                }, { once: true });
+            });
+            
+            // Zet het volume hoog
+            errorSound.volume = 0.8;
+        });
+    </script>
+</body>
+</html>
