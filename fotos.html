@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBA Klassenwebsite - Foto's</title>
+    <link rel="icon" href="BBA-Logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specifieke stijlen voor foto's pagina */
+        .page-header {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Project voorvertoning */
+        .project-preview {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            border-left: 5px solid #e67e22;
+        }
+
+        .project-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .project-info p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .photo-count {
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .view-button {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-button:hover {
+            background-color: #d35400;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .project-image {
+                height: 200px;
+            }
+            
+            .project-info {
+                padding: 15px;
+            }
+            
+            .project-info h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
+            </a>
+            
+            <div class="hamburger-menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="verjaardagen.html" class="nav-link">Verjaardagen</a></li>
+                    <li><a href="fotos.html" class="nav-link active">Foto's</a></li>
+                    <li><a href="overige.html" class="nav-link">Overige</a></li>
+                    <li><a href="belangerijkedata.html" class="nav-link">Belangrijke Data</a></li>
+                    <li><a href="huiswerk.html" class="nav-link">Huiswerk</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Foto's</h1>
+            <p>Bekijk hier foto's van onze projecten en activiteiten.</p>
+        </div>
+
+        <!-- Herfsthuiswerk project voorvertoning -->
+        <div class="project-preview">
+            <a href="herfsthuiswerk/herfsthuiswerk.html" class="project-link">
+                <img src="herfsthuiswerk/Herfsthuiswerk 1.jpg" alt="Herfsthuiswerk project" class="project-image">
+                <div class="project-info">
+                    <h2>Herfsthuiswerk Project</h2>
+                    <p>Bekijk onze complete fotoserie van het herfsthuiswerk project. Leerlingen hebben gewerkt aan creatieve herfstopdrachten, natuuronderzoek en seizoensgebonden activiteiten.</p>
+                    <div class="project-meta">
+                        <span class="photo-count">6 foto's</span>
+                        <span class="view-button">Bekijk project →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background-color: #e8f4fc; border-radius: 8px; border-left: 5px solid #3498db;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">Hoe werkt het?</h3>
+            <p style="color: #666; margin: 0;">Klik op een project om alle foto's te bekijken. Binnenkort komen hier meer projecten!</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
+            <p>Een website voor en door leerlingen van BBA</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
