@@ -128,28 +128,19 @@
         <!-- Full-width PDF preview -->
         <div class="full-width-pdf">
             <!-- Optie 1: Direct PDF embed (werkt niet in alle browsers) -->
-            <object data="reclame.pdf" type="application/pdf" class="pdf-preview">
+            <object data="reclame.png" type="application/pdf" class="pdf-preview">
                 <!-- Optie 2: Fallback als PDF niet direct getoond kan worden -->
                 <div class="pdf-placeholder">
-                    <h2>Reclame PDF</h2>
-                    <p>De PDF wordt hier direct weergegeven als je browser dit ondersteunt.</p>
+                    <h2>(Reclame)</h2>
+                    <p>De reclame kon niet worden gevonden.</p>
                     <p>Als je de PDF niet ziet, <a href="reclame.pdf" style="color: white; text-decoration: underline;" target="_blank">klik dan hier om hem te openen</a>.</p>
                 </div>
             </object>
         </div>
 
-        <!-- Optioneel: Extra uitleg onderaan -->
-        <div class="container" style="text-align: center; margin-top: 20px; padding: 20px;">
-            <p style="color: #666;">
-                Dit is de reclame PDF. Scroll naar beneden om de hele PDF te bekijken.<br>
-                Gebruik Ctrl+ of Ctrl- om in/uit te zoomen indien nodig.
-            </p>
-        </div>
-    </main>
-
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 2 December 2025</p>
             <p>Een website voor en door leerlingen van BBA</p>
         </div>
     </footer>
@@ -161,7 +152,7 @@
             const pdfObject = document.querySelector('object[data="reclame.pdf"]');
             
             // Controleren of PDF bestaat (simpele check)
-            fetch('reclame.pdf')
+            fetch('reclame.jpg')
                 .then(response => {
                     if (!response.ok) {
                         showPdfError();
