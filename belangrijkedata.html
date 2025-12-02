@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBA Klassenwebsite - Belangrijke Data</title>
+    <link rel="icon" href="BBA-Logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specifieke stijlen voor belangrijke data pagina */
+        .page-header {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Datum overzicht */
+        .date-overview {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .date-month {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .date-month:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .month-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .date-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .date-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .date-number {
+            background-color: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .date-content h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .date-content p {
+            color: #666;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Urgentie aanduiding */
+        .date-item.urgent {
+            border-left-color: #e74c3c;
+            background-color: #ffeaea;
+        }
+
+        .date-item.urgent .date-number {
+            background-color: #e74c3c;
+        }
+
+        .date-item.upcoming {
+            border-left-color: #f39c12;
+            background-color: #fff8e6;
+        }
+
+        .date-item.upcoming .date-number {
+            background-color: #f39c12;
+        }
+
+        /* Info box */
+        .info-box {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 5px solid #f39c12;
+        }
+
+        .info-box strong {
+            color: #d35400;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .date-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .date-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
+                <span class="logo-text">BBA</span>
+            </a>
+            
+            <div class="hamburger-menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="verjaardagen.html" class="nav-link">Verjaardagen</a></li>
+                    <li><a href="fotos.html" class="nav-link">Foto's</a></li>
+                    <li><a href="overige.html" class="nav-link">Overige</a></li>
+                    <li><a href="belangerijkedata.html" class="nav-link active">Belangrijke Data</a></li>
+                    <li><a href="huiswerk.html" class="nav-link">Huiswerk</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Belangrijke Data</h1>
+            <p>Hier vind je alle belangrijke data voor de komende periode.</p>
+        </div>
+
+        <div class="date-overview">
+            <div class="date-month">
+                <div class="month-header">November 2025</div>
+                
+                <div class="date-item urgent">
+                    <div class="date-number">15</div>
+                    <div class="date-content">
+                        <h3>Project inleveren geschiedenis</h3>
+                        <p>Project "Nederland in de 20e eeuw" moet worden ingeleverd</p>
+                    </div>
+                </div>
+                
+                <div class="date-item upcoming">
+                    <div class="date-number">22</div>
+                    <div class="date-content">
+                        <h3>Excursie Rijksmuseum Amsterdam</h3>
+                        <p>Hele dag uitstapje. Vertrek om 8:30 uur vanaf school</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">27</div>
+                    <div class="date-content">
+                        <h3>Toets Wiskunde</h3>
+                        <p>Toets over hoofdstuk 3: Meetkunde</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="date-month">
+                <div class="month-header">December 2025</div>
+                
+                <div class="date-item upcoming">
+                    <div class="date-number">5</div>
+                    <div class="date-content">
+                        <h3>Sinterklaasviering in de klas</h3>
+                        <p>Neem je surprise en gedicht mee!</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">12</div>
+                    <div class="date-content">
+                        <h3>Ouderavond</h3>
+                        <p>19:00-21:00 uur in het klaslokaal</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">18</div>
+                    <div class="date-content">
+                        <h3>Kerstviering schoolbreed</h3>
+                        <p>Voorstelling in de aula voor alle ouders</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">20</div>
+                    <div class="date-content">
+                        <h3>Laatste schooldag voor kerstvakantie</h3>
+                        <p>Kerstontbijt in de klas. Vakantie tot 6 januari 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="date-month">
+                <div class="month-header">Januari 2026</div>
+                
+                <div class="date-item">
+                    <div class="date-number">6</div>
+                    <div class="date-content">
+                        <h3>Eerste schooldag na kerstvakantie</h3>
+                        <p>We starten weer om 8:30 uur</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">15</div>
+                    <div class="date-content">
+                        <h3>Start projectweek wetenschap</h3>
+                        <p>Een hele week werken aan wetenschappelijke projecten</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">30</div>
+                    <div class="date-content">
+                        <h3>Rapport 1 uitgereikt</h3>
+                        <p>Eerste rapport van het schooljaar</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="date-month">
+                <div class="month-header">Februari 2026</div>
+                
+                <div class="date-item">
+                    <div class="date-number">13</div>
+                    <div class="date-content">
+                        <h3>Voorjaarsvakantie begint</h3>
+                        <p>Vakantie van 13 t/m 21 februari</p>
+                    </div>
+                </div>
+                
+                <div class="date-item">
+                    <div class="date-number">27</div>
+                    <div class="date-content">
+                        <h3>Schoolfotograaf</h3>
+                        <p>Klassenfoto's en individuele portretten</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p><strong>Opmerking:</strong> Bij deze pagina is de navigatiebalk nog niet toegevoegd. Gebruik de terugknop van je browser om terug te gaan naar de vorige pagina.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
+            <p>Een website voor en door leerlingen van BBA</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
