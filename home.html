@@ -1,89 +1,83 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BBA Klassenwebsite - Home</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="BBA-Logo.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBA Klassenwebsite - Home</title>
+    <link rel="icon" href="BBA-Logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- Navigatie -->
-  <nav id="mobileNav">
-    <a href="index.html">
-      <img src="BBA-Logo.png" alt="BBA Logo" />
-    </a>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu openen/sluiten">
-      ☰
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="verjaardagen.html">Verjaardagen</a></li>
-      <li><a href="fotos.html">Foto's</a></li>
-      <li><a href="overig.html">Overige</a></li>
-      <li><a href="belangrijkeinfo.html">Belangrijke Data</a></li>
-      <li><a href="Huiswerk.html">Huiswerk</a></li>
-    </ul>
-  </nav>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
+            </a>
+            
+            <!-- Hamburger menu (zichtbaar op mobiel) -->
+            <div class="hamburger-menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <!-- Navigatie -->
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="verjaardagen.html" class="nav-link">Verjaardagen</a></li>
+                    <li><a href="fotos.html" class="nav-link">Foto's</a></li>
+                    <li><a href="overige.html" class="nav-link">Overige</a></li>
+                    <li><a href="belangerijkedata.html" class="nav-link">Belangrijke Data</a></li>
+                    <li><a href="huiswerk.html" class="nav-link">Huiswerk</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Hoofdinhoud -->
-  <header>
-    <p class="intro">
-      Welkom op de klassenwebsite van BBA!<br>
-      Wij zijn een klas met 26 leergierige, lieve, hardwerkende leerlingen! 
-      Op deze site zullen we laten zien wat ze zoal beleven… 
-      veel lees- en kijkplezier!
-    </p>
-  </header>
+    <!-- Overlay voor mobiel menu -->
+    <div class="overlay" id="overlay"></div>
 
-  <main class="container">
-    <h2>Laatste update:</h2>
-    <p id="lastUpdate">1 November 2025</p>
-    <p id="update">
-      Het grote menu is nu een <strong>hamburgermenu</strong>. Zo heeft u geen last meer van het menu en hij klapt automatisch uit wanneer je naar boven scrollt.
-      <strong>Opmerking:</strong> bij belangrijke data en huiswerk is de balk nog niet toegevoegd. Gebruik daar de terug knopjes van uw browser.
-    </p>
-  </main>
+    <!-- Hoofdinhoud -->
+    <main class="container">
+        <section class="welcome-section">
+            <h1>Welkom op de klassenwebsite van BBA!</h1>
+            
+            <div class="welcome-content">
+                <p class="welcome-text">
+                    Wij zijn een klas met <span class="student-count">26 leergierige, lieve, hardwerkende leerlingen</span>! 
+                    Op deze site zullen we laten zien wat ze zoal beleven… veel lees- en kijkplezier!
+                </p>
+                
+                <div class="classroom-image">
+                    <!-- Plaatshouder voor klassenfoto -->
+                    <div class="image-placeholder">
+                        <p>Klassenfoto BBA 2025</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h2>Laatste update:</h2>
+                    <p><strong>2 December 2025</strong></p>
+                    <p>Deze volledig nieuwe klassenwebsite!!! Geniet ervan allemaal!</p>
+                </div>
+                
+                <div class="note-box">
+                    <p><strong>Opmerking:</strong> bij belangrijke data en huiswerk is de balk nog niet toegevoegd. Gebruik daar de terug knopjes van uw browser.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <!-- Scripts -->
-  <script>
-    const nav = document.getElementById("mobileNav");
-    const hamburger = document.getElementById("hamburgerBtn");
-    const navLinks = document.getElementById("navLinks");
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
+            <p>Een website voor en door leerlingen van BBA</p>
+        </div>
+    </footer>
 
-    let lastScroll = window.pageYOffset;
-
-    // Toon menu bij laden
-    window.addEventListener("load", () => {
-      nav.classList.add("visible");
-    });
-
-    // Scrollgedrag
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset;
-
-      if (currentScroll < lastScroll) {
-        nav.classList.add("visible");
-      } else {
-        nav.classList.remove("visible");
-        navLinks.classList.remove("show");
-      }
-
-      lastScroll = currentScroll;
-    });
-
-    // Hamburgerknop toggle
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
-
-    // Sluit menu bij klik op link (optioneel)
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("show");
-      });
-    });
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
