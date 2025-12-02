@@ -8,153 +8,89 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* Specifieke stijlen voor overige pagina */
-        .page-header {
-            background-color: rgba(255, 255, 255, 0.92);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        body {
+            padding-top: 80px;
+        }
+        
+        .full-width-pdf {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: -20px;
             margin-bottom: 30px;
-            backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .page-header h1 {
-            color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 15px;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        .page-header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        /* PDF Reclame sectie - Gecentreerd en groot */
-        .pdf-advertisement {
-            background-color: rgba(255, 255, 255, 0.92);
-            border-radius: 15px;
-            padding: 50px 30px;
-            margin: 30px auto;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            max-width: 800px;
-        }
-
-        .pdf-container {
-            margin: 40px 0;
+            overflow: hidden;
         }
 
         .pdf-preview {
             width: 100%;
-            max-width: 600px;
-            height: 400px;
-            margin: 0 auto;
-            border: 3px solid #3498db;
-            border-radius: 10px;
+            height: calc(100vh - 100px);
+            min-height: 600px;
+            border: none;
+            display: block;
             background-color: #f8f9fa;
+        }
+
+        .pdf-placeholder {
+            width: 100%;
+            height: calc(100vh - 100px);
+            min-height: 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .pdf-icon {
-            font-size: 5rem;
-            color: #e74c3c;
-            margin-bottom: 20px;
-        }
-
-        .pdf-info {
-            text-align: center;
-        }
-
-        .pdf-info h3 {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .pdf-info p {
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .download-button {
-            display: inline-block;
-            background-color: #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .pdf-placeholder h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .pdf-placeholder p {
             font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid #3498db;
-            margin-top: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
         }
 
-        .download-button:hover {
-            background-color: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .download-button:active {
-            transform: translateY(-1px);
-        }
-
-        .file-info {
-            background-color: rgba(232, 244, 252, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 25px;
-            display: inline-block;
-            color: #2c3e50;
+        .pdf-error {
+            background-color: #ffeaa7;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+            border-left: 5px solid #f39c12;
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
-            .pdf-advertisement {
-                padding: 30px 20px;
+            .pdf-preview,
+            .pdf-placeholder {
+                height: 500px;
+                min-height: 500px;
             }
             
-            .pdf-preview {
-                height: 300px;
-                max-width: 90%;
-            }
-            
-            .pdf-icon {
-                font-size: 4rem;
-            }
-            
-            .pdf-info h3 {
-                font-size: 1.5rem;
-            }
-            
-            .download-button {
-                padding: 12px 25px;
-                font-size: 1.1rem;
+            .pdf-placeholder h2 {
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 480px) {
-            .pdf-preview {
-                height: 250px;
+            .pdf-preview,
+            .pdf-placeholder {
+                height: 400px;
+                min-height: 400px;
             }
             
-            .pdf-icon {
-                font-size: 3rem;
-            }
-            
-            .download-button {
-                padding: 10px 20px;
-                font-size: 1rem;
+            .pdf-placeholder h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -188,38 +124,25 @@
 
     <div class="overlay" id="overlay"></div>
 
-    <main class="container">
-        <div class="page-header">
-            <h1>Overige</h1>
-            <p>Hier vind je extra informatie.</p>
-        </div>
-
-        <!-- PDF Reclame - alleen dit op de pagina -->
-        <div class="pdf-advertisement">
-            <div class="pdf-container">
-                <div class="pdf-preview">
-                    <div class="pdf-icon">📄</div>
-                    <div class="pdf-info">
-                        <h3>Reclame</h3>
-                        <p>Klik op de knop hieronder om de reclame te bekijken of downloaden.</p>
-                        <a href="reclame.pdf" class="download-button" target="_blank">
-                            📥 Bekijk Reclame PDF
-                        </a>
-                    </div>
+    <main>
+        <!-- Full-width PDF preview -->
+        <div class="full-width-pdf">
+            <!-- Optie 1: Direct PDF embed (werkt niet in alle browsers) -->
+            <object data="reclame.pdf" type="application/pdf" class="pdf-preview">
+                <!-- Optie 2: Fallback als PDF niet direct getoond kan worden -->
+                <div class="pdf-placeholder">
+                    <h2>Reclame PDF</h2>
+                    <p>De PDF wordt hier direct weergegeven als je browser dit ondersteunt.</p>
+                    <p>Als je de PDF niet ziet, <a href="reclame.pdf" style="color: white; text-decoration: underline;" target="_blank">klik dan hier om hem te openen</a>.</p>
                 </div>
-            </div>
-            
-            <div class="file-info">
-                <p>📄 <strong>Bestand:</strong> reclame.pdf</p>
-                <p>👆 <strong>Klik op de knop om te openen</strong></p>
-            </div>
+            </object>
         </div>
 
-        <!-- Optioneel: Toegevoegde uitleg -->
-        <div style="text-align: center; margin-top: 30px; padding: 20px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            <p style="color: #666; margin: 0;">
-                Deze pagina bevat momenteel alleen de reclame PDF. 
-                Binnenkort komt hier mogelijk meer informatie.
+        <!-- Optioneel: Extra uitleg onderaan -->
+        <div class="container" style="text-align: center; margin-top: 20px; padding: 20px;">
+            <p style="color: #666;">
+                Dit is de reclame PDF. Scroll naar beneden om de hele PDF te bekijken.<br>
+                Gebruik Ctrl+ of Ctrl- om in/uit te zoomen indien nodig.
             </p>
         </div>
     </main>
@@ -232,5 +155,34 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Controleren of PDF laadt
+        document.addEventListener('DOMContentLoaded', function() {
+            const pdfObject = document.querySelector('object[data="reclame.pdf"]');
+            
+            // Controleren of PDF bestaat (simpele check)
+            fetch('reclame.pdf')
+                .then(response => {
+                    if (!response.ok) {
+                        showPdfError();
+                    }
+                })
+                .catch(() => {
+                    showPdfError();
+                });
+            
+            function showPdfError() {
+                const container = document.querySelector('.full-width-pdf');
+                container.innerHTML = `
+                    <div class="pdf-error">
+                        <h3>PDF niet gevonden</h3>
+                        <p>Het bestand <strong>reclame.pdf</strong> kon niet worden geladen.</p>
+                        <p>Zorg ervoor dat het bestand in dezelfde map staat als de website.</p>
+                        <p>Je kunt <a href="reclame.pdf" target="_blank">hier proberen de PDF te openen</a>.</p>
+                    </div>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
