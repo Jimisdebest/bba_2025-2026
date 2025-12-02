@@ -7,89 +7,62 @@
     <link rel="icon" href="BBA-Logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Specifieke stijlen voor overige pagina */
-        body {
-            padding-top: 80px;
-        }
-        
-        .full-width-pdf {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            margin-top: -20px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-
-        .pdf-preview {
-            width: 100%;
-            height: calc(100vh - 100px);
-            min-height: 600px;
-            border: none;
-            display: block;
-            background-color: #f8f9fa;
-        }
-
-        .pdf-placeholder {
-            width: 100%;
-            height: calc(100vh - 100px);
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        /* Stijlen voor lege pagina */
+        .empty-message {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             text-align: center;
-            padding: 20px;
+            max-width: 800px;
+            margin: 50px auto;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .pdf-placeholder h2 {
-            font-size: 2.5rem;
+        .empty-message h2 {
+            color: #2c3e50;
+            font-size: 2rem;
             margin-bottom: 20px;
-            color: white;
         }
 
-        .pdf-placeholder p {
+        .empty-message p {
+            color: #666;
             font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 30px;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
-        .pdf-error {
-            background-color: #ffeaa7;
+        .info-box {
+            background-color: rgba(232, 244, 252, 0.9);
             padding: 20px;
             border-radius: 10px;
-            margin: 20px auto;
-            max-width: 600px;
-            text-align: center;
-            border-left: 5px solid #f39c12;
+            margin-top: 30px;
+            border-left: 5px solid #3498db;
         }
 
-        /* Responsive design */
+        .info-box strong {
+            color: #2c3e50;
+        }
+
+        .email-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .pdf-preview,
-            .pdf-placeholder {
-                height: 500px;
-                min-height: 500px;
+            .empty-message {
+                padding: 40px 20px;
+                margin: 30px auto;
             }
             
-            .pdf-placeholder h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .pdf-preview,
-            .pdf-placeholder {
-                height: 400px;
-                min-height: 400px;
-            }
-            
-            .pdf-placeholder h2 {
+            .empty-message h2 {
                 font-size: 1.8rem;
             }
         }
@@ -124,19 +97,29 @@
 
     <div class="overlay" id="overlay"></div>
 
-    <main>
-        <!-- Full-width PDF preview -->
-        <div class="full-width-pdf">
-            <!-- Optie 1: Direct PDF embed (werkt niet in alle browsers) -->
-            <object data="reclame.png" type="application/pdf" class="pdf-preview">
-                <!-- Optie 2: Fallback als PDF niet direct getoond kan worden -->
-                <div class="pdf-placeholder">
-                    <h2>(Reclame)</h2>
-                    <p>De reclame kon niet worden gevonden.</p>
-                    <p>Als je de PDF niet ziet, <a href="reclame.pdf" style="color: white; text-decoration: underline;" target="_blank">klik dan hier om hem te openen</a>.</p>
-                </div>
-            </object>
+    <main class="container">
+        <div class="empty-message">
+            <h2>Hier zijn nog geen mededelingen.</h2>
+            
+            <p>
+                Doordat de chromebooks waren gereset was de website weg. 
+                Nu we de nieuwe hebben gemaakt, maar nog geen berichten. 
+                Laat ze maar binnenkomen dus!
+            </p>
+            
+            <div class="info-box">
+                <p>
+                    <strong>Heb je een mededeling voor de klas?</strong><br>
+                    Stuur een e-mail naar:<br>
+                    <a href="mailto:Jimschel1@outlook.com" class="email-link">Jimschel1@outlook.com</a>
+                </p>
+            </div>
+            
+            <p style="margin-top: 25px; font-style: italic; color: #7f8c8d;">
+                Binnenkort verschijnen hier de (jouw) mededelingen...
+            </p>
         </div>
+    </main>
 
     <footer>
         <div class="footer-content">
@@ -146,34 +129,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Controleren of PDF laadt
-        document.addEventListener('DOMContentLoaded', function() {
-            const pdfObject = document.querySelector('object[data="reclame.pdf"]');
-            
-            // Controleren of PDF bestaat (simpele check)
-            fetch('reclame.jpg')
-                .then(response => {
-                    if (!response.ok) {
-                        showPdfError();
-                    }
-                })
-                .catch(() => {
-                    showPdfError();
-                });
-            
-            function showPdfError() {
-                const container = document.querySelector('.full-width-pdf');
-                container.innerHTML = `
-                    <div class="pdf-error">
-                        <h3>PDF niet gevonden</h3>
-                        <p>Het bestand <strong>reclame.pdf</strong> kon niet worden geladen.</p>
-                        <p>Zorg ervoor dat het bestand in dezelfde map staat als de website.</p>
-                        <p>Je kunt <a href="reclame.pdf" target="_blank">hier proberen de PDF te openen</a>.</p>
-                    </div>
-                `;
-            }
-        });
-    </script>
 </body>
 </html>
