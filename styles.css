@@ -1,162 +1,382 @@
-/* ===== Basisvariabelen ===== */
-:root {
-  --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
-  --bg-light: #fefaf6;
-  --bg-accent: #f7ede2;
-  --primary: #e27d90;
-  --accent: #f4a261;
-  --accent-2: #e9c46a;
-  --text: #2c3e50;
-  --muted: #5f6b7a;
-  --card: #ffffff;
-  --border: rgba(0,0,0,0.05);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.1);
-  --radius: 10px;
-  --ease: cubic-bezier(.25,.8,.25,1);
-  --max-width: 1100px;
-  --nav-height: 80px;
-}
-
-/* ===== Reset & Body ===== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Reset en basisstijlen */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  font-family: var(--font-main);
-  background: url('Pieten.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: var(--text);
-  line-height: 1.6;
-  min-height: 100vh;
-  padding-bottom: 3rem;
-  -webkit-font-smoothing: antialiased;
+    background-image: url('Achtergrond.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #f8f9fa; /* Fallback kleur als afbeelding niet laadt */
+    color: #333;
+    line-height: 1.6;
+    padding-top: 80px;
+    min-height: 100vh;
 }
 
-/* ===== Navigatie ===== */
-nav {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  height: var(--nav-height);
-  box-shadow: var(--shadow-lg);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
-}
-
-nav.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-nav img {
-  max-width: 150px;
-  height: auto;
-}
-
-.hamburger {
-  font-size: 28px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: none;
-}
-
-/* ===== Navigatie links ===== */
-.nav-links {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,0.06);
-  transition: all 0.2s var(--ease);
-}
-
-.nav-links a:hover,
-.nav-links a:focus {
-  background: rgba(255,255,255,0.12);
-  transform: translateY(-2px);
-  outline: none;
-}
-
-/* ===== Introductie ===== */
-header {
-  text-align: center;
-  padding: calc(var(--nav-height) + 32px) 16px 32px;
-}
-
-.intro {
-  max-width: 720px;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.85);
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  font-size: 1.05rem;
-}
-
-/* ===== Container & Main ===== */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-main {
-  background: rgba(255,255,255,0.85);
-  margin: 32px auto;
-  padding: 24px;
-  padding-top: var(--nav-height);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  max-width: var(--max-width);
-}
-
-/* ===== Responsive + Hamburgermenu ===== */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 100%;
+/* Overlay voor betere leesbaarheid */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
     left: 0;
-    right: 0;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    flex-direction: column;
-    display: none;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .nav-links a {
     width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: -1;
+}
+
+/* Header en navigatie */
+header {
+    background-color: rgba(44, 62, 80, 0.95); /* Semi-transparant donkerblauw */
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(5px); /* Blur effect voor moderne browsers */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo (alleen afbeelding) */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 60px; /* Vaste hoogte voor consistente header */
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    border-radius: 5px;
+    background-color: white;
+    padding: 3px;
+}
+
+/* Hamburger menu */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.hamburger-menu span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Navigatie */
+nav {
+    transition: all 0.3s ease;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    background-color: rgba(52, 152, 219, 0.8);
+    transform: translateY(-2px);
+}
+
+nav ul li a.active {
+    background-color: rgba(52, 152, 219, 0.9);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Hoofdinhoud */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.welcome-section {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.welcome-section h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
     text-align: center;
-    padding: 12px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 15px;
+}
+
+.welcome-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.student-count {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* Klassenaam */
+.classroom-image {
+    margin: 30px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.image-placeholder {
+    height: 300px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    backdrop-filter: blur(2px);
+}
+
+.highlight-box {
+    background-color: rgba(232, 244, 252, 0.9);
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+    margin: 30px 0;
+    backdrop-filter: blur(2px);
+}
+
+.highlight-box h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.note-box {
+    background-color: rgba(255, 243, 205, 0.9);
+    border: 1px solid rgba(255, 234, 167, 0.8);
+    border-left: 5px solid #f39c12;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 30px;
+    backdrop-filter: blur(2px);
+}
+
+.note-box strong {
+    color: #d35400;
+}
+
+/* Overlay voor mobiel menu */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    display: none;
+    backdrop-filter: blur(3px);
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(44, 62, 80, 0.95);
+    color: white;
+    padding: 30px 20px;
+    margin-top: 50px;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-content p {
+    margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: rgba(44, 62, 80, 0.98);
+        padding: 100px 20px 20px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.1rem;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .logo-img {
+        height: 40px;
+    }
+
+    .welcome-section {
+        padding: 25px;
+    }
+
+    .welcome-section h1 {
+        font-size: 2rem;
+    }
+
+    .image-placeholder {
+        height: 200px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 10px;
+    }
+    
+    .logo-img {
+        height: 35px;
+    }
+    
+    .welcome-section {
+        padding: 20px;
+    }
+    
+    .welcome-section h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Aanvullende stijlen voor andere pagina's */
+.page-header {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.page-header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.page-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Witte achtergronden voor content secties */
+.birthday-table,
+.photo-gallery,
+.project-preview,
+.date-overview,
+.homework-overview,
+.info-section,
+.project-description {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Achtergrond voor herfsthuiswerk project header */
+.project-header {
+    background: linear-gradient(135deg, rgba(230, 126, 34, 0.9) 0%, rgba(211, 84, 0, 0.9) 100%);
+    backdrop-filter: blur(5px);
+}
+
+/* Lightbox achtergrond */
+.lightbox {
+    background-color: rgba(0,0,0,0.95);
+    backdrop-filter: blur(10px);
 }
