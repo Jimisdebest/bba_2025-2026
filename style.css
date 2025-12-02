@@ -423,3 +423,11 @@ footer {
     background-color: rgba(0,0,0,0.95);
     backdrop-filter: blur(10px);
 }
+/* Klassenfoto netjes binnen de randen */
+.classroom-image img {
+    display: block;        /* Foto op eigen regel */
+    max-width: 80%;        /* Foto nooit breder dan 80% van container */
+    height: auto;          /* Hoogte schaalt mee */
+    margin: 0 auto;        /* Centreert de foto */
+    border-radius: 8px;    /* Mooie afgeronde hoeken */
+}
