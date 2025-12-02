@@ -9,11 +9,13 @@
     <style>
         /* Specifieke stijlen voor overige pagina */
         .page-header {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.92);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             margin-bottom: 30px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .page-header h1 {
@@ -29,93 +31,130 @@
             font-size: 1.1rem;
         }
 
-        /* Info secties */
-        .info-section {
-            background-color: white;
+        /* PDF Reclame sectie - Gecentreerd en groot */
+        .pdf-advertisement {
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            padding: 50px 30px;
+            margin: 30px auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 800px;
+        }
+
+        .pdf-container {
+            margin: 40px 0;
+        }
+
+        .pdf-preview {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            border: 3px solid #3498db;
             border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-left: 5px solid #3498db;
-        }
-
-        .info-section h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-section h2 i {
-            color: #3498db;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .info-card {
             background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-3px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .info-card h3 {
+        .pdf-icon {
+            font-size: 5rem;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .pdf-info {
+            text-align: center;
+        }
+
+        .pdf-info h3 {
             color: #2c3e50;
+            font-size: 1.8rem;
             margin-bottom: 10px;
-            font-size: 1.2rem;
         }
 
-        .class-rules {
-            list-style: none;
-            padding-left: 0;
+        .pdf-info p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
         }
 
-        .class-rules li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .class-rules li:last-child {
-            border-bottom: none;
-        }
-
-        .rule-number {
+        .download-button {
+            display: inline-block;
             background-color: #3498db;
             color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2rem;
             font-weight: bold;
-            flex-shrink: 0;
+            transition: all 0.3s ease;
+            border: 2px solid #3498db;
+            margin-top: 20px;
+        }
+
+        .download-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .download-button:active {
+            transform: translateY(-1px);
+        }
+
+        .file-info {
+            background-color: rgba(232, 244, 252, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            display: inline-block;
+            color: #2c3e50;
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
+            .pdf-advertisement {
+                padding: 30px 20px;
             }
             
-            .info-section {
-                padding: 20px;
+            .pdf-preview {
+                height: 300px;
+                max-width: 90%;
+            }
+            
+            .pdf-icon {
+                font-size: 4rem;
+            }
+            
+            .pdf-info h3 {
+                font-size: 1.5rem;
+            }
+            
+            .download-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pdf-preview {
+                height: 250px;
+            }
+            
+            .pdf-icon {
+                font-size: 3rem;
+            }
+            
+            .download-button {
+                padding: 10px 20px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -126,7 +165,6 @@
         <div class="header-container">
             <a href="index.html" class="logo">
                 <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
-                <span class="logo-text">BBA</span>
             </a>
             
             <div class="hamburger-menu" id="hamburger">
@@ -153,91 +191,36 @@
     <main class="container">
         <div class="page-header">
             <h1>Overige</h1>
-            <p>Hier vind je allerlei extra informatie over onze klas.</p>
+            <p>Hier vind je extra informatie.</p>
         </div>
 
-        <div class="info-section">
-            <h2>Onze Klassenormen</h2>
-            <ul class="class-rules">
-                <li>
-                    <div class="rule-number">1</div>
-                    <div>We respecteren elkaar en luisteren naar elkaars mening</div>
-                </li>
-                <li>
-                    <div class="rule-number">2</div>
-                    <div>We helpen elkaar wanneer iemand dat nodig heeft</div>
-                </li>
-                <li>
-                    <div class="rule-number">3</div>
-                    <div>We werken hard en doen ons best bij alle vakken</div>
-                </li>
-                <li>
-                    <div class="rule-number">4</div>
-                    <div>We zorgen samen voor een nette en opgeruimde klas</div>
-                </li>
-                <li>
-                    <div class="rule-number">5</div>
-                    <div>We hebben plezier in leren en gaan positief met elkaar om</div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="info-section">
-            <h2>Klassenouders</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>Mevrouw Jansen</h3>
-                    <p>Moeder van Ryan</p>
-                    <p><strong>Contact:</strong> ryan.mama@email.nl</p>
-                    <p><strong>Functie:</strong> Coördinator uitstapjes</p>
+        <!-- PDF Reclame - alleen dit op de pagina -->
+        <div class="pdf-advertisement">
+            <div class="pdf-container">
+                <div class="pdf-preview">
+                    <div class="pdf-icon">📄</div>
+                    <div class="pdf-info">
+                        <h3>Reclame</h3>
+                        <p>Klik op de knop hieronder om de reclame te bekijken of downloaden.</p>
+                        <a href="reclame.pdf" class="download-button" target="_blank">
+                            📥 Bekijk Reclame PDF
+                        </a>
+                    </div>
                 </div>
-                <div class="info-card">
-                    <h3>De heer Ali</h3>
-                    <p>Vader van Mohamed</p>
-                    <p><strong>Contact:</strong> mohamed.papa@email.nl</p>
-                    <p><strong>Functie:</strong> Feestcommissie</p>
-                </div>
+            </div>
+            
+            <div class="file-info">
+                <p>📄 <strong>Bestand:</strong> reclame.pdf</p>
+                <p>👆 <strong>Klik op de knop om te openen</strong></p>
             </div>
         </div>
 
-        <div class="info-section">
-            <h2>Bijzondere Prestaties</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>Wetenschapsbeurs</h3>
-                    <p>1e prijs gewonnen met ons project over duurzame energie</p>
-                    <p><em>Februari 2025</em></p>
-                </div>
-                <div class="info-card">
-                    <h3>Leeswedstrijd</h3>
-                    <p>Schoolkampioen geworden in de jaarlijkse leeswedstrijd</p>
-                    <p><em>Maart 2025</em></p>
-                </div>
-                <div class="info-card">
-                    <h3>Sportdag</h3>
-                    <p>Beste klas bij de jaarlijkse schoolsportdag</p>
-                    <p><em>April 2025</em></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-section">
-            <h2>Groene Klas</h2>
-            <p>Onze klas is trots op onze groene initiatieven:</p>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>Plantenverzorging</h3>
-                    <p>Elke leerling verzorgt een eigen plant in de klas. We hebben nu 26 gezonde planten!</p>
-                </div>
-                <div class="info-card">
-                    <h3>Afvalscheiding</h3>
-                    <p>We scheiden plastic, papier en GFE (groente-, fruit- en etensresten) in aparte bakken.</p>
-                </div>
-                <div class="info-card">
-                    <h3>Energiebesparing</h3>
-                    <p>We hebben energiewachters die ervoor zorgen dat lichten en computers uit staan als we de klas verlaten.</p>
-                </div>
-            </div>
+        <!-- Optioneel: Toegevoegde uitleg -->
+        <div style="text-align: center; margin-top: 30px; padding: 20px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <p style="color: #666; margin: 0;">
+                Deze pagina bevat momenteel alleen de reclame PDF. 
+                Binnenkort komt hier mogelijk meer informatie.
+            </p>
         </div>
     </main>
 
