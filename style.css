@@ -71,11 +71,11 @@ header {
 }
 
 .logo-img {
-    height: 100px;
+    height: 65px;
     width: auto;
     border-radius: 5px;
     background-color: white;
-    padding: 6px;
+    padding: 4px;
 }
 
 /* DJ T&J logo en tekst */
