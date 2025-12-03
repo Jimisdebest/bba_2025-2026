@@ -147,6 +147,16 @@
             100% { opacity: 0.7; }
         }
         
+        .time-info {
+            font-size: 2rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: rgba(0, 60, 0, 0.7);
+            border-radius: 15px;
+            border: 2px solid #aaffaa;
+            animation: pulse 2s infinite;
+        }
+        
         .countdown {
             display: flex;
             justify-content: center;
@@ -202,7 +212,7 @@
         
         .progress-bar {
             height: 100%;
-            width: 78%;
+            width: 85%;
             background: linear-gradient(90deg, #2d8a2c, #44c044, #aaffaa);
             border-radius: 10px;
             animation: progress 2s ease-in-out infinite alternate, fillUp 3s ease-out forwards;
@@ -217,7 +227,7 @@
         
         @keyframes fillUp {
             0% { width: 0%; }
-            100% { width: 78%; }
+            100% { width: 85%; }
         }
         
         .progress-bar:after {
@@ -235,13 +245,6 @@
         @keyframes moveStripes {
             0% { background-position: 0 0; }
             100% { background-position: 50px 50px; }
-        }
-        
-        .progress-text {
-            margin-top: 0.5rem;
-            font-size: 1.2rem;
-            color: #e8ffe8;
-            position: relative;
         }
         
         .animation-container {
@@ -283,25 +286,6 @@
             background-color: rgba(255, 170, 170, 0.7);
         }
         
-        .contact {
-            margin-top: 2rem;
-            font-size: 1.2rem;
-            color: #e8ffe8;
-            position: relative;
-        }
-        
-        .contact a {
-            color: #ffffaa;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        
-        .contact a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        
         footer {
             margin-top: 3rem;
             padding-top: 1.5rem;
@@ -320,6 +304,7 @@
             .countdown { flex-wrap: wrap; }
             .countdown-item { min-width: 100px; }
             .logo { width: 120px; height: 120px; font-size: 3rem; }
+            .time-info { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -335,14 +320,19 @@
         
         <div class="message-box">
             <h2>We zijn bezig met een update!</h2>
-            <p>Op dit moment werken we hard aan een verbeterde versie van de BBA Klassenwebsite.</p>
-            <p>We voeren onderhoud uit om de site nog beter, sneller en gebruiksvriendelijker te maken.</p>
-            <p>Kom <span class="highlight">morgen</span> terug en ontdek alle nieuwe functies!</p>
+            <p>De BBA Klassenwebsite is tijdelijk niet beschikbaar.</p>
+            <p>Kom <span class="highlight">later</span> weer terug om de website te bezoeken.</p>
+            
+            <div class="time-info">
+                <!-- HIER KUNT U DE TIJD AANPASSEN -->
+                <!-- Pas de tijd aan tussen de aanhalingstekens -->
+                <!-- Voorbeeld: "09:00" voor 9 uur 's ochtends -->
+                Beschikbaar vanaf: <span class="highlight" id="available-time">09:00</span> uur
+            </div>
             
             <div class="progress-container">
                 <div class="progress-bar"></div>
             </div>
-            <div class="progress-text">Update voor 78% voltooid</div>
             
             <div class="countdown">
                 <div class="countdown-item">
@@ -367,34 +357,44 @@
             <div class="animation-item"></div>
         </div>
         
-        <div class="contact">
-            <p>Voor dringende vragen: <a href="mailto:info@bbaklassen.nl">info@bbaklassen.nl</a></p>
-        </div>
-        
         <footer>
-            <p>© 2023 BBA Klassenwebsite. Alle rechten voorbehouden.</p>
+            <p>© 2025 BBA Klassenwebsite. Alle rechten voorbehouden.</p>
         </footer>
     </div>
 
     <script>
+        // ============================================
+        // TIJD INSTELLEN
+        // ============================================
+        // Pas alleen deze waarde aan:
+        const availableTime = "12:15";
+        // ============================================
+        
+        // Zet de ingestelde tijd op het scherm
+        document.getElementById('available-time').textContent = availableTime;
+        
         // Countdown timer
         function updateCountdown() {
-            // Stel de tijd in voor morgen om 9:00 uur
             const now = new Date();
             const tomorrow = new Date();
+            
+            // Zet de datum naar morgen
             tomorrow.setDate(now.getDate() + 1);
-            tomorrow.setHours(9, 0, 0, 0);
+            
+            // Gebruik de ingestelde tijd
+            const [hours, minutes] = availableTime.split(':').map(Number);
+            tomorrow.setHours(hours, minutes, 0, 0);
             
             const timeDiff = tomorrow - now;
             
             if (timeDiff > 0) {
-                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
                 
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hoursLeft.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutesLeft.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = secondsLeft.toString().padStart(2, '0');
             } else {
                 // Als de tijd voorbij is, toon een bericht
                 document.getElementById('hours').textContent = '00';
@@ -403,7 +403,8 @@
                 
                 // Verander de tekst om aan te geven dat de site beschikbaar is
                 document.querySelector('h2').textContent = "De update is voltooid!";
-                document.querySelector('.message-box p:nth-child(4)').innerHTML = 'De BBA Klassenwebsite is nu <span class="highlight">weer beschikbaar</span>!';
+                document.querySelector('.message-box p:nth-child(3)').innerHTML = 'De BBA Klassenwebsite kan elk moment weer<span class="highlight"> beschikbaar zijn</span>.';
+                document.querySelector('.time-info').innerHTML = '<span class="highlight">Nu beschikbaar!</span>';
             }
         }
         
@@ -426,17 +427,16 @@
         
         // Animeer de progress bar
         const progressBar = document.querySelector('.progress-bar');
-        let progress = 78;
+        let progress = 85;
         let direction = 1;
         
         setInterval(() => {
             // Laat de progress bar licht oscilleren
-            if (progress > 80) direction = -1;
-            if (progress < 76) direction = 1;
+            if (progress > 87) direction = -1;
+            if (progress < 83) direction = 1;
             
             progress += 0.1 * direction;
             progressBar.style.width = `${progress}%`;
-            document.querySelector('.progress-text').textContent = `Update voor ${Math.round(progress)}% voltooid`;
         }, 300);
     </script>
 </body>
