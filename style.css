@@ -421,7 +421,7 @@ footer {
 /* Lightbox achtergrond */
 .lightbox {
     background-color: rgba(0,0,0,0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
 }
 /* Klassenfoto netjes binnen de randen */
 .classroom-image img {
