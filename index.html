@@ -61,14 +61,14 @@
                     Op deze site zullen we laten zien wat ze zoal beleven… veel lees- en kijkplezier!
                 </p>
                 
-              <div class="classroom-image">
-    <img src="klassenfoto.jpg" alt="Klassenfoto BBA 2025">
-</div>
+                <div class="classroom-image">
+                    <img src="klassenfoto.jpg" alt="Klassenfoto BBA 2025">
+                </div>
 
                 <div class="highlight-box">
                     <h2>Laatste update:</h2>
-                    <p><strong>2 December 2025</strong></p>
-                    <p>De website heeft een hele nieuwe CSS gekregen. Voor wie niet weet wat CSS is (waarschijnlijk iedereen): de code die zorgt voor de lay - out.</p>
+                    <p><strong id="commit-date">Laden...</strong></p>
+                    <p id="commit-message">De website heeft een hele nieuwe CSS gekregen. Voor wie niet weet wat CSS is (waarschijnlijk iedereen): de code die zorgt voor de lay - out.</p>
                 </div>
                 
             </div>
@@ -78,11 +78,70 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 2 December 2025</p>
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: <span id="footer-date">2 December 2025</span></p>
             <p>Een website voor leerlingen en ouders van BBA</p>
+            <p id="commit-sha" style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;"></p>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Zet hier je GitHub gebruikersnaam en repository naam
+        const repoOwner = 'Jimisdebest';
+        const repoName = 'bba_2025-2026';
+        
+        // Functie om de laatste commit op te halen
+        async function getLatestCommit() {
+            try {
+                // Haal de laatste commit op van de main branch
+                const response = await fetch(
+                    `https://api.github.com/repos/${Jimisdebest}/${bba_2025-2026}/commits/main`
+                );
+                
+                if (!response.ok) {
+                    throw new Error('Kon laatste update niet ophalen');
+                }
+                
+                const commitData = await response.json();
+                
+                // Formatteer de datum
+                const commitDate = new Date(commitData.commit.author.date);
+                const formattedDate = commitDate.toLocaleDateString('nl-NL', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                
+                // Haal het eerste deel van de commit message (voor de titel)
+                const fullMessage = commitData.commit.message;
+                const firstLine = fullMessage.split('\n')[0];
+                
+                // Update de inhoud op de pagina
+                document.getElementById('commit-date').textContent = formattedDate;
+                document.getElementById('footer-date').textContent = formattedDate;
+                
+                // Toon de commit message als die niet te lang is
+                if (firstLine.length < 100) {
+                    document.getElementById('commit-message').textContent = firstLine;
+                }
+                
+                // Toon verkorte SHA in de footer
+                const shortSha = commitData.sha.substring(0, 7);
+                document.getElementById('commit-sha').innerHTML = 
+                    `Commit: <a href="${commitData.html_url}" target="_blank" style="color: inherit;">${shortSha}</a>`;
+                
+            } catch (error) {
+                console.log('Kon laatste commit niet laden:', error);
+                
+                // Fallback tekst als het niet lukt
+                document.getElementById('commit-date').textContent = '2 December 2025';
+                document.getElementById('footer-date').textContent = '2 December 2025';
+                document.getElementById('commit-sha').textContent = 'Automatische update niet beschikbaar';
+            }
+        }
+        
+        // Wacht tot de DOM geladen is en haal dan de commit op
+        document.addEventListener('DOMContentLoaded', getLatestCommit);
+    </script>
 </body>
 </html>
