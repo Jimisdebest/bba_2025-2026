@@ -367,50 +367,69 @@
         // TIJD INSTELLEN
         // ============================================
         // Pas alleen deze waarde aan:
-        const availableTime = "12:15";
+        const availableTime = "09:00";
         // ============================================
         
         // Zet de ingestelde tijd op het scherm
         document.getElementById('available-time').textContent = availableTime;
         
+        // Controleer of de huidige tijd de ingestelde tijd heeft bereikt
+        function checkTimeAndRedirect() {
+            const now = new Date();
+            const [targetHours, targetMinutes] = availableTime.split(':').map(Number);
+            
+            // Vergelijk huidige tijd met doel tijd
+            if (now.getHours() >= targetHours && now.getMinutes() >= targetMinutes) {
+                // Tijd is bereikt, redirect naar home.html
+                window.location.href = "home.html";
+                return true;
+            }
+            return false;
+        }
+        
         // Countdown timer
         function updateCountdown() {
             const now = new Date();
-            const tomorrow = new Date();
+            const today = new Date();
             
-            // Zet de datum naar morgen
-            tomorrow.setDate(now.getDate() + 1);
-            
-            // Gebruik de ingestelde tijd
+            // Stel de doel tijd in voor vandaag
             const [hours, minutes] = availableTime.split(':').map(Number);
-            tomorrow.setHours(hours, minutes, 0, 0);
+            today.setHours(hours, minutes, 0, 0);
             
-            const timeDiff = tomorrow - now;
+            // Als de tijd voor vandaag al voorbij is, gebruik morgen
+            if (today < now) {
+                today.setDate(today.getDate() + 1);
+            }
             
-            if (timeDiff > 0) {
-                const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                
-                document.getElementById('hours').textContent = hoursLeft.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutesLeft.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = secondsLeft.toString().padStart(2, '0');
-            } else {
-                // Als de tijd voorbij is, toon een bericht
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                
-                // Verander de tekst om aan te geven dat de site beschikbaar is
-                document.querySelector('h2').textContent = "De update is voltooid!";
-                document.querySelector('.message-box p:nth-child(3)').innerHTML = 'De BBA Klassenwebsite kan elk moment weer<span class="highlight"> beschikbaar zijn</span>.';
-                document.querySelector('.time-info').innerHTML = '<span class="highlight">Nu beschikbaar!</span>';
+            const timeDiff = today - now;
+            
+            // Controleer of het tijd is om te redirecten
+            if (timeDiff <= 0 || checkTimeAndRedirect()) {
+                // Redirect wordt afgehandeld door checkTimeAndRedirect
+                return;
+            }
+            
+            const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            document.getElementById('hours').textContent = hoursLeft.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutesLeft.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = secondsLeft.toString().padStart(2, '0');
+            
+            // Bijwerken van de boodschap als de tijd bijna is
+            if (timeDiff < 60000) { // Minder dan 1 minuut
+                document.querySelector('h2').textContent = "De update is bijna klaar!";
+                document.querySelector('.message-box p:nth-child(3)').innerHTML = 'De BBA Klassenwebsite wordt<span class="highlight"> bijna</span> beschikbaar.';
             }
         }
         
-        // Start de countdown
+        // Controleer onmiddellijk of het al tijd is
+        checkTimeAndRedirect();
+        
+        // Start de countdown en controleer elke seconde
         updateCountdown();
-        setInterval(updateCountdown, 1000);
+        const countdownInterval = setInterval(updateCountdown, 1000);
         
         // Voeg extra animaties toe voor de logo's
         const animationItems = document.querySelectorAll('.animation-item');
