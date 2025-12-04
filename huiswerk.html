@@ -1,69 +1,176 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Huiswerk - BBA</title>
-  <link rel="stylesheet" href="style.css"> <!-- Correcte bestandsnaam -->
-  <link rel="icon" href="BBA-Logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBA Klassenwebsite - Huiswerk</title>
+    <link rel="icon" href="BBA-Logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Aanvullende stijlen voor huiswerk pagina */
+        .page-header {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .page-header h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content-section {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+
+        .content-section h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .topo-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .topo-link:hover {
+            background-color: #2980b9;
+        }
+
+        .important-note {
+            background-color: rgba(255, 243, 205, 0.9);
+            border: 1px solid rgba(255, 234, 167, 0.8);
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .important-note strong {
+            color: #d35400;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 20px;
+            }
+            
+            .page-header {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
+                </a>
+                
+                <a href="https://tycho2014.github.io/dj-T-J/" 
+                   target="_blank" 
+                   class="dj-credit">
+                    <span class="dj-text">Door de makers van</span>
+                    <img src="https://raw.githubusercontent.com/Tycho2014/dj-T-J/refs/heads/main/logo.png" 
+                         alt="DJ - T & J Logo" 
+                         class="dj-logo">
+                </a>
+            </div>
+            
+            <div class="hamburger-menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="verjaardagen.html" class="nav-link">Verjaardagen</a></li>
+                    <li><a href="fotos.html" class="nav-link">Foto's</a></li>
+                    <li><a href="overige.html" class="nav-link">Overige</a></li>
+                    <li><a href="belangerijkedata.html" class="nav-link">Belangrijke Data</a></li>
+                    <li><a href="huiswerk.html" class="nav-link active">Huiswerk</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <nav>
-    
-    <a href="index.html">
-  <img src="BBA-Logo.png" alt="BBA Logo" width="150">
-</a>
+    <div class="overlay" id="overlay"></div>
 
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="verjaardagen.html">Verjaardagen</a></li>
-      <li><a href="fotos.html">Foto´s</a></li>
-      <li><a href="overig.html">Overige</a></li>
-      <li><a href="belangrijkeinfo.html">Belangrijke Data</a></li>
-      <li><a href="Huiswerk.html">Huiswerk</a></li>
-    </ul>
-  </nav>
+    <main class="container">
+        <div class="page-header">
+            <h1>Huiswerk</h1>
+            <p>
+                Elke week maakt de meester ons blij met huiswerk! We oefenen de stof die we deze week behandeld hebben. 
+                Op donderdag bespreken we het huiswerk met de meester, dus handig om het die dag (gemaakt en wel) 
+                mee te nemen naar school!
+            </p>
+        </div>
 
-  <section class="intro">
-    <h2>Huiswerk</h2>
-    <p>Elke week maakt de meester ons blij met huiswerk! We oefenen de stof die we deze week behandeld hebben. Op donderdag bespreken we het huiswerk met de meester, dus handig om het die dag (gemaakt en wel) mee te nemen naar school!
+        <div class="content-section">
+            <h2>Toetsen</h2>
+            <h3>Topo toets Benelux</h3>
+            <p>
+                Klik op de knop hieronder om naar Topomania te gaan en te oefenen voor de topo toets:
+            </p>
+            <a href="https://www.topomania.net/map/66422" class="topo-link" target="_blank">
+                Naar Topomania oefenen →
+            </a>
+        </div>
 
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
+            <p>Een website voor en door leerlingen van BBA</p>
+        </div>
+    </footer>
 
-    </p>
-    </section>
-
- 
-
- 
-
-  <section class="intro">
-    <h3> Toetsen:</h3>
-    <p>
-
-Topo toets Benelux
-Klik <a href="https://www.topomania.net/map/66422">hier</a> om naar de topomania te gaan.
-
-    </p>
-  </section>
-  
-  <section class="intro">
-    <h3> De boekpresentatie´s komen eraan!</h3>
-    <p>
-In de week van 24 oktober zijn de presentatie´s.
-
-Check de exacte data <a href="belangrijkeinfo.html">hier.</a>
-
-Wat ga je doen:
- - Je kiest een boek
- - Je leest een deel van het boek
- - Je mag beginnen met je presentatie maken: dit mag op verschillende manieren.
-     - Een boekbespreking
-     - Een boekendoos
-     - Een muurkrant
-     - Of een ander creatief idee (in bespreking met de meester)
-    </p>
-    
-  </section>
+    <script src="script.js"></script>
 </body>
 </html>
