@@ -9,11 +9,12 @@
     <style>
         /* Specifieke stijlen voor foto's pagina */
         .page-header {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.92);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .page-header h1 {
@@ -31,13 +32,14 @@
 
         /* Project voorvertoning */
         .project-preview {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.92);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             margin-bottom: 30px;
             border-left: 5px solid #e67e22;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .project-preview:hover {
@@ -105,6 +107,16 @@
             background-color: #d35400;
         }
 
+        /* Info box */
+        .info-box {
+            background-color: rgba(232, 244, 252, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 5px solid #3498db;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .project-image {
@@ -125,9 +137,20 @@
     <!-- Header -->
     <header id="main-header">
         <div class="header-container">
-            <a href="index.html" class="logo">
-                <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
-            </a>
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
+                </a>
+                
+                <a href="https://tycho2014.github.io/dj-T-J/" 
+                   target="_blank" 
+                   class="dj-credit">
+                    <span class="dj-text">Door de makers van</span>
+                    <img src="https://raw.githubusercontent.com/Tycho2014/dj-T-J/refs/heads/main/logo.png" 
+                         alt="DJ - T & J Logo" 
+                         class="dj-logo">
+                </a>
+            </div>
             
             <div class="hamburger-menu" id="hamburger">
                 <span></span>
@@ -155,21 +178,22 @@
             <h1>Foto's</h1>
             <p>Bekijk hier foto's van onze projecten en activiteiten.</p>
         </div>
-        <div style="margin-top: 30px; padding: 20px; background-color: #e8f4fc; border-radius: 8px; border-left: 5px solid #3498db;">
+        
+        <div class="info-box">
             <h3 style="color: #2c3e50; margin-bottom: 10px;">Hoe werkt het?</h3>
-            <p style="color: #666; margin: 0;">Klik op een knop om alle foto's te bekijken. Binnenkort komen hier meer foto´s</p>
+            <p style="color: #666; margin: 0;">Klik op een project om alle foto's te bekijken. Binnenkort komen hier meer foto's!</p>
         </div>
 
-       <!--Pietengym voorvertoning --> 
+       <!-- Pietengym voorvertoning --> 
         <div class="project-preview">
             <a href="pietengym.html" class="project-link">
                 <img src="Pietengym/Pietengym 1.jpg" alt="pietengym" class="project-image">
                 <div class="project-info">
                     <h2>Pietengym (week 14)</h2>
-                    <p>Bekijk alle foto´s van onze superleuke pietengym!</p>
+                    <p>Bekijk alle foto's van onze superleuke pietengym!</p>
                     <div class="project-meta">
                         <span class="photo-count">6 foto's</span>
-                        <span class="view-button">Bekijk de foto´s --></span>
+                        <span class="view-button">Bekijk de foto's →</span>
                     </div>
                 </div>
             </a>
@@ -184,7 +208,7 @@
                     <p>Deze week hadden we speciaal huiswerk...</p>
                     <div class="project-meta">
                         <span class="photo-count">6 foto's</span>
-                        <span class="view-button">Bekijk de foto´s --></span>
+                        <span class="view-button">Bekijk de foto's →</span>
                     </div>
                 </div>
             </a>
@@ -199,22 +223,22 @@
                     <p>De oudste diavoorstelling...</p>
                     <div class="project-meta">
                         <span class="photo-count">2 foto's</span>
-                        <span class="view-button">Bekijk de foto´s --></span>
+                        <span class="view-button">Bekijk de foto's →</span>
                     </div>
                 </div>
             </a>
         </div>
-
-        
     </main>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 2 December 2025</p>
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
             <p>Een website voor en door leerlingen van BBA</p>
         </div>
     </footer>
 
+    <!-- CONFIG.JS MOET EERST KOMEN -->
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
