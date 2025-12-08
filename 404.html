@@ -3,196 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina niet gevonden - BBA Klassenwebsite 2025-2026</title>
+    <title>BBA Klassenwebsite - 404</title>
     
     <!-- Link naar jouw bestaande stylesheet -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Optioneel: extra styling specifiek voor de 404 pagina -->
+    <!-- Styling voor de 404 pagina -->
     <style>
-        .error-container {
-            min-height: 70vh;
+        :root {
+            --error-primary: #4361ee;
+            --error-secondary: #3a0ca3;
+            --error-accent: #f72585;
+            --error-light: #f8f9fa;
+            --error-dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            color: var(--error-light);
+            overflow: hidden;
+        }
+        
+        .error-wrapper {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
+            justify-content: center;
+            min-height: 100vh;
             padding: 2rem;
+            position: relative;
         }
         
-        .error-code {
-            font-size: 8rem;
-            font-weight: bold;
-            color: #e74c3c;
+        /* Achtergrond animaties */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, var(--error-primary), var(--error-accent));
+            border-radius: 50%;
+            animation: floatParticle infinite linear;
+        }
+        
+        /* Hoofdinhoud */
+        .error-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 3rem;
+            border-radius: 24px;
+            z-index: 10;
+            animation: glowPulse 3s infinite ease-in-out;
+        }
+        
+        /* 404 Nummer met constante animatie */
+        .error-number {
+            font-size: 15rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #4361ee, #f72585, #3a0ca3, #4cc9f0);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
             margin-bottom: 1rem;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            animation: 
+                gradientShift 4s infinite ease-in-out,
+                numberFloat 6s infinite ease-in-out,
+                numberGlow 5s infinite ease-in-out;
+            text-shadow: 0 0 30px rgba(67, 97, 238, 0.3);
+            letter-spacing: -10px;
+            position: relative;
         }
         
-        .error-message {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #333;
+        .error-number::after {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3s infinite linear;
+            z-index: -1;
         }
         
-        .error-description {
+        /* Titel */
+        .error-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            animation: titleSlide 1s ease-out, textGlow 2s infinite alternate;
+        }
+        
+        .error-title::before,
+        .error-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--error-accent), transparent);
+            animation: lineExpand 2s infinite ease-in-out;
+        }
+        
+        .error-title::before {
+            right: calc(100% + 20px);
+        }
+        
+        .error-title::after {
+            left: calc(100% + 20px);
+        }
+        
+        /* Afteller */
+        .countdown {
+            font-size: 5rem;
+            font-weight: 800;
+            margin: 2rem 0;
+            color: var(--error-accent);
+            animation: 
+                countdownPulse 1s infinite ease-in-out,
+                countdownScale 1s infinite alternate;
+            text-shadow: 
+                0 0 10px var(--error-accent),
+                0 0 20px var(--error-accent),
+                0 0 40px var(--error-accent);
+        }
+        
+        .countdown-label {
             font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            color: #666;
-            max-width: 600px;
-            line-height: 1.6;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            animation: fadeInOut 2s infinite;
         }
         
+        /* Knoppen */
         .error-actions {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            gap: 2rem;
             justify-content: center;
+            margin-bottom: 2rem;
         }
         
-        .btn-404 {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            background: var(--primary-color, #007acc);
-            color: white;
+        .error-btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
             border: none;
             cursor: pointer;
+            background: linear-gradient(45deg, var(--error-primary), var(--error-secondary));
+            color: white;
+            box-shadow: 
+                0 10px 30px rgba(67, 97, 238, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            animation: buttonPulse 2s infinite;
         }
         
-        .btn-404:hover {
-            background: var(--primary-hover, #005a99);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .error-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
         }
         
-        .btn-secondary {
-            background: #6c757d;
+        .error-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 20px 40px rgba(67, 97, 238, 0.6),
+                0 0 60px rgba(67, 97, 238, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            animation: none;
         }
         
-        .btn-secondary:hover {
-            background: #545b62;
+        .error-btn:hover::before {
+            left: 100%;
+        }
+        
+        .error-btn:active {
+            transform: translateY(-2px) scale(1.02);
         }
         
         /* Responsive design */
         @media (max-width: 768px) {
-            .error-code {
-                font-size: 6rem;
+            .error-number {
+                font-size: 10rem;
+                letter-spacing: -5px;
             }
             
-            .error-message {
-                font-size: 1.5rem;
+            .error-title {
+                font-size: 2.2rem;
             }
             
-            .error-description {
+            .countdown {
+                font-size: 4rem;
+            }
+            
+            .error-btn {
+                padding: 1rem 2rem;
                 font-size: 1.1rem;
             }
-            
-            .error-actions {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
+        }
+        
+        @media (max-width: 480px) {
+            .error-number {
+                font-size: 7rem;
             }
             
-            .btn-404 {
-                width: 100%;
-                text-align: center;
+            .error-title {
+                font-size: 1.8rem;
+            }
+            
+            .countdown {
+                font-size: 3rem;
+            }
+            
+            .error-content {
+                padding: 2rem 1rem;
             }
         }
         
-        /* Animatie voor 404 */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* ===== ANIMATIES ===== */
+        
+        /* Achtergrond particle animatie */
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100vw) rotate(360deg);
+                opacity: 0;
+            }
         }
         
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        /* 404 gradient animatie */
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        /* 404 zweef animatie */
+        @keyframes numberFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(1deg);
+            }
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+            75% {
+                transform: translateY(10px) rotate(-1deg);
+            }
+        }
+        
+        /* 404 glow animatie */
+        @keyframes numberGlow {
+            0%, 100% {
+                text-shadow: 
+                    0 0 20px rgba(67, 97, 238, 0.5),
+                    0 0 40px rgba(67, 97, 238, 0.3),
+                    0 0 60px rgba(67, 97, 238, 0.1);
+            }
+            50% {
+                text-shadow: 
+                    0 0 40px rgba(67, 97, 238, 0.7),
+                    0 0 60px rgba(67, 97, 238, 0.5),
+                    0 0 80px rgba(67, 97, 238, 0.3);
+            }
+        }
+        
+        /* Shine effect */
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Titel slide-in */
+        @keyframes titleSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Titel glow */
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(67, 97, 238, 0.6), 0 0 30px rgba(67, 97, 238, 0.4);
+            }
+        }
+        
+        /* Lijnen animatie */
+        @keyframes lineExpand {
+            0%, 100% {
+                width: 50px;
+                opacity: 0.5;
+            }
+            50% {
+                width: 100px;
+                opacity: 1;
+            }
+        }
+        
+        /* Afteller pulse */
+        @keyframes countdownPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        /* Afteller scale */
+        @keyframes countdownScale {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Label fade */
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        /* Knop pulse */
+        @keyframes buttonPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(67, 97, 238, 0.4),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 15px 40px rgba(67, 97, 238, 0.6),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        /* Content glow */
+        @keyframes glowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(67, 97, 238, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(67, 97, 238, 0.4));
+            }
+        }
+        
+        /* Redirect overlay */
+        .redirect-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--error-primary), var(--error-accent));
+            z-index: 1000;
+            animation: slideOverlay 5s linear forwards;
+        }
+        
+        @keyframes slideOverlay {
+            0% {
+                width: 0%;
+                opacity: 0.1;
+            }
+            80% {
+                width: 100%;
+                opacity: 0.8;
+            }
+            100% {
+                width: 100%;
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Als je een header/navbar hebt in je style.css, dan kun je die hier ook includen -->
-    <!-- Voorbeeld: -->
-    <!--
-    <header class="site-header">
-        <nav>
-            <a href="/" class="logo">BBA 2025-2026</a>
-            ...
-        </nav>
-    </header>
-    -->
-
-    <main class="error-container">
-        <div class="error-code floating">404</div>
-        
-        <h1 class="error-message">Helaas, deze pagina is verdwaald! 🗺️</h1>
-        
-        <p class="error-description">
-            De pagina die je zoekt lijkt niet te bestaan. Misschien is hij verplaatst, 
-            verwijderd of je hebt een typfout gemaakt in de URL. 
-            Geen zorgen, je kunt terug naar veilig terrein navigeren!
-        </p>
-        
-        <div class="error-actions">
-            <a href="https://jimisdebest.github.io/bba_2025-2026/" class="btn-404">
-                🏠 Terug naar Homepage
-            </a>
+    <div class="redirect-overlay"></div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="error-wrapper">
+        <div class="error-content">
+            <div class="error-number">404</div>
             
-            <a href="javascript:history.back()" class="btn-404 btn-secondary">
-                ↩️ Ga een stap terug
-            </a>
+            <h1 class="error-title">PAGINA NIET GEVONDEN</h1>
             
-            <!-- Optioneel: als je een contactpagina hebt -->
-            <!--
-            <a href="/contact" class="btn-404">
-                📧 Meld probleem
-            </a>
-            -->
+            <div class="countdown" id="countdown">5</div>
+            <div class="countdown-label">SECONDEN TOT AUTOMATISCHE REDIRECT</div>
+            
+            <div class="error-actions">
+                <a href="https://jimisdebest.github.io/bba_2025-2026/" class="error-btn">
+                    DIRECT NAAR HOMEPAGE
+                </a>
+            </div>
         </div>
-        
-        <!-- Zoekfunctionaliteit (optioneel) -->
-        <div class="search-box" style="margin-top: 3rem; max-width: 500px; width: 100%;">
-            <p style="margin-bottom: 1rem; color: #555;">Of zoek naar wat je nodig hebt:</p>
-            <form action="https://jimisdebest.github.io/bba_2025-2026/" method="get" style="display: flex;">
-                <input type="text" name="q" placeholder="Zoek op de website..." 
-                       style="flex: 1; padding: 0.8rem; border: 2px solid #ddd; border-radius: 5px 0 0 5px; font-size: 1rem;">
-                <button type="submit" class="btn-404" style="border-radius: 0 5px 5px 0; padding: 0.8rem 1.5rem;">
-                    🔍 Zoeken
-                </button>
-            </form>
-        </div>
-    </main>
-
-    <!-- Als je een footer hebt in je style.css -->
-    <!--
-    <footer class="site-footer">
-        <p>© 2025-2026 BBA Klassenwebsite | Gemaakt door Jim</p>
-    </footer>
-    -->
+    </div>
 
     <script>
-        // Simpele JavaScript voor extra interactie
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Random animation
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                // Random color
+                const colors = [
+                    'linear-gradient(45deg, #4361ee, #3a0ca3)',
+                    'linear-gradient(45deg, #f72585, #b5179e)',
+                    'linear-gradient(45deg, #4cc9f0, #4895ef)'
+                ];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Countdown timer
+        function startCountdown() {
+            let count = 5;
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdownInterval = setInterval(() => {
+                count--;
+                countdownElement.textContent = count;
+                
+                // Add shake effect on each count
+                countdownElement.style.animation = 'none';
+                setTimeout(() => {
+                    countdownElement.style.animation = 'countdownPulse 1s infinite ease-in-out, countdownScale 1s infinite alternate';
+                }, 10);
+                
+                if (count <= 0) {
+                    clearInterval(countdownInterval);
+                    redirectToHomepage();
+                }
+            }, 1000);
+        }
+        
+        // Automatic redirect after 5 seconds
+        function redirectToHomepage() {
+            // Add redirect animation
+            document.body.style.overflow = 'hidden';
+            
+            // Wait for animation to complete
+            setTimeout(() => {
+                window.location.href = 'https://jimisdebest.github.io/bba_2025-2026/';
+            }, 1000);
+        }
+        
+        // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
-            // Voeg klikgeluid toe (optioneel)
-            const buttons = document.querySelectorAll('.btn-404');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Je kunt hier een geluid toevoegen als je wilt
-                    console.log('Navigeren vanaf 404 pagina...');
-                });
+            // Create particles
+            createParticles();
+            
+            // Start countdown immediately
+            startCountdown();
+            
+            // Auto-redirect after 5 seconds
+            setTimeout(redirectToHomepage, 5000);
+            
+            // Add click sound effect to button
+            const button = document.querySelector('.error-btn');
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Fast redirect with animation
+                document.querySelector('.redirect-overlay').style.animation = 'slideOverlay 0.5s linear forwards';
+                
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 500);
             });
             
-            // Toon de huidige URL in console voor debugging
-            console.log('404 op URL:', window.location.href);
+            // Add keyboard shortcut (Enter for redirect)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    window.location.href = 'https://jimisdebest.github.io/bba_2025-2026/';
+                }
+            });
             
-            // Suggestie voor gebruiker
-            const path = window.location.pathname;
-            if (path.includes('bba')) {
-                console.log('Tip: Controleer of de pagina naam correct is gespeld.');
-            }
+            // Console message
+            console.log('🚀 404 Page - BBA 2025-2026');
+            console.log('⏱️ Auto-redirect in 5 seconds...');
         });
     </script>
 </body>
