@@ -9,11 +9,12 @@
     <style>
         /* Aanvullende stijlen voor verjaardagen pagina */
         .page-header {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.92);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .page-header h1 {
@@ -29,10 +30,11 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            background-color: white;
-            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .birthday-table th {
@@ -79,9 +81,20 @@
     <!-- Header -->
     <header id="main-header">
         <div class="header-container">
-            <a href="index.html" class="logo">
-                <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
-            </a>
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="BBA-Logo.png" alt="BBA Logo" class="logo-img">
+                </a>
+                
+                <a href="https://tycho2014.github.io/dj-T-J/" 
+                   target="_blank" 
+                   class="dj-credit">
+                    <span class="dj-text">Door de makers van</span>
+                    <img src="https://raw.githubusercontent.com/Tycho2014/dj-T-J/refs/heads/main/logo.png" 
+                         alt="DJ - T & J Logo" 
+                         class="dj-logo">
+                </a>
+            </div>
             
             <div class="hamburger-menu" id="hamburger">
                 <span></span>
@@ -179,7 +192,10 @@
         </div>
     </footer>
 
+    <!-- CONFIG.JS MOET EERST KOMEN -->
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    
     <script>
         // Markeer verjaardagen van deze maand
         document.addEventListener('DOMContentLoaded', () => {
