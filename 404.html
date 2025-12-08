@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina niet gevonden - BBA Klassenwebsite 2025-2026</title>
+    
+    <!-- Link naar jouw bestaande stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Optioneel: extra styling specifiek voor de 404 pagina -->
+    <style>
+        .error-container {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+        
+        .error-message {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: #666;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn-404 {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: var(--primary-color, #007acc);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-404:hover {
+            background: var(--primary-hover, #005a99);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.5rem;
+            }
+            
+            .error-description {
+                font-size: 1.1rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .btn-404 {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        /* Animatie voor 404 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Als je een header/navbar hebt in je style.css, dan kun je die hier ook includen -->
+    <!-- Voorbeeld: -->
+    <!--
+    <header class="site-header">
+        <nav>
+            <a href="/" class="logo">BBA 2025-2026</a>
+            ...
+        </nav>
+    </header>
+    -->
+
+    <main class="error-container">
+        <div class="error-code floating">404</div>
+        
+        <h1 class="error-message">Helaas, deze pagina is verdwaald! 🗺️</h1>
+        
+        <p class="error-description">
+            De pagina die je zoekt lijkt niet te bestaan. Misschien is hij verplaatst, 
+            verwijderd of je hebt een typfout gemaakt in de URL. 
+            Geen zorgen, je kunt terug naar veilig terrein navigeren!
+        </p>
+        
+        <div class="error-actions">
+            <a href="https://jimisdebest.github.io/bba_2025-2026/" class="btn-404">
+                🏠 Terug naar Homepage
+            </a>
+            
+            <a href="javascript:history.back()" class="btn-404 btn-secondary">
+                ↩️ Ga een stap terug
+            </a>
+            
+            <!-- Optioneel: als je een contactpagina hebt -->
+            <!--
+            <a href="/contact" class="btn-404">
+                📧 Meld probleem
+            </a>
+            -->
+        </div>
+        
+        <!-- Zoekfunctionaliteit (optioneel) -->
+        <div class="search-box" style="margin-top: 3rem; max-width: 500px; width: 100%;">
+            <p style="margin-bottom: 1rem; color: #555;">Of zoek naar wat je nodig hebt:</p>
+            <form action="https://jimisdebest.github.io/bba_2025-2026/" method="get" style="display: flex;">
+                <input type="text" name="q" placeholder="Zoek op de website..." 
+                       style="flex: 1; padding: 0.8rem; border: 2px solid #ddd; border-radius: 5px 0 0 5px; font-size: 1rem;">
+                <button type="submit" class="btn-404" style="border-radius: 0 5px 5px 0; padding: 0.8rem 1.5rem;">
+                    🔍 Zoeken
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Als je een footer hebt in je style.css -->
+    <!--
+    <footer class="site-footer">
+        <p>© 2025-2026 BBA Klassenwebsite | Gemaakt door Jim</p>
+    </footer>
+    -->
+
+    <script>
+        // Simpele JavaScript voor extra interactie
+        document.addEventListener('DOMContentLoaded', function() {
+            // Voeg klikgeluid toe (optioneel)
+            const buttons = document.querySelectorAll('.btn-404');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Je kunt hier een geluid toevoegen als je wilt
+                    console.log('Navigeren vanaf 404 pagina...');
+                });
+            });
+            
+            // Toon de huidige URL in console voor debugging
+            console.log('404 op URL:', window.location.href);
+            
+            // Suggestie voor gebruiker
+            const path = window.location.pathname;
+            if (path.includes('bba')) {
+                console.log('Tip: Controleer of de pagina naam correct is gespeld.');
+            }
+        });
+    </script>
+</body>
+</html>
