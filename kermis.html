@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voorstelling week 7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        #videoPlayer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <video id="videoPlayer" autoplay muted>
+        <!-- Vervang dit met je eigen video -->
+        <source src="Kermis.mov" type="video/mp4">
+    </video>
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        
+        // Verwijder alle controls
+        videoPlayer.controls = false;
+        
+        // Fullscreen functie
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+        
+        // ESC toets - ga terug naar fotos.html
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.location.href = 'fotos.html';
+            }
+        });
+        
+        // Video afgelopen - ga terug
+        videoPlayer.addEventListener('ended', function() {
+            window.location.href = 'fotos.html';
+        });
+        
+        // Klik op video - ga terug
+        videoPlayer.addEventListener('click', function() {
+            window.location.href = 'fotos.html';
+        });
+        
+        // Start fullscreen en video automatisch
+        window.addEventListener('load', function() {
+            // Zet video op mute zodat hij automatisch kan spelen
+            videoPlayer.muted = true;
+            
+            // Probeer video te starten
+            videoPlayer.play().then(() => {
+                // Ga naar fullscreen na het starten van video
+                enterFullscreen();
+            }).catch((error) => {
+                // Als autoplay niet werkt, vraag interactie
+                document.addEventListener('click', function startVideo() {
+                    videoPlayer.play();
+                    enterFullscreen();
+                    document.removeEventListener('click', startVideo);
+                }, { once: true });
+            });
+        });
+        
+        // Fallback voor mobiel - fullscreen bij elke interactie
+        document.addEventListener('click', function() {
+            enterFullscreen();
+        });
+        
+        // Fullscreen change event - als fullscreen verlaten wordt, ga terug
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) {
+                window.location.href = 'fotos.html';
+            }
+        });
+        
+        document.addEventListener('webkitfullscreenchange', function() {
+            if (!document.webkitFullscreenElement) {
+                window.location.href = 'fotos.html';
+            }
+        });
+    </script>
+</body>
+</html>
