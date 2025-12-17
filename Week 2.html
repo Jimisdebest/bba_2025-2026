@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diavoorstelling week 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+        }
+        
+        /* Lichteffect bij binnenkomst */
+        .light-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0.8) 10%,
+                rgba(255, 255, 255, 0) 70%
+            );
+            animation: lightReveal 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+        }
+        
+        @keyframes lightReveal {
+            0% {
+                opacity: 1;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+                display: none;
+            }
+        }
+        
+        /* Diavoorstelling container */
+        .slideshow {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+        
+        /* Individuele dia's */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateX(100%);
+            padding: 40px 20px;
+            will-change: transform, opacity;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+        
+        .slide.previous {
+            transform: translateX(-100%);
+        }
+        
+        /* Afbeelding container */
+        .image-container {
+            width: 90%;
+            height: 75%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(20, 20, 20, 0.6);
+        }
+        
+        .slide-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide-image:hover {
+            transform: scale(1.01);
+        }
+        
+        /* Beschrijving */
+        .caption {
+            margin-top: 30px;
+            font-size: 1.6rem;
+            text-align: center;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            max-width: 85%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 300;
+            line-height: 1.5;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Navigatie pijlen */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.3);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            user-select: none;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .arrow:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .arrow-left {
+            left: 30px;
+        }
+        
+        .arrow-right {
+            right: 30px;
+        }
+        
+        /* Dia indicator */
+        .slide-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 10;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .indicator-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .indicator-dot:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.2);
+        }
+        
+        .indicator-dot.active {
+            background: white;
+            transform: scale(1.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Titel */
+        .title {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 2.2rem;
+            color: white;
+            z-index: 10;
+            padding: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+        }
+        
+        /* Progress indicator */
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            width: 0%;
+            z-index: 5;
+            transition: width 0.3s ease;
+        }
+        
+        /* Navigatie hint */
+        .nav-hint {
+            position: absolute;
+            bottom: 120px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInOut 3s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Responsive aanpassingen */
+        @media (max-width: 768px) {
+            .arrow {
+                width: 60px;
+                height: 60px;
+                font-size: 2.2rem;
+            }
+            
+            .arrow-left {
+                left: 15px;
+            }
+            
+            .arrow-right {
+                right: 15px;
+            }
+            
+            .caption {
+                font-size: 1.3rem;
+                max-width: 90%;
+                padding: 15px 25px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+                top: 20px;
+            }
+            
+            .image-container {
+                width: 95%;
+                height: 70%;
+            }
+            
+            .nav-hint {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 1.8rem;
+                opacity: 0.8;
+            }
+            
+            .caption {
+                font-size: 1.1rem;
+                padding: 12px 20px;
+            }
+            
+            .title {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+            
+            .image-container {
+                height: 65%;
+            }
+            
+            .slide-indicator {
+                bottom: 25px;
+            }
+            
+            .indicator-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lichteffect bij binnenkomst -->
+    <div class="light-effect" id="lightEffect"></div>
+    
+    <!-- Titel -->
+    <div class="title">Diavoorstelling Week 2: Egyptenaren</div>
+    
+    <!-- Progress indicator -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Diavoorstelling -->
+    <div class="slideshow" id="slideshow">
+        <!-- Dia's worden hier ingevoegd via JavaScript -->
+    </div>
+    
+    <!-- Navigatie hint -->
+    <div class="nav-hint">← Swipe of gebruik pijltjestoetsen →</div>
+    
+    <!-- Navigatie pijlen -->
+    <div class="arrow arrow-left" id="prevBtn">‹</div>
+    <div class="arrow arrow-right" id="nextBtn">›</div>
+    
+    <!-- Dia indicator -->
+    <div class="slide-indicator" id="slideIndicator">
+        <!-- Indicator dots worden hier ingevoegd via JavaScript -->
+    </div>
+
+    <script>
+        // Afbeeldingen en bijschriften
+        const afbeeldingen = [
+            { 
+                src: "Week 2/Egypte 1.jpg", 
+                caption: "" 
+            },
+            { 
+                src: "Week 2/Egypte 2.jpg", 
+                caption: "" 
+            }
+        ];
+        
+        // Huidige dia index
+        let currentSlideIndex = 0;
+        let isAnimating = false;
+        
+        // DOM elementen
+        const slideshow = document.getElementById('slideshow');
+        const lightEffect = document.getElementById('lightEffect');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideIndicator = document.getElementById('slideIndicator');
+        const progressBar = document.getElementById('progressBar');
+        
+        // Maak dia's aan
+        function createSlides() {
+            afbeeldingen.forEach((afbeelding, index) => {
+                // Maak slide element
+                const slide = document.createElement('div');
+                slide.className = `slide ${index === 0 ? 'active' : ''}`;
+                slide.dataset.index = index;
+                
+                // Maak afbeelding container
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'image-container';
+                
+                // Maak afbeelding element
+                const img = document.createElement('img');
+                img.src = afbeelding.src;
+                img.alt = `Pietengym foto ${index + 1}`;
+                img.className = 'slide-image';
+                
+                // Maak bijschrift alleen als er tekst is
+                if (afbeelding.caption) {
+                    const caption = document.createElement('div');
+                    caption.className = 'caption';
+                    caption.textContent = afbeelding.caption;
+                    slide.appendChild(caption);
+                }
+                
+                // Voeg alles samen
+                imageContainer.appendChild(img);
+                slide.appendChild(imageContainer);
+                slideshow.appendChild(slide);
+                
+                // Maak indicator dot
+                const indicatorDot = document.createElement('div');
+                indicatorDot.className = `indicator-dot ${index === 0 ? 'active' : ''}`;
+                indicatorDot.dataset.index = index;
+                indicatorDot.addEventListener('click', () => goToSlide(index));
+                slideIndicator.appendChild(indicatorDot);
+            });
+            
+            // Update progress bar
+            updateProgressBar();
+        }
+        
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentSlideIndex + 1) / afbeeldingen.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // Ga naar specifieke dia
+        function goToSlide(index) {
+            // Voorkom dubbele animaties
+            if (isAnimating || index === currentSlideIndex) return;
+            
+            isAnimating = true;
+            
+            // Bepaal animatie richting
+            const direction = index > currentSlideIndex ? 'next' : 'prev';
+            
+            // Haal huidige en volgende dia op
+            const currentSlide = document.querySelector('.slide.active');
+            const nextSlide = document.querySelector(`.slide[data-index="${index}"]`);
+            
+            // Verwijder active class van huidige dia en indicator
+            if (currentSlide) {
+                currentSlide.classList.remove('active');
+                currentSlide.classList.add('previous');
+            }
+            
+            // Update indicator dots
+            document.querySelector('.indicator-dot.active').classList.remove('active');
+            document.querySelector(`.indicator-dot[data-index="${index}"]`).classList.add('active');
+            
+            // Zet nieuwe dia als active
+            nextSlide.classList.remove('previous');
+            nextSlide.classList.add('active');
+            
+            // Update huidige index
+            currentSlideIndex = index;
+            
+            // Update progress bar
+            updateProgressBar();
+            
+            // Reset animatie vlag
+            setTimeout(() => {
+                isAnimating = false;
+                if (currentSlide) {
+                    currentSlide.classList.remove('previous');
+                }
+            }, 1000);
+        }
+        
+        // Volgende dia
+        function nextSlide() {
+            if (isAnimating) return;
+            const nextIndex = (currentSlideIndex + 1) % afbeeldingen.length;
+            goToSlide(nextIndex);
+        }
+        
+        // Vorige dia
+        function prevSlide() {
+            if (isAnimating) return;
+            const prevIndex = (currentSlideIndex - 1 + afbeeldingen.length) % afbeeldingen.length;
+            goToSlide(prevIndex);
+        }
+        
+        // Swipe functionaliteit
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        function handleTouchStart(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }
+        
+        function handleTouchMove(e) {
+            if (!touchStartX) return;
+            
+            const touchX = e.touches[0].clientX;
+            const touchY = e.touches[0].clientY;
+            
+            const diffX = touchStartX - touchX;
+            const diffY = touchStartY - touchY;
+            
+            // Alleen horizontale swipes behandelen
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
+            }
+        }
+        
+        function handleTouchEnd(e) {
+            if (!touchStartX) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const diffX = touchStartX - touchEndX;
+            
+            const swipeThreshold = 50;
+            
+            if (Math.abs(diffX) > swipeThreshold) {
+                if (diffX > 0) {
+                    // Swipe naar links = volgende dia
+                    nextSlide();
+                } else {
+                    // Swipe naar rechts = vorige dia
+                    prevSlide();
+                }
+            }
+            
+            touchStartX = 0;
+            touchStartY = 0;
+        }
+        
+        // Toetsenbord navigatie
+        function handleKeyDown(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+            }
+        }
+        
+        // Initialiseer de diavoorstelling
+        function initSlideshow() {
+            createSlides();
+            
+            // Verwijder lichteffect na animatie
+            setTimeout(() => {
+                lightEffect.style.display = 'none';
+            }, 2500);
+            
+            // Event listeners
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            // Touch events voor swipe
+            slideshow.addEventListener('touchstart', handleTouchStart, { passive: true });
+            slideshow.addEventListener('touchmove', handleTouchMove, { passive: false });
+            slideshow.addEventListener('touchend', handleTouchEnd, { passive: true });
+            
+            // Keyboard events
+            document.addEventListener('keydown', handleKeyDown);
+            
+            // Fullscreen functionaliteit
+            function enterFullscreen() {
+                const elem = document.documentElement;
+                
+                if (!document.fullscreenElement) {
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen().catch(err => {
+                            console.log("Fullscreen error:", err);
+                        });
+                    }
+                }
+            }
+            
+            // Probeer fullscreen te starten
+            window.addEventListener('load', () => {
+                setTimeout(enterFullscreen, 100);
+            });
+            
+            // Vraag fullscreen aan bij eerste interactie
+            document.addEventListener('click', enterFullscreen, { once: true });
+            document.addEventListener('keydown', enterFullscreen, { once: true });
+            
+            // Houd fullscreen actief
+            document.addEventListener('fullscreenchange', () => {
+                if (!document.fullscreenElement) {
+                    setTimeout(enterFullscreen, 100);
+                }
+            });
+            
+            // Voorkom context menu op mobiel
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+        }
+        
+        // Start de diavoorstelling
+        initSlideshow();
+    </script>
+</body>
+</html>
