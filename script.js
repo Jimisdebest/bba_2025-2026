@@ -1,3 +1,65 @@
+// HAMBURGER MENU FUNCTIONALITEIT
+document.addEventListener('DOMContentLoaded', function() {
+    // Selecteer de elementen
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('overlay');
+    
+    // Debug: log of we de elementen vinden
+    console.log('Hamburger element:', hamburger);
+    console.log('Nav element:', nav);
+    console.log('Overlay element:', overlay);
+    
+    // Als de hamburger bestaat, voeg event listener toe
+    if (hamburger && nav && overlay) {
+        // Hamburger klik
+        hamburger.addEventListener('click', function(event) {
+            console.log('Hamburger geklikt!');
+            
+            // Toggle de 'active' class op alle elementen
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            // Voorkom dat de klik doorbubbelt
+            event.stopPropagation();
+        });
+        
+        // Overlay klik (sluit menu)
+        overlay.addEventListener('click', function() {
+            console.log('Overlay geklikt - menu sluiten');
+            
+            // Verwijder 'active' class van alle elementen
+            nav.classList.remove('active');
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+        
+        // Sluit menu als er op een nav-link wordt geklikt (optioneel)
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Sluit menu bij ESC-toets
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                nav.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+        
+    } else {
+        console.error('Kon een of meer elementen niet vinden voor hamburger menu!');
+    }
+});
+
+// VERJAARDAGEN & CONFETTI CODE
 (function () {
   const birthdayTodayElement = document.getElementById("birthdayToday");
 
