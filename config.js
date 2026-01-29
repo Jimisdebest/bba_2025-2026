@@ -1,7 +1,7 @@
 // HIER PAS JE ALLEEN DEZE DATUM AAN!
 // ============================================
 const SITE_CONFIG = {
-    lastUpdate: "6 Januari 2025. Kerstpagina verwijderd.",  // <-- VERANDER ALLEEN DIT!
+    lastUpdate: "29 Januari 2026",  // <-- VERANDER ALLEEN DIT!
     siteName: "BBA Klassenwebsite",
     currentYear: new Date().getFullYear(),
     email: "Jimschel1@outlook.com"
