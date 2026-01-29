@@ -478,6 +478,47 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Update voltooid banner */
+        .update-complete-banner {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            text-align: center;
+            border-left: 8px solid #f1c40f;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .update-complete-banner h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .update-complete-banner p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #f1c40f;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        
         /* Update voortgang indicator */
         .update-progress {
             background-color: rgba(255, 255, 255, 0.15);
@@ -625,12 +666,25 @@
             50% { opacity: 1; }
         }
         
+        .update-complete-message {
+            background-color: rgba(46, 204, 113, 0.1);
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
         @media (max-width: 768px) {
-            .update-banner h2 {
+            .update-banner h2,
+            .update-complete-banner h2 {
                 font-size: 1.5rem;
             }
             
-            .update-banner p {
+            .update-banner p,
+            .update-complete-banner p {
                 font-size: 1rem;
             }
             
@@ -647,6 +701,24 @@
                 font-size: 1.5rem;
             }
         }
+        
+        /* Redirect melding */
+        .redirect-notice {
+            background-color: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            animation: pulseBlue 2s infinite;
+        }
+        
+        @keyframes pulseBlue {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+        }
     </style>
 </head>
 <body>
@@ -655,8 +727,8 @@
         <div class="header-container">
             <div class="logo-container">
                 <a href="home.html" class="logo">
-                    <!-- Logo afbeelding -->
-                    <img src="https://via.placeholder.com/65x50/2c3e50/ffffff?text=BBA" alt="BBA Logo" class="logo-img">
+                    <!-- BBA Logo -->
+                    <img src="Overige foto´s/BBA-Logo.png" alt="BBA Logo" class="logo-img">
                 </a>
                 
                 <a href="https://tycho2014.github.io/dj-T-J/" 
@@ -695,8 +767,8 @@
 
     <!-- Hoofdinhoud -->
     <main class="container">
-        <!-- Update Waarschuwingsbanner -->
-        <div class="update-banner">
+        <!-- Update Waarschuwingsbanner (ALLEEN als update nog bezig is) -->
+        <div id="update-banner" class="update-banner" style="display: none;">
             <div class="update-icon">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
@@ -735,8 +807,18 @@
             <p><strong>Verwachte eindtijd: <span id="expected-time">morgen 09:00</span></strong></p>
         </div>
         
-        <!-- Waarschuwing voor normale inhoud -->
-        <div class="content-warning">
+        <!-- Update voltooid banner (ALLEEN als update klaar is) -->
+        <div id="update-complete-banner" class="update-complete-banner" style="display: none;">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Update succesvol voltooid!</h2>
+            <p>Alle updates zijn afgerond. De website functioneert nu weer normaal.</p>
+            <p>Geniet van de verbeterde functies en een betere gebruikerservaring!</p>
+        </div>
+
+        <!-- Waarschuwing voor normale inhoud (ALLEEN als update bezig is) -->
+        <div id="content-warning" class="content-warning" style="display: none;">
             <p><strong>Waarschuwing:</strong> We zijn momenteel bezig met updates. Sommige functies kunnen tijdelijk niet werken zoals verwacht. Excuses voor het ongemak!</p>
         </div>
 
@@ -757,34 +839,72 @@
                 </div>
 
                 <!-- Update melding in highlight box -->
-                <div class="update-message">
-                    <p><i class="fas fa-sync-alt"></i> Website in onderhoud - Updates worden uitgevoerd</p>
+                <div id="update-message-box" style="display: none;">
+                    <!-- Wordt ingevuld door JavaScript -->
                 </div>
 
                 <div class="highlight-box">
                     <h2>Laatste update:</h2>
                     <p><strong>29 Januari 2026</strong></p>
                     <p>Winterachtergrond en nog meer.</p>
-                    <p><em>Let op: Meer updates komen eraan!</em></p>
+                    <div id="update-status-text">
+                        <!-- Wordt ingevuld door JavaScript -->
+                    </div>
                 </div>
             </div>
         </section>
+        
+        <!-- Redirect melding -->
+        <div id="redirect-notice" class="redirect-notice" style="display: none;">
+            <p><i class="fas fa-sync-alt fa-spin"></i> Update voltooid! Je wordt doorgestuurd naar de normale website...</p>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: 1 November 2025</p>
+            <p>&copy; 2025 BBA Klassenwebsite | Laatste update: <span id="footer-date"></span></p>
             <p>Een website voor en door leerlingen van BBA</p>
-            <p><strong>Status:</strong> In onderhoud - Updates bezig</p>
+            <p id="footer-status"><strong>Status:</strong> Normaal operationeel</p>
         </div>
     </footer>
 
     <script>
-    
-        // Pas alleen deze waarde aan:
-        const availableTime = "12:10"; // Verander dit naar de gewenste tijd
         // ============================================
+        // HIER KUNT U EENVOUDIG DE TIJD INSTELLEN
+        // ============================================
+        // Pas alleen deze waarde aan:
+        const availableTime = "09:00"; // Verander dit naar de gewenste tijd (bijv: "14:30")
+        // ============================================
+        
+        // Controleer of de update tijd al gepasseerd is
+        function isUpdateTimePassed() {
+            const now = new Date();
+            const today = new Date();
+            
+            // Gebruik de ingestelde tijd voor VANDAAG
+            const [hours, minutes] = availableTime.split(':').map(Number);
+            today.setHours(hours, minutes, 0, 0);
+            
+            // Als de tijd van vandaag al gepasseerd is
+            return now > today;
+        }
+        
+        // Redirect naar home.html als update klaar is
+        function checkAndRedirect() {
+            if (isUpdateTimePassed()) {
+                // Toon redirect melding
+                document.getElementById('redirect-notice').style.display = 'block';
+                
+                // Wacht 3 seconden en redirect dan
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 3000);
+                
+                return true;
+            }
+            return false;
+        }
         
         // Hamburger menu functionaliteit
         const hamburger = document.getElementById('hamburger');
@@ -806,12 +926,32 @@
         // Zet de ingestelde tijd op het scherm
         function setDisplayTime() {
             const now = new Date();
-            const tomorrow = new Date();
-            tomorrow.setDate(now.getDate() + 1);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // Gebruik de ingestelde tijd voor VANDAAG
+            const [hours, minutes] = availableTime.split(':').map(Number);
+            const updateTimeToday = new Date();
+            updateTimeToday.setHours(hours, minutes, 0, 0);
+            
+            // Als update tijd vandaag al geweest is, gebruik morgen
+            let displayDate = new Date();
+            if (now > updateTimeToday) {
+                displayDate.setDate(now.getDate() + 1);
+            }
+            displayDate.setHours(hours, minutes, 0, 0);
             
             // Format de tijd voor weergave
-            const timeText = `morgen ${availableTime}`;
+            const timeText = `vandaag ${availableTime}`;
             document.getElementById('expected-time').textContent = timeText;
+            
+            // Update footer datum
+            const todayFormatted = new Date().toLocaleDateString('nl-NL', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            document.getElementById('footer-date').textContent = todayFormatted;
         }
         
         // Update de voortgangsbalk animatie
@@ -836,16 +976,18 @@
         // Countdown timer
         function updateCountdown() {
             const now = new Date();
-            const tomorrow = new Date();
+            const updateTime = new Date();
             
-            // Zet de datum naar morgen
-            tomorrow.setDate(now.getDate() + 1);
-            
-            // Gebruik de ingestelde tijd
+            // Gebruik de ingestelde tijd voor VANDAAG
             const [hours, minutes] = availableTime.split(':').map(Number);
-            tomorrow.setHours(hours, minutes, 0, 0);
+            updateTime.setHours(hours, minutes, 0, 0);
             
-            const timeDiff = tomorrow - now;
+            // Als de tijd van vandaag al gepasseerd is, gebruik morgen
+            if (now > updateTime) {
+                updateTime.setDate(updateTime.getDate() + 1);
+            }
+            
+            const timeDiff = updateTime - now;
             
             if (timeDiff > 0) {
                 const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -856,24 +998,33 @@
                 document.getElementById('countdown-minutes').textContent = minutesLeft.toString().padStart(2, '0');
                 document.getElementById('countdown-seconds').textContent = secondsLeft.toString().padStart(2, '0');
             } else {
-                // Als de tijd voorbij is, toon een bericht
-                document.getElementById('countdown-hours').textContent = '00';
-                document.getElementById('countdown-minutes').textContent = '00';
-                document.getElementById('countdown-seconds').textContent = '00';
-                
-                // Verander de tekst om aan te geven dat de update klaar is
-                document.querySelector('.update-banner h2').textContent = "Update voltooid!";
-                document.querySelector('.update-banner p:nth-child(3)').textContent = 'De website is nu volledig bijgewerkt en functioneert normaal.';
-                document.getElementById('expected-time').textContent = 'Update voltooid';
-                document.querySelector('.content-warning p').innerHTML = '<strong>Update voltooid:</strong> Alle functies werken nu weer normaal!';
-                document.querySelector('.update-message p').innerHTML = '<i class="fas fa-check-circle"></i> Update succesvol afgerond';
-                document.querySelector('.update-message').style.backgroundColor = 'rgba(46, 204, 113, 0.1)';
-                document.querySelector('.update-message').style.borderColor = 'rgba(46, 204, 113, 0.3)';
-                
-                // Stop de waarschuwingsanimatie
-                document.querySelector('.update-banner').style.animation = 'none';
-                document.querySelector('.update-banner').style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
+                // Update is klaar
+                showUpdateComplete();
             }
+        }
+        
+        // Toon update complete status
+        function showUpdateComplete() {
+            // Verberg update banner
+            document.getElementById('update-banner').style.display = 'none';
+            document.getElementById('content-warning').style.display = 'none';
+            
+            // Toon update complete banner
+            document.getElementById('update-complete-banner').style.display = 'block';
+            
+            // Update melding in highlight box
+            document.getElementById('update-message-box').innerHTML = `
+                <div class="update-complete-message">
+                    <p><i class="fas fa-check-circle"></i> Update succesvol afgerond</p>
+                </div>
+            `;
+            document.getElementById('update-message-box').style.display = 'block';
+            
+            // Update status tekst
+            document.getElementById('update-status-text').innerHTML = '<p><em>Alle updates zijn succesvol geïnstalleerd!</em></p>';
+            
+            // Update footer status
+            document.getElementById('footer-status').innerHTML = '<strong>Status:</strong> Update voltooid';
         }
         
         // Voeg hover effect toe aan navigatie
@@ -888,29 +1039,42 @@
         });
         
         // Initialiseer de pagina
-        setDisplayTime();
-        updateProgressBar();
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Simuleer een netwerk waarschuwing voor de update
-        setTimeout(() => {
-            const warning = document.createElement('div');
-            warning.className = 'content-warning';
-            warning.innerHTML = '<p><strong>Tijdelijke storing:</strong> Sommige afbeeldingen kunnen traag laden tijdens de update.</p>';
-            document.querySelector('.welcome-content').appendChild(warning);
+        function initializePage() {
+            // Controleer eerst of we moeten redirecten
+            if (checkAndRedirect()) {
+                return; // Stop verdere initialisatie als we redirecten
+            }
             
-            // Verwijder na 10 seconden
-            setTimeout(() => {
-                if (warning.parentNode) {
-                    warning.style.opacity = '0';
-                    warning.style.transition = 'opacity 1s';
-                    setTimeout(() => {
-                        if (warning.parentNode) warning.parentNode.removeChild(warning);
-                    }, 1000);
+            // Update tijd is nog niet gepasseerd, toon update meldingen
+            setDisplayTime();
+            updateProgressBar();
+            updateCountdown();
+            
+            // Toon update banners
+            document.getElementById('update-banner').style.display = 'block';
+            document.getElementById('content-warning').style.display = 'block';
+            document.getElementById('update-message-box').innerHTML = `
+                <div class="update-message">
+                    <p><i class="fas fa-sync-alt"></i> Website in onderhoud - Updates worden uitgevoerd</p>
+                </div>
+            `;
+            document.getElementById('update-message-box').style.display = 'block';
+            document.getElementById('update-status-text').innerHTML = '<p><em>Let op: Updates zijn bezig!</em></p>';
+            document.getElementById('footer-status').innerHTML = '<strong>Status:</strong> In onderhoud - Updates bezig';
+            
+            // Start de countdown timer
+            setInterval(updateCountdown, 1000);
+            
+            // Controleer elke 10 seconden of update tijd gepasseerd is
+            setInterval(() => {
+                if (isUpdateTimePassed()) {
+                    checkAndRedirect();
                 }
             }, 10000);
-        }, 5000);
+        }
+        
+        // Start de pagina
+        initializePage();
     </script>
 </body>
 </html>
